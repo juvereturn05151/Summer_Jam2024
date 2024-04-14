@@ -30,10 +30,12 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void DecreaseHealth() 
+    public void DecreaseHealth(float damage)
     {
-        _health -= Time.deltaTime;
-
+        // _health -= Time.deltaTime;
+        _health -= damage;
+        
+        Debug.Log("_health" + _health);
         if (_health <= 0) 
         {
             Destroy(gameObject);
