@@ -55,6 +55,7 @@ public class Sunlight : MonoBehaviour
         }
         else
         {
+            ActivateSunlight = false;
             isMorning = false;
             light.gameObject.SetActive(false);
         }

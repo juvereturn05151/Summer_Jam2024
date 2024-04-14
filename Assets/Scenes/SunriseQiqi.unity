@@ -634,7 +634,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 404915944}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -652,7 +652,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 3
+  m_Constraints: 0
 --- !u!1 &894329855
 GameObject:
   m_ObjectHideFlags: 0
@@ -710,7 +710,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f8863d013b1257418762fc5622494a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sunlight: {fileID: 984722870}
+  sunlight: {fileID: 0}
   moonlight: {fileID: 8117130097422038509}
 --- !u!1 &919003639
 GameObject:
@@ -857,17 +857,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 998459fb3f3275e4585251bd5229d3d8, type: 3}
---- !u!114 &984722870 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3687364642673932757, guid: 6325fd24993e06e49a202d4321f9bfe3, type: 3}
-  m_PrefabInstance: {fileID: 1753560235}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ba4057984709ef40b628c404073b02b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1171163970
 GameObject:
   m_ObjectHideFlags: 0
@@ -999,67 +988,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1753560235
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1653185030284301143, guid: 6325fd24993e06e49a202d4321f9bfe3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1653185030284301143, guid: 6325fd24993e06e49a202d4321f9bfe3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1653185030284301143, guid: 6325fd24993e06e49a202d4321f9bfe3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1653185030284301143, guid: 6325fd24993e06e49a202d4321f9bfe3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1653185030284301143, guid: 6325fd24993e06e49a202d4321f9bfe3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1653185030284301143, guid: 6325fd24993e06e49a202d4321f9bfe3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1653185030284301143, guid: 6325fd24993e06e49a202d4321f9bfe3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1653185030284301143, guid: 6325fd24993e06e49a202d4321f9bfe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1653185030284301143, guid: 6325fd24993e06e49a202d4321f9bfe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1653185030284301143, guid: 6325fd24993e06e49a202d4321f9bfe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5281588524044609426, guid: 6325fd24993e06e49a202d4321f9bfe3, type: 3}
-      propertyPath: m_Name
-      value: Sunlight
-      objectReference: {fileID: 0}
-    - target: {fileID: 5281588524044609426, guid: 6325fd24993e06e49a202d4321f9bfe3, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 6325fd24993e06e49a202d4321f9bfe3, type: 3}
 --- !u!1 &1906081973
 GameObject:
   m_ObjectHideFlags: 0
@@ -1731,7 +1659,6 @@ SceneRoots:
   - {fileID: 919003641}
   - {fileID: 6504058367749408162}
   - {fileID: 4648116036177851464}
-  - {fileID: 1753560235}
   - {fileID: 5455516288519830384}
   - {fileID: 4917135548020295948}
   - {fileID: 239538030}

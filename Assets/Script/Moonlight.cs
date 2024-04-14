@@ -53,6 +53,7 @@ public class Moonlight : MonoBehaviour
         }
         else
         {
+            moonlightActivated = false;
             isNight = false;
             light.gameObject.SetActive(false);
         }

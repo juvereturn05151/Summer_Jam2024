@@ -5,9 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b9982210-07de-4cf7-8416-60902d8d8432" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Summer_Jam2024/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Summer_Jam2024/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SunriseQiqi.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SunriseQiqi.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Managers/TimeManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Managers/TimeManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Moonlight.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Moonlight.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Sunlight.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Sunlight.cs" afterDir="false" />
     </list>
