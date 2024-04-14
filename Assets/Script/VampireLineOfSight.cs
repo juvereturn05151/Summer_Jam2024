@@ -9,10 +9,9 @@ public class VampireLineOfSight : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.tag == "Human")
+        if (collision.CompareTag(TagCollection.PlayerTag))
         {
             _aiAgent.ChangeState(new StateSeek(_aiAgent, collision.gameObject));
         }
-
     }
 }
