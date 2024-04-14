@@ -80,7 +80,7 @@ GameObject:
   - component: {fileID: 101473229877315710}
   - component: {fileID: 7713227816175463476}
   - component: {fileID: 6140603534495596400}
-  - component: {fileID: 5196886026554490873}
+  - component: {fileID: 7044077412557546384}
   m_Layer: 0
   m_Name: Human
   m_TagString: Human
@@ -231,7 +231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 2
---- !u!114 &5196886026554490873
+--- !u!114 &7044077412557546384
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -244,3 +244,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _humanAIAgent: {fileID: 6140603534495596400}
+  health: 10
