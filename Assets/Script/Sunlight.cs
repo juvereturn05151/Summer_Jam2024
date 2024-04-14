@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class Sunlight : MonoBehaviour
 {
@@ -14,9 +15,16 @@ public class Sunlight : MonoBehaviour
 
     public bool ActivateSunlight;
 
+    private Light2D light;
+    [SerializeField] private float normalSunlightIntensity = 0.1f;
+    [SerializeField] private float sunlightFlashIntensity = 0.5f;
+
     private void Start()
     {
         SetAlpha(startingAlpha);
+        
+        light = GetComponentInChildren<Light2D>();
+        light.intensity = normalSunlightIntensity;
     }
 
     private void Update()
@@ -24,11 +32,13 @@ public class Sunlight : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             SetAlpha(1.0f);
+            light.intensity = sunlightFlashIntensity;
             ActivateSunlight = true;
         }
         else 
         {
             SetAlpha(startingAlpha);
+            light.intensity = normalSunlightIntensity;
             ActivateSunlight = false;
         }
     }
