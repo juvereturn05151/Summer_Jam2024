@@ -4,29 +4,30 @@ using UnityEngine;
 
 public class StateStun : State
 {
+    Enemy _enemy;
     float stunTime = 3.0f;
     float currentStunTime;
 
-    public StateStun(AIAgent aiAgent) : base(aiAgent)
+    public StateStun(AIAgent aiAgent, Enemy enemy) : base(aiAgent)
     {
+        _enemy = enemy;
         AIAgent = aiAgent;
         currentStunTime = stunTime;
     }
     public override void OnEnter()
     {
-        //AIAgent.GetComponent<PrototypeEnemy>()._stunEffect.SetActive(true);
+        _enemy.StunEffect.SetActive(true);
     }
     public override void OnState()
     {
-        /*AIAgent.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
         currentStunTime -= Time.deltaTime;
         if (currentStunTime <= 0) 
         {
-            AIAgent.CurrentState = new StateSeek(AIAgent);
-        }*/
+            AIAgent.ChangeState(new StateMove(AIAgent, -AIAgent.MoveSpeed));
+        }
     }
     public override void OnExit()
     {
-        //AIAgent.GetComponent<PrototypeEnemy>()._stunEffect.SetActive(false);
+        _enemy.StunEffect.SetActive(false);
     }
 }

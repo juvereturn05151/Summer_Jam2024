@@ -5,7 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Human
-  - Vampire
+  - Enemy
   layers:
   - Default
   - TransparentFX

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -9,7 +7,9 @@ public class Sunlight : MonoBehaviour
     private SpriteRenderer _sunlightImage;
 
     [SerializeField]
-    private float startingAlpha = 0.25f;
+    private float _startingAlpha = 0.25f;
+
+    private float _maximumAlpha = 1.0f;
 
     private float _currentAlpha;
 
@@ -21,6 +21,7 @@ public class Sunlight : MonoBehaviour
 
     private void Start()
     {
+        SetAlpha(_startingAlpha);
         SetAlpha(startingAlpha);
         
         light = GetComponentInChildren<Light2D>();
@@ -31,12 +32,21 @@ public class Sunlight : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
+            _currentAlpha += Time.deltaTime;
+            SetAlpha(_currentAlpha);
+
+            if (_currentAlpha >= _maximumAlpha) 
+            {
+                ActivateSunlight = true;
+            }
             SetAlpha(1.0f);
             light.intensity = sunlightFlashIntensity;
             ActivateSunlight = true;
         }
         else 
         {
+            _currentAlpha = _startingAlpha;
+            SetAlpha(_startingAlpha);
             SetAlpha(startingAlpha);
             light.intensity = normalSunlightIntensity;
             ActivateSunlight = false;
@@ -54,11 +64,11 @@ public class Sunlight : MonoBehaviour
     {
         if (ActivateSunlight) 
         {
-            if (collision.tag == "Vampire")
+            if (collision.gameObject.GetComponent<Enemy>() is Enemy enemy)
             {
-                Destroy(collision.gameObject);
+                enemy.Stun();
+                enemy.DecreaseHealth();
             }
         }
-
     }
 }

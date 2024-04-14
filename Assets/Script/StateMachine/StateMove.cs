@@ -18,10 +18,11 @@ public class StateMove : State
 
     public override void OnState()
     {
-        // Actions to perform while in the move right state
-
         // Move the AI agent to the right
-        AIAgent.transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
+        if (AIAgent != null) 
+        {
+            AIAgent.transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
+        }
     }
 
     public override void OnExit()

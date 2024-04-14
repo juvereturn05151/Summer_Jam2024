@@ -10,17 +10,11 @@ public class AIAgent : MonoBehaviour
 {
     [SerializeField]
     private float _moveSpeed = 2f;
+    public float MoveSpeed { get; private set; }
 
     public MoveDirection MoveDirection;
 
     public State currentState; // Current state of the AI agent
-
-
-
-    private void Start()
-    {
-
-    }
 
     private void Update()
     {
@@ -75,13 +69,6 @@ public class AIAgent : MonoBehaviour
         {
             Debug.Log("des");
             // If reached, transition to another state (e.g., idle)
-            //OnCatch(TargetPos);
         }
     }
-
-   /* public void OnCatch(GameObject target) 
-    {
-        Destroy(target);
-        Destroy(this.gameObject);
-    }*/
 }
