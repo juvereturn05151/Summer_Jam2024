@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Human
   - Enemy
+  - Moonlight
   layers:
   - Default
   - TransparentFX

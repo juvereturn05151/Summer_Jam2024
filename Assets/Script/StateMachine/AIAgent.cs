@@ -64,7 +64,7 @@ public class AIAgent : MonoBehaviour
         transform.Translate(direction * Time.deltaTime);
 
         // Check if the AI agent has reached the target position with some tolerance
-        Debug.Log(Vector3.Distance(transform.position, TargetPos.transform.position));
+        // Debug.Log(Vector3.Distance(transform.position, TargetPos.transform.position));
         if (Vector3.Distance(transform.position, TargetPos.transform.position) <= 0.1f)
         {
             Debug.Log("des");

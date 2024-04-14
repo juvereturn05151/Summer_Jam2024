@@ -18,19 +18,19 @@ public class TimeManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI timeText;
 
     [Space]
-    public float gameHourInSeconds;
-    public float currentTimeInSeconds = 0;
+    [SerializeField] private float gameHourInSeconds;
+    [SerializeField] private float currentTimeInSeconds = 0;
     
     [Space]
-    public float timeSpeed = 1.0f;
-    public float time;
-    public float hour;
+    [SerializeField] private float timeSpeed = 1.0f;
+    [SerializeField] private float time;
+    [SerializeField] private float hour;
 
-    public TimePhase timePhase = TimePhase.Morning;
+    [SerializeField] private TimePhase timePhase = TimePhase.Morning;
 
     [Space]
     [Header("Global Light")]
-    public Light2D globalLight; // Reference to the directional light representing the sun
+    [SerializeField] private Light2D globalLight; // Reference to the directional light representing the sun
     
     [Space]
     [SerializeField] private float morningLight;
