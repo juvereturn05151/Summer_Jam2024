@@ -36,7 +36,7 @@ public class TimeManager : MonoBehaviour
     [SerializeField] private float morningLight;
     [SerializeField] private float nightLight;
 
-    // [SerializeField] private
+    [SerializeField] private float lightTime = 0.025f;
 
     void Start()
     {
@@ -104,15 +104,16 @@ public class TimeManager : MonoBehaviour
         switch (timePhase)
         {
             case TimePhase.Morning:
-                if (globalLight.intensity >= nightLight && globalLight.intensity <= morningLight)
+                if (globalLight.intensity >= nightLight && globalLight.intensity < morningLight)
                 {
-                    globalLight.intensity += 0.025f * Time.deltaTime * timeSpeed;
+                    globalLight.intensity += lightTime * Time.deltaTime * timeSpeed;
                 }
+                else globalLight.intensity = morningLight;
                 break;
             case TimePhase.Night:
-                if (globalLight.intensity >= nightLight)
+                if (globalLight.intensity > nightLight)
                 {
-                    globalLight.intensity -= 0.025f * Time.deltaTime * timeSpeed;
+                    globalLight.intensity -= lightTime * Time.deltaTime * timeSpeed;
                 }
                 else globalLight.intensity = nightLight;
                 break;
