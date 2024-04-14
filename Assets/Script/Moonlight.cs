@@ -7,8 +7,13 @@ using UnityEngine.Rendering.Universal;
 public class Moonlight : MonoBehaviour
 {
     [SerializeField] private bool isNight;
+    public bool IsNight
+    {
+        get => isNight;
+        set => isNight = value;
+    }
 
-    private Light2D light;
+    [SerializeField] private Light2D light;
     private CircleCollider2D col;
 
     [SerializeField] private float lightRadius = 0.5f;
@@ -41,6 +46,16 @@ public class Moonlight : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (TimeManager.Instance._TimePhase == TimePhase.Night)
+        {
+            isNight = true;
+            light.gameObject.SetActive(true);
+        }
+        else
+        {
+            isNight = false;
+            light.gameObject.SetActive(false);
+        }
         FlashMoonlight();
     }
 

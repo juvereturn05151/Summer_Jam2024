@@ -6,15 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="b9982210-07de-4cf7-8416-60902d8d8432" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Summer_Jam2024/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Summer_Jam2024/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Vampire.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Vampire.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SunlightQiqi.unity.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SunlightQiqi.unity.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Enemy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/StateMachine/AIAgent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/StateMachine/AIAgent.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SunriseQiqi.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SunriseQiqi.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Managers/TimeManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Managers/TimeManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Moonlight.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Moonlight.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Sunlight.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Sunlight.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Time.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Time/TimeManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Time/TimeManager.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sunlight RealLight.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sunlight RealLight.prefab" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +20,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Script/FollowMouse.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/GameController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Human.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/SwitchLightSystem.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -101,7 +97,7 @@
       <updated>1712996738993</updated>
       <workItem from="1712996738994" duration="15215000" />
       <workItem from="1713075517441" duration="14156000" />
-      <workItem from="1713090879237" duration="16650000" />
+      <workItem from="1713090879237" duration="20384000" />
     </task>
     <servers />
   </component>

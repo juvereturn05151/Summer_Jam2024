@@ -14,6 +14,8 @@ public enum TimePhase
 
 public class TimeManager : MonoBehaviour
 {
+    public static TimeManager Instance { get; private set; }
+    
     [Header("Time")]
     [SerializeField] private TextMeshProUGUI timeText;
 
@@ -26,7 +28,14 @@ public class TimeManager : MonoBehaviour
     [SerializeField] private float time;
     [SerializeField] private float hour;
 
-    [SerializeField] private TimePhase timePhase = TimePhase.Morning;
+    [SerializeField] private int dayCount;
+
+    [SerializeField] private TimePhase _timePhase = TimePhase.Morning;
+    public TimePhase _TimePhase
+    {
+        get => _timePhase;
+        set => _timePhase = value;
+    }
 
     [Space]
     [Header("Global Light")]
@@ -37,6 +46,14 @@ public class TimeManager : MonoBehaviour
     [SerializeField] private float nightLight;
 
     [SerializeField] private float lightTime = 0.025f;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+            Destroy(this);
+        else
+            Instance = this;
+    }
 
     void Start()
     {
@@ -54,6 +71,7 @@ public class TimeManager : MonoBehaviour
         {
             time = 0;
             hour = 0;
+            dayCount++;
         }
         
         UpdateTimeText();
@@ -67,7 +85,7 @@ public class TimeManager : MonoBehaviour
         int currentHour = Mathf.FloorToInt(currentTimeInSeconds / gameHourInSeconds) % 24;
         int currentMinute = Mathf.FloorToInt((currentTimeInSeconds % gameHourInSeconds) / (gameHourInSeconds / 60f));
 
-        timeText.text = string.Format("{0:00}:{1:00}", currentHour, currentMinute);
+        timeText.text = string.Format($"Day: {dayCount} || " + "{0:00}:{1:00}", currentHour, currentMinute);
     }
 
     void UpdateTimePhase()
@@ -76,10 +94,10 @@ public class TimeManager : MonoBehaviour
         switch (currentHour)
         {
             case 4:
-                timePhase = TimePhase.Morning;
+                _timePhase = TimePhase.Morning;
                 break;
             case 17:
-                timePhase = TimePhase.Night;
+                _timePhase = TimePhase.Night;
                 break;
         }
     }
@@ -101,7 +119,7 @@ public class TimeManager : MonoBehaviour
 
     void UpdateLightByTime()
     {
-        switch (timePhase)
+        switch (_timePhase)
         {
             case TimePhase.Morning:
                 if (globalLight.intensity >= nightLight && globalLight.intensity < morningLight)

@@ -4,6 +4,11 @@ using UnityEngine.Rendering.Universal;
 public class Sunlight : MonoBehaviour
 {
     [SerializeField] private bool isMorning;
+    public bool IsMorning
+    {
+        get => isMorning;
+        set => isMorning = value;
+    }
     
     [Header("Sunlight (Sprite Renderer)")]
     [SerializeField] private SpriteRenderer _sunlightImage;
@@ -15,7 +20,7 @@ public class Sunlight : MonoBehaviour
     public bool ActivateSunlight;
 
     [Header("Sunlight (Light)")]
-    private Light2D light;
+    [SerializeField] private Light2D light;
     private CircleCollider2D col;
     
     [SerializeField] private float sunlightRadius = 0.5f;
@@ -43,26 +48,37 @@ public class Sunlight : MonoBehaviour
 
     private void Update()
     {
+        if (TimeManager.Instance._TimePhase == TimePhase.Morning)
+        {
+            isMorning = true;
+            light.gameObject.SetActive(true);
+        }
+        else
+        {
+            isMorning = false;
+            light.gameObject.SetActive(false);
+        }
+            
         if (isMorning)
         {
             if (Input.GetMouseButton(0))
             {
                 _currentAlpha += Time.deltaTime;
                 SetAlpha(_currentAlpha);
-            
-                if(light.intensity < sunlightFlashIntensity)
+
+                if (light.intensity < sunlightFlashIntensity)
                     light.intensity += Time.deltaTime;
 
-                if (_currentAlpha >= _maximumAlpha || light.intensity >= sunlightFlashIntensity) 
+                if (_currentAlpha >= _maximumAlpha || light.intensity >= sunlightFlashIntensity)
                 {
                     ActivateSunlight = true;
                 }
             }
-            else 
+            else
             {
                 _currentAlpha = _startingAlpha;
                 SetAlpha(_startingAlpha);
-            
+
                 light.intensity = normalSunlightIntensity;
                 ActivateSunlight = false;
             }
