@@ -41,18 +41,9 @@ public class AIAgent : MonoBehaviour
         }
     }
 
-    public void SetOnSpawn(MoveDirection moveDirection)
+    public void SetOnSpawn(GameObject target)
     {
-        MoveDirection = moveDirection;
-
-        if (moveDirection == MoveDirection.Left)
-        {
-            ChangeState(new StateMove(this, -_moveSpeed));
-        }
-        else
-        {
-            ChangeState(new StateMove(this, _moveSpeed));
-        }
+        ChangeState(new StateSeek(this, target));
     }
 
     public void Seek(GameObject TargetPos) 
