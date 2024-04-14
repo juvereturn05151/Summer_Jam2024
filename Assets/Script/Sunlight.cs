@@ -10,6 +10,8 @@ public class Sunlight : MonoBehaviour
     [SerializeField]
     private float startingAlpha = 0.25f;
 
+    private float _maximumAlpha = 1.0f;
+
     private float _currentAlpha;
 
     public bool ActivateSunlight;
@@ -23,11 +25,17 @@ public class Sunlight : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            SetAlpha(1.0f);
-            ActivateSunlight = true;
+            _currentAlpha += Time.deltaTime;
+            SetAlpha(_currentAlpha);
+
+            if (_currentAlpha >= _maximumAlpha) 
+            {
+                ActivateSunlight = true;
+            }
         }
         else 
         {
+            _currentAlpha = startingAlpha;
             SetAlpha(startingAlpha);
             ActivateSunlight = false;
         }
@@ -49,6 +57,5 @@ public class Sunlight : MonoBehaviour
                 Destroy(collision.gameObject);
             }
         }
-
     }
 }
