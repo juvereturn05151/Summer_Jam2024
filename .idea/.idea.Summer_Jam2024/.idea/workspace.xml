@@ -6,10 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b9982210-07de-4cf7-8416-60902d8d8432" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Summer_Jam2024/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Summer_Jam2024/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SunlightQiqi.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SunlightQiqi.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SunlightQiqi/PostProcessing Profile.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SunlightQiqi/PostProcessing Profile.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Time/TimeManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Time/TimeManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Sunlight.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Sunlight.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +93,7 @@
       <updated>1712996738993</updated>
       <workItem from="1712996738994" duration="15215000" />
       <workItem from="1713075517441" duration="14156000" />
-      <workItem from="1713090879237" duration="3675000" />
+      <workItem from="1713090879237" duration="4049000" />
     </task>
     <servers />
   </component>

@@ -22,8 +22,7 @@ public class Sunlight : MonoBehaviour
     private void Start()
     {
         SetAlpha(_startingAlpha);
-        SetAlpha(startingAlpha);
-        
+
         light = GetComponentInChildren<Light2D>();
         light.intensity = normalSunlightIntensity;
     }
@@ -34,20 +33,17 @@ public class Sunlight : MonoBehaviour
         {
             _currentAlpha += Time.deltaTime;
             SetAlpha(_currentAlpha);
-
+            light.intensity = sunlightFlashIntensity;
+            
             if (_currentAlpha >= _maximumAlpha) 
             {
                 ActivateSunlight = true;
             }
-            SetAlpha(1.0f);
-            light.intensity = sunlightFlashIntensity;
-            ActivateSunlight = true;
         }
         else 
         {
             _currentAlpha = _startingAlpha;
             SetAlpha(_startingAlpha);
-            SetAlpha(startingAlpha);
             light.intensity = normalSunlightIntensity;
             ActivateSunlight = false;
         }
