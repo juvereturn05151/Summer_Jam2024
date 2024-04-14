@@ -4,19 +4,44 @@ public class PlayerBase : MonoBehaviour
 {
     private static PlayerBase instance;
 
-    // Private constructor to prevent instantiation from outside
-    private PlayerBase() { }
-
-    // Public static method to get the singleton instance
-    public static PlayerBase GetInstance()
+    // Public property to access the singleton instance
+    public static PlayerBase Instance
     {
-        // If the instance hasn't been created yet, create a new one
-        if (instance == null)
+        get
         {
-            instance = new PlayerBase();
+            // If the instance doesn't exist, try to find it in the scene
+            if (instance == null)
+            {
+                instance = FindObjectOfType<PlayerBase>();
+
+                // If it still doesn't exist, create a new GameObject with the SingletonExample component
+                if (instance == null)
+                {
+                    GameObject singletonObject = new GameObject("PlayerBase");
+                    instance = singletonObject.AddComponent<PlayerBase>();
+                }
+
+                // Ensure the instance persists between scene changes
+                DontDestroyOnLoad(instance.gameObject);
+            }
+            return instance;
         }
-        // Return the existing instance
-        return instance;
+    }
+    // Optional Awake method to ensure the instance is created before any other script's Start method
+    private void Awake()
+    {
+        // If an instance already exists and it's not this one, destroy this instance
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        // If this is the first instance, set it as the singleton instance
+        instance = this;
+
+        // Ensure the instance persists between scene changes
+        DontDestroyOnLoad(gameObject);
     }
 
 

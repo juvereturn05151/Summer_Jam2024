@@ -24,7 +24,7 @@ public class StateStun : State
 
         if (currentStunTime <= 0) 
         {
-            AIAgent.ChangeState(new StateSeek(AIAgent, PlayerBase.GetInstance().gameObject));
+            AIAgent.ChangeState(new StateSeek(AIAgent, PlayerBase.Instance.gameObject));
         }
     }
     public override void OnExit()
