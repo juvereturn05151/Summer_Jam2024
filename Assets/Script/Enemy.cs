@@ -33,7 +33,7 @@ public class Enemy : MonoBehaviour
     public void DecreaseHealth() 
     {
         _health -= Time.deltaTime;
-        Debug.Log("_health" + _health);
+
         if (_health <= 0) 
         {
             Destroy(gameObject);
