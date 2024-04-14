@@ -29,6 +29,7 @@ public class Sunlight : MonoBehaviour
             if (_currentAlpha >= _maximumAlpha) 
             {
                 ActivateSunlight = true;
+                HumanManager.Instance.MoveHere(this.transform.position);
             }
         }
         else 
