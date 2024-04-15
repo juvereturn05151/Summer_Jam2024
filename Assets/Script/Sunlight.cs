@@ -65,7 +65,7 @@ public class Sunlight : MonoBehaviour
         {
             if (Input.GetMouseButton(0))
             {
-                _currentAlpha += Time.deltaTime;
+                _currentAlpha += Time.deltaTime * 2.0f;
                 SetAlpha(_currentAlpha);
 
                 if (light.intensity < sunlightFlashIntensity)
@@ -131,16 +131,21 @@ public class Sunlight : MonoBehaviour
 
             if (collision.GetComponent<Pond>() is Pond pond)
             {
+
+
                 timer += Time.deltaTime;
-                if (timer >= pond.IceMeltTimeBySun && pond.ObjectStat == Status.Freeze)
+                /*if (timer >= pond.IceMeltTimeBySun && pond.ObjectStat == Status.Freeze)
                 {
                     pond.IceMeltToPond();
                     timer = 0;
-                }
+                }*/
 
-                if (timer >= pond.PondTimeEvaporate && pond.ObjectStat == Status.Liquid)
+                if (timer >= pond.PondTimeEvaporate)
                 {
-                    pond.PondEvaporate();
+                    PlayerBase.Instance.IncreaseWaterAmount(pond.PondFillOnDay);
+                    Destroy(pond.gameObject);
+                    //pond.PondEvaporate();
+                    
                     timer = 0;
                 }
             }

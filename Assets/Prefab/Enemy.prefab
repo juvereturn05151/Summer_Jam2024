@@ -207,7 +207,7 @@ MonoBehaviour:
   _aiAgent: {fileID: 1754017539144427101}
   _stunEffect: {fileID: 2141444037406865515}
   freezeEffect: {fileID: 1359680425471040440}
-  _health: 10
+  _health: 5
   _decreaseAmount: 2
   isStunning: 0
   dropItemPrefab: {fileID: 5472125496726947528, guid: a56ef9622bfbb764797a1bdc726d7a78, type: 3}

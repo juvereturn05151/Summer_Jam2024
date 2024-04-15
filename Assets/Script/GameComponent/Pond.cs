@@ -57,7 +57,10 @@ public class Pond : MonoBehaviour
         set => objectStat = value;
     }
 
-    [SerializeField] private float pondFill;
+    [SerializeField] private float pondFillOnDay;
+    public float PondFillOnDay => pondFillOnDay;
+    [SerializeField] private float pondFillOnNight;
+    public float PondFillOnNight => pondFillOnNight;
 
     private float timer;
 
@@ -115,7 +118,7 @@ public class Pond : MonoBehaviour
         if (other.gameObject.GetComponent<Human>() is Human human)
         {
             print("human drink water");
-            PlayerBase.Instance.IncreaseWaterAmount(pondFill);
+            PlayerBase.Instance.IncreaseWaterAmount(PondFillOnDay);
             Destroy(gameObject);
         }
     }

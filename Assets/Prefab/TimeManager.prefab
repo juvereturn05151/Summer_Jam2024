@@ -47,7 +47,7 @@ MonoBehaviour:
   timeText: {fileID: 0}
   gameHourInSeconds: 3
   currentTimeInSeconds: 0
-  timeSpeed: 1
+  timeSpeed: 2
   time: 0
   hour: 0
   dayCount: 0

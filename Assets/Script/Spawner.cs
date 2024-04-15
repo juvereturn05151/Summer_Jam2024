@@ -4,10 +4,52 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
+    private static Spawner instance;
+
+    // Public property to access the singleton instance
+    public static Spawner Instance
+    {
+        get
+        {
+            // If the instance doesn't exist, try to find it in the scene
+            if (instance == null)
+            {
+                instance = FindObjectOfType<Spawner>();
+
+                // If it still doesn't exist, create a new GameObject with the SingletonExample component
+                if (instance == null)
+                {
+                    GameObject singletonObject = new GameObject("Spawner");
+                    instance = singletonObject.AddComponent<Spawner>();
+                }
+
+                // Ensure the instance persists between scene changes
+                DontDestroyOnLoad(instance.gameObject);
+            }
+            return instance;
+        }
+    }
+
+    // Optional Awake method to ensure the instance is created before any other script's Start method
+    private void Awake()
+    {
+        // If an instance already exists and it's not this one, destroy this instance
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        // If this is the first instance, set it as the singleton instance
+        instance = this;
+
+        // Ensure the instance persists between scene changes
+        DontDestroyOnLoad(gameObject);
+    }
+
     [SerializeField]
     private GameObject []prefabToSpawn; // The prefab you want to spawn
-    [SerializeField]
-    private float spawnInterval = 2f; // Interval between spawns
+    public float spawnInterval = 2f; // Interval between spawns
     private float nextSpawnTime; // Time of the next spawn
 
     private Vector3 spawnPoint; // The point where you want to spawn the prefabs

@@ -205,7 +205,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 1440477751235517290}
   iceMeltTimeBySun: 3
-  pondTimeEvaporate: 5
+  pondTimeEvaporate: 1
   freezeTimeByMoon: 5
   objectStat: 1
-  pondFill: 1
+  pondFillOnDay: 5
+  pondFillOnNight: 5
