@@ -73,8 +73,11 @@ public class Sunlight : MonoBehaviour
 
                 if (_currentAlpha >= _maximumAlpha || light.intensity >= sunlightFlashIntensity)
                 {
-                    ActivateSunlight = true;
-                    //HumanManager.Instance.MoveHere(this.transform.position);
+                    if (PlayerBase.Instance.AmountWater > 0) 
+                    {
+                        ActivateSunlight = true;
+                        PlayerBase.Instance.DecreaseWaterAmount(Time.deltaTime);
+                    } 
                 }
             }
             else

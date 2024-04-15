@@ -64,6 +64,11 @@ public class Enemy : MonoBehaviour
         {
             playerBase.DecreaseWaterAmount(_decreaseAmount);
         }
+
+        if (collision.gameObject.GetComponent<Human>() is Human Human)
+        {
+            PlayerBase.Instance.DecreaseWaterAmount(_decreaseAmount);
+        }
     }
 
     public void DecreaseHealth(float damage)

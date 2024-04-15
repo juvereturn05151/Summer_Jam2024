@@ -116,7 +116,7 @@ public class Pond : MonoBehaviour
         {
             print("human drink water");
             PlayerBase.Instance.IncreaseWaterAmount(pondFill);
-            Destroy(gameObject, human.DrinkWaterTimer);
+            Destroy(gameObject);
         }
     }
 }

@@ -208,3 +208,4 @@ MonoBehaviour:
   pondTimeEvaporate: 5
   freezeTimeByMoon: 5
   objectStat: 1
+  pondFill: 1
