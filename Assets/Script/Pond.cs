@@ -76,7 +76,10 @@ public class Pond : MonoBehaviour
                 objectStat = Status.Liquid;
                 break;
             case Status.Liquid:
-                objectStat = Status.Gas;
+                if(TimeManager.Instance._TimePhase == TimePhase.Night) 
+                    objectStat = Status.Freeze;
+                if (TimeManager.Instance._TimePhase == TimePhase.Morning)
+                    objectStat = Status.Gas;    
                 break;
         }
     }
@@ -95,7 +98,7 @@ public class Pond : MonoBehaviour
         CheckObjectStatus();
     }
 
-    public void FreezePondToMelt()
+    public void FreezePond()
     {
         print("Pond have freeze into ice...");
         _spriteRenderer.color = Color.white;
