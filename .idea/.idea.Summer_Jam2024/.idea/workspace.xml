@@ -6,9 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="b9982210-07de-4cf7-8416-60902d8d8432" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Summer_Jam2024/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Summer_Jam2024/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Moonlight.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Moonlight.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Pond.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Pond.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Sunlight.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Sunlight.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Human.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Human.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SunriseQiqi.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SunriseQiqi.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/GameComponent/Human.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/GameComponent/Human.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/SwitchLightSystem.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/SwitchLightSystem.cs.meta" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,8 +19,8 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Script/FollowMouse.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/GameComponent/Human.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/GameController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Script/Human.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/SwitchLightSystem.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -97,7 +99,8 @@
       <workItem from="1712996738994" duration="15215000" />
       <workItem from="1713075517441" duration="14156000" />
       <workItem from="1713090879237" duration="20384000" />
-      <workItem from="1713141822895" duration="2835000" />
+      <workItem from="1713141822895" duration="3586000" />
+      <workItem from="1713163882390" duration="612000" />
     </task>
     <servers />
   </component>
