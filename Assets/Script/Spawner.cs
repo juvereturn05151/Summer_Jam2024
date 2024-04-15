@@ -14,14 +14,17 @@ public class Spawner : MonoBehaviour
 
     private void Update()
     {
-        // Check if it's time to spawn
-        if (Time.time >= nextSpawnTime)
+        if (TimeManager.Instance._TimePhase == TimePhase.Morning)
         {
-            // Spawn the prefab
-            SpawnPrefab();
+            // Check if it's time to spawn
+            if (Time.time >= nextSpawnTime)
+            {
+                // Spawn the prefab
+                SpawnPrefab();
 
-            // Calculate the time for the next spawn
-            nextSpawnTime = Time.time + spawnInterval;
+                // Calculate the time for the next spawn
+                nextSpawnTime = Time.time + spawnInterval;
+            }
         }
     }
 
@@ -35,8 +38,8 @@ public class Spawner : MonoBehaviour
         if (spawnPoint != null && prefabToSpawn[random] != null)
         {
             // Instantiate the prefab at the spawn point
-            AIAgent aIAgent = Instantiate(prefabToSpawn[random], spawnPoint, Quaternion.identity).GetComponent<AIAgent>();
-            aIAgent.SetOnSpawn(PlayerBase.Instance.gameObject);
+            AIAgent aiAgent = Instantiate(prefabToSpawn[random], spawnPoint, Quaternion.identity).GetComponent<AIAgent>();
+            aiAgent.SetOnSpawn(PlayerBase.Instance.gameObject);
         }
         else
         {

@@ -4,18 +4,23 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField]
-    private AIAgent _aiAgent;
+    [SerializeField] private AIAgent _aiAgent;
 
-    [SerializeField]
-    private GameObject _stunEffect;
+    [SerializeField] private GameObject _stunEffect;
     public GameObject StunEffect => _stunEffect;
 
-    [SerializeField]
-    private float _health;
+    [SerializeField] private float _health;
 
-    [SerializeField]
-    private float _decreaseAmount;
+    [SerializeField] private float _decreaseAmount;
+
+    [SerializeField] private bool isStunning;
+
+    public bool IsStunning
+    {
+        get => isStunning;
+        set => isStunning = value;
+    }
+
 
     private void Update()
     {
