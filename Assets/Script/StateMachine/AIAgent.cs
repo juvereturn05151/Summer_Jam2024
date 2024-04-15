@@ -12,8 +12,6 @@ public class AIAgent : MonoBehaviour
     private float _moveSpeed = 2f;
     public float MoveSpeed { get; private set; }
 
-    public MoveDirection MoveDirection;
-
     public State currentState; // Current state of the AI agent
 
     private void Update()
@@ -41,18 +39,9 @@ public class AIAgent : MonoBehaviour
         }
     }
 
-    public void SetOnSpawn(MoveDirection moveDirection)
+    public virtual void SetOnSpawn(GameObject target)
     {
-        MoveDirection = moveDirection;
-
-        if (moveDirection == MoveDirection.Left)
-        {
-            ChangeState(new StateMove(this, -_moveSpeed));
-        }
-        else
-        {
-            ChangeState(new StateMove(this, _moveSpeed));
-        }
+        ChangeState(new StateSeek(this, target));
     }
 
     public void Seek(GameObject TargetPos) 
@@ -64,10 +53,25 @@ public class AIAgent : MonoBehaviour
         transform.Translate(direction * Time.deltaTime);
 
         // Check if the AI agent has reached the target position with some tolerance
-        Debug.Log(Vector3.Distance(transform.position, TargetPos.transform.position));
+        // Debug.Log(Vector3.Distance(transform.position, TargetPos.transform.position));
         if (Vector3.Distance(transform.position, TargetPos.transform.position) <= 0.1f)
         {
-            Debug.Log("des");
+            // If reached, transition to another state (e.g., idle)
+        }
+    }
+
+    public void Seek(Vector3 TargetPos)
+    {
+        // Calculate the direction to the target
+        Vector3 direction = (TargetPos - transform.position).normalized;
+
+        // Move towards the target position
+        transform.Translate(direction * Time.deltaTime);
+
+        // Check if the AI agent has reached the target position with some tolerance
+        Debug.Log(Vector3.Distance(transform.position, TargetPos));
+        if (Vector3.Distance(transform.position, TargetPos) <= 0.1f)
+        {
             // If reached, transition to another state (e.g., idle)
         }
     }
