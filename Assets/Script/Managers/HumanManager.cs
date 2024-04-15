@@ -1,24 +1,26 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerBase : MonoBehaviour
+public class HumanManager : MonoBehaviour
 {
-    private static PlayerBase instance;
+    private static HumanManager instance;
 
     // Public property to access the singleton instance
-    public static PlayerBase Instance
+    public static HumanManager Instance
     {
         get
         {
             // If the instance doesn't exist, try to find it in the scene
             if (instance == null)
             {
-                instance = FindObjectOfType<PlayerBase>();
+                instance = FindObjectOfType<HumanManager>();
 
                 // If it still doesn't exist, create a new GameObject with the SingletonExample component
                 if (instance == null)
                 {
-                    GameObject singletonObject = new GameObject("PlayerBase");
-                    instance = singletonObject.AddComponent<PlayerBase>();
+                    GameObject singletonObject = new GameObject("HumanManager");
+                    instance = singletonObject.AddComponent<HumanManager>();
                 }
 
                 // Ensure the instance persists between scene changes
@@ -27,6 +29,11 @@ public class PlayerBase : MonoBehaviour
             return instance;
         }
     }
+
+    [SerializeField]
+    private Human _human;
+    public Human Human => _human;
+
     // Optional Awake method to ensure the instance is created before any other script's Start method
     private void Awake()
     {
@@ -44,16 +51,15 @@ public class PlayerBase : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-
-    public float WaterAmount { private set; get; } = 50f;
-
-    public void IncreaseWaterAmount(float increaseAmount) 
+    public void MoveHere(GameObject target) 
     {
-        WaterAmount += increaseAmount;
+        HumanAIAgent humanAIAgent = Human.HumanAIAgent;
+        humanAIAgent.ChangeState(new StateSeek(humanAIAgent, target));
     }
 
-    public void DecreaseWaterAmount(float increaseAmount)
+    public void MoveHere(Vector3 pos)
     {
-        WaterAmount -= increaseAmount;
+        HumanAIAgent humanAIAgent = Human.HumanAIAgent;
+        humanAIAgent.ChangeState(new StateSeek(humanAIAgent, pos));
     }
 }

@@ -21,9 +21,10 @@ public class StateStun : State
     public override void OnState()
     {
         currentStunTime -= Time.deltaTime;
+
         if (currentStunTime <= 0) 
         {
-            AIAgent.ChangeState(new StateMove(AIAgent, -AIAgent.MoveSpeed));
+            AIAgent.ChangeState(new StateSeek(AIAgent, PlayerBase.Instance.gameObject));
         }
     }
     public override void OnExit()
