@@ -1440,18 +1440,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2940887928499749680, guid: 6325fd24993e06e49a202d4321f9bfe3, type: 3}
-      propertyPath: m_Color.b
-      value: 0.5424528
-      objectReference: {fileID: 0}
-    - target: {fileID: 2940887928499749680, guid: 6325fd24993e06e49a202d4321f9bfe3, type: 3}
-      propertyPath: m_Color.g
-      value: 0.9649156
-      objectReference: {fileID: 0}
-    - target: {fileID: 2940887928499749680, guid: 6325fd24993e06e49a202d4321f9bfe3, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5281588524044609426, guid: 6325fd24993e06e49a202d4321f9bfe3, type: 3}
       propertyPath: m_Name
       value: Sunlight
