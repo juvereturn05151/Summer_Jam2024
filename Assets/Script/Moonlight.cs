@@ -99,8 +99,11 @@ public class Moonlight : MonoBehaviour
             if (other.GetComponent<Pond>() is Pond pond)
             {
                 timer += Time.deltaTime;
-                if (timer >= pond.MeltTimeByMoon)
-                    pond.MeltToPond();
+                if (timer >= pond.FreezeTimeByMoon && pond.ObjectStat == Status.Liquid)
+                {
+                    pond.FreezePondToMelt();
+                    timer = 0;
+                }
             }
         }
     }

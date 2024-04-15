@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -127,8 +128,17 @@ public class Sunlight : MonoBehaviour
             if (collision.GetComponent<Pond>() is Pond pond)
             {
                 timer += Time.deltaTime;
-                if (timer >= pond.MeltTimeBySun)
-                    pond.MeltToPond();
+                if (timer >= pond.IceMeltTimeBySun && pond.ObjectStat == Status.Freeze)
+                {
+                    pond.IceMeltToPond();
+                    timer = 0;
+                }
+
+                if (timer >= pond.PondTimeEvaporate && pond.ObjectStat == Status.Liquid)
+                {
+                    pond.PondEvaporate();
+                    timer = 0;
+                }
             }
         }
     }

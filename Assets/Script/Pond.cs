@@ -1,27 +1,61 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
+public enum Status
+{
+    Freeze,
+    Liquid,
+    Gas
+}
 public class Pond : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer _spriteRenderer;
 
-    [SerializeField] private float meltTimeBySun = 3f;
+    #region -Sunlight-
 
-    public float MeltTimeBySun
-    {
-        get => meltTimeBySun;
-        set => meltTimeBySun = value;
-    }
-
-    [SerializeField] private float meltTimeByMoon = 5f;
-
-    public float MeltTimeByMoon
-    {
-        get => meltTimeByMoon;
-        set => meltTimeByMoon = value;
-    }
+    [Header("Sunlight Variables")]
+    [SerializeField] private float iceMeltTimeBySun = 3f;
     
+    public float IceMeltTimeBySun
+    {
+        get => iceMeltTimeBySun;
+        set => iceMeltTimeBySun = value;
+    }
+
+    [SerializeField] private float pondTimeEvaporate = 5f;
+
+    public float PondTimeEvaporate
+    {
+        get => pondTimeEvaporate;
+        set => pondTimeEvaporate = value;
+    }
+
+    #endregion
+
+    #region -Moonlight-
+
+    [Header("Moonlight Variables")]
+    [SerializeField] private float freezeTimeByMoon = 5f;
+
+    public float FreezeTimeByMoon
+    {
+        get => freezeTimeByMoon;
+        set => freezeTimeByMoon = value;
+    }
+
+    #endregion
+
+    [Space]
+    [SerializeField] private Status objectStat;
+
+    public Status ObjectStat
+    {
+        get => objectStat;
+        set => objectStat = value;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,8 +68,37 @@ public class Pond : MonoBehaviour
         
     }
 
-    public void MeltToPond()
+    void CheckObjectStatus()
     {
+        switch (objectStat)
+        {
+            case Status.Freeze:
+                objectStat = Status.Liquid;
+                break;
+            case Status.Liquid:
+                objectStat = Status.Gas;
+                break;
+        }
+    }
+
+    public void IceMeltToPond()
+    {
+        print("Ice change to pond");
+        _spriteRenderer.color = Color.blue;
+        CheckObjectStatus();
+    }
+
+    public void PondEvaporate()
+    {
+        print("water is run out!");
+        Destroy(gameObject, 1f);
+        CheckObjectStatus();
+    }
+
+    public void FreezePondToMelt()
+    {
+        print("Pond have freeze into ice...");
         _spriteRenderer.color = Color.white;
+        CheckObjectStatus();
     }
 }
