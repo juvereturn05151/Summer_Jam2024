@@ -9,6 +9,13 @@ public class Human : MonoBehaviour
     public HumanAIAgent HumanAIAgent => _humanAIAgent;
 
     [SerializeField] private float health;
+    [SerializeField] private float drinkWaterTimer = 2f;
+
+    public float DrinkWaterTimer
+    {
+        get => drinkWaterTimer;
+        set => drinkWaterTimer = value;
+    }
 
     // Update is called once per frame
     void Update()

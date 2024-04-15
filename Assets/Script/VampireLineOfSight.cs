@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class VampireLineOfSight : MonoBehaviour
@@ -20,6 +18,23 @@ public class VampireLineOfSight : MonoBehaviour
         {
             if (_enemy.IsStunning)
                 _aiAgent.ChangeState(new StateSeek(_aiAgent, collision.gameObject));
+        }
+
+        if (TimeManager.Instance._TimePhase == TimePhase.Night)
+        {
+            if (collision.CompareTag(TagCollection.HumanTag))
+            {
+                _enemy.FoundHuman = true;
+                _aiAgent.ChangeState(new StateSeek(_aiAgent, collision.gameObject));
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag(TagCollection.HumanTag))
+        {
+            _enemy.FoundHuman = false;
         }
     }
 }

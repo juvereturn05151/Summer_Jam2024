@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -56,6 +57,10 @@ public class Pond : MonoBehaviour
         set => objectStat = value;
     }
 
+    [SerializeField] private float pondFill;
+
+    private float timer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -103,5 +108,15 @@ public class Pond : MonoBehaviour
         print("Pond have freeze into ice...");
         _spriteRenderer.color = Color.white;
         CheckObjectStatus();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.GetComponent<Human>() is Human human)
+        {
+            print("human drink water");
+            PlayerBase.Instance.IncreaseWaterAmount(pondFill);
+            Destroy(gameObject, human.DrinkWaterTimer);
+        }
     }
 }
