@@ -138,8 +138,12 @@ public class Human : MonoBehaviour
         waterSlider.value = amountWater;
         amountWater -= increaseAmount;
 
-        if (amountWater <= 0)
+        if (amountWater <= 0) 
+        {
             amountWater = 0;
+            gameOver.SetActive(true);
+        }
+            
     }
 
     public void MoveTo(Vector3 pos) 
