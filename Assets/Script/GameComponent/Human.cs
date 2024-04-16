@@ -34,9 +34,6 @@ public class Human : MonoBehaviour
 
     #region -Declared Variables-
 
-    [Header("Water Bar")]
-    [SerializeField] private Slider waterSlider;
-
     private bool isThirsty;
     private float velocity = 0f;
     private float lerpSpeed = 2f;
@@ -64,9 +61,6 @@ public class Human : MonoBehaviour
 
         // If this is the first instance, set it as the singleton instance
         instance = this;
-
-        // Ensure the instance persists between scene changes
-        DontDestroyOnLoad(gameObject);
     }
 
     [SerializeField] private HumanAIAgent _humanAIAgent;
@@ -74,7 +68,6 @@ public class Human : MonoBehaviour
 
     [SerializeField] private float health;
     [SerializeField] private float drinkWaterTimer = 2f;
-    [SerializeField] private GameObject gameOver;
 
     public float DrinkWaterTimer
     {
@@ -85,13 +78,19 @@ public class Human : MonoBehaviour
     private void Start()
     {
         amountWater = startWater;
-        waterSlider.maxValue = maxWater;
-        waterSlider.value = amountWater;
+        GameplayUIManager.Instance.waterSlider.maxValue = maxWater;
+        GameplayUIManager.Instance.waterSlider.value = amountWater;
     }
 
     // Update is called once per frame
     void Update()
     {
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+        Vector3 moveDirection = new Vector3(horizontalInput, verticalInput, 0f).normalized;
+        Debug.Log("moveDirection: " + moveDirection);
+        transform.position += moveDirection * 2* Time.deltaTime;
+
         DecreaseWaterAmount(Time.deltaTime);
     }
 
@@ -125,7 +124,7 @@ public class Human : MonoBehaviour
     public void IncreaseWaterAmount(float increaseAmount)
     {
         isThirsty = true;
-        waterSlider.value = amountWater;
+        GameplayUIManager.Instance.waterSlider.value = amountWater;
         amountWater += increaseAmount;
 
         if (amountWater >= maxWater)
@@ -135,7 +134,7 @@ public class Human : MonoBehaviour
     public void DecreaseWaterAmount(float increaseAmount)
     {
         isThirsty = true;
-        waterSlider.value = amountWater;
+        GameplayUIManager.Instance.waterSlider.value = amountWater;
         amountWater -= increaseAmount;
 
         if (amountWater <= 0) 

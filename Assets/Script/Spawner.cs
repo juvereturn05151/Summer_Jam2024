@@ -4,48 +4,6 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    private static Spawner instance;
-
-    // Public property to access the singleton instance
-    public static Spawner Instance
-    {
-        get
-        {
-            // If the instance doesn't exist, try to find it in the scene
-            if (instance == null)
-            {
-                instance = FindObjectOfType<Spawner>();
-
-                // If it still doesn't exist, create a new GameObject with the SingletonExample component
-                if (instance == null)
-                {
-                    GameObject singletonObject = new GameObject("Spawner");
-                    instance = singletonObject.AddComponent<Spawner>();
-                }
-
-                // Ensure the instance persists between scene changes
-                DontDestroyOnLoad(instance.gameObject);
-            }
-            return instance;
-        }
-    }
-
-    // Optional Awake method to ensure the instance is created before any other script's Start method
-    private void Awake()
-    {
-        // If an instance already exists and it's not this one, destroy this instance
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        // If this is the first instance, set it as the singleton instance
-        instance = this;
-
-        // Ensure the instance persists between scene changes
-        DontDestroyOnLoad(gameObject);
-    }
 
     [SerializeField]
     private GameObject []prefabToSpawn; // The prefab you want to spawn
@@ -103,16 +61,16 @@ public class Spawner : MonoBehaviour
         switch (side)
         {
             case 0: // Top side
-                spawnPosition = new Vector3(Random.Range(-cameraWidth, cameraWidth), cameraHeight - 3.5f, 0f);
+                spawnPosition = new Vector3(Random.Range(-cameraWidth, cameraWidth), cameraHeight - 3f, 0f);
                 break;
             case 1: // Bottom side
                 spawnPosition = new Vector3(Random.Range(-cameraWidth, cameraWidth), -cameraHeight, 0f);
                 break;
             case 2: // Left side
-                spawnPosition = new Vector3(-cameraWidth, Random.Range(-cameraHeight, cameraHeight - 3.5f), 0f);
+                spawnPosition = new Vector3(-cameraWidth, Random.Range(-cameraHeight, cameraHeight - 3f), 0f);
                 break;
             case 3: // Right side
-                spawnPosition = new Vector3(cameraWidth, Random.Range(-cameraHeight, cameraHeight - 3.5f), 0f);
+                spawnPosition = new Vector3(cameraWidth, Random.Range(-cameraHeight, cameraHeight - 3f), 0f);
                 break;
         }
 

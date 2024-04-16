@@ -124,6 +124,8 @@ MonoBehaviour:
   timeTargetToDamage: 1
   sunlightDamageToEnemy: 10
   sunlightDamageToHuman: 1
+  hole: {fileID: 8030402335014482249, guid: 6c854820bd1c3ea4c988bc68c888e4ec, type: 3}
+  createHoldTime: 1
 --- !u!58 &4933593121755393694
 CircleCollider2D:
   m_ObjectHideFlags: 0

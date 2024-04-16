@@ -276,7 +276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28136ab514195cc49ac4faf98db2811f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 1
+  _moveSpeed: 2
 --- !u!114 &3552005282547976627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,15 +292,19 @@ MonoBehaviour:
   _aiAgent: {fileID: 1754017539144427101}
   _stunEffect: {fileID: 2141444037406865515}
   freezeEffect: {fileID: 1359680425471040440}
-  _health: 25
+  _health: 60
   _decreaseAmount: 2
   isStunning: 0
+  raycastDistance: 1
   dropItemPrefab: {fileID: 5472125496726947528, guid: a56ef9622bfbb764797a1bdc726d7a78, type: 3}
   destroyDropItemTime: 10
   isFreeze: 0
   foundHuman: 0
   scorePoint: 25
   _healthUI: {fileID: 710457376287878317}
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!58 &9136401385096076173
 CircleCollider2D:
   m_ObjectHideFlags: 0

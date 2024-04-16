@@ -20,6 +20,8 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private bool isStunning;
 
+    public float raycastDistance = 1f;
+
     public bool IsStunning
     {
         get => isStunning;
@@ -47,6 +49,8 @@ public class Enemy : MonoBehaviour
 
     private float _maxHealth;
 
+    public LayerMask obstacleLayer;
+
     public bool FoundHuman
     {
         get => foundHuman;
@@ -71,6 +75,17 @@ public class Enemy : MonoBehaviour
         if (_healthUI != null) 
         {
             _healthUI.transform.localScale = new Vector3(_health / _maxHealth, _healthUI.transform.localScale.y, _healthUI.transform.localScale.z);
+        }
+
+        Vector2 direction = (Human.Instance.gameObject.transform.position - transform.position).normalized;
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, raycastDistance, obstacleLayer);
+
+        if (hit.collider != null)
+        {
+            // If an obstacle is detected, calculate a new direction to avoid it
+            Vector2 avoidDirection = Vector2.Perpendicular(hit.normal).normalized;
+            direction += avoidDirection * 2; // Adjust the direction to avoid the obstacle
         }
     }
 

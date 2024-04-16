@@ -51,13 +51,17 @@ public class GameplayUIManager : MonoBehaviour
 
     public GameObject gameOverUI;
 
+    public Slider waterSlider;
+
     // Update is called once per frame
     void Update()
     {
-        if (gameOverUI.activeSelf)
+        if (Input.GetMouseButtonDown(0)) 
         {
-            ScoreManager.score = 0;
-            SceneManager.LoadScene("QiqiRealGameplay");
+            if (gameOverUI.activeSelf)
+            {
+                Restart();
+            }
         }
 
         scoreText.text = "Score: " + ScoreManager.score.ToString();
@@ -65,6 +69,7 @@ public class GameplayUIManager : MonoBehaviour
 
     public void Restart() 
     {
+        gameOverUI.SetActive(false);
         ScoreManager.score = 0;
         SceneManager.LoadScene("QiqiRealGameplay");
     }

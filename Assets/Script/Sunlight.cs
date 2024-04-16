@@ -40,6 +40,11 @@ public class Sunlight : MonoBehaviour
 
     List<Enemy> sightedEnemies = new List<Enemy>();
 
+    [SerializeField] private GameObject hole;
+
+    [SerializeField] private float createHoldTime;
+    private float currentCreateHoleTime;
+
     private void Start()
     {
         SetAlpha(_startingAlpha);
@@ -108,7 +113,15 @@ public class Sunlight : MonoBehaviour
                 {
                     sightedEnemies[i].Stun();
                     sightedEnemies[i].DecreaseHealth(sunlightDamageToEnemy * Time.deltaTime);
+                    currentCreateHoleTime = 0;
                 }
+            }
+
+            currentCreateHoleTime += Time.deltaTime;
+            if (currentCreateHoleTime >= createHoldTime) 
+            {
+                Instantiate(hole, transform.position, transform.rotation);
+                currentCreateHoleTime = 0;
             }
         }
 

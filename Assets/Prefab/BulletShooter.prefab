@@ -182,8 +182,9 @@ GameObject:
   - component: {fileID: 3552005282547976627}
   - component: {fileID: 9136401385096076173}
   - component: {fileID: 8509672912424950501}
+  - component: {fileID: 6343006467374959628}
   m_Layer: 0
-  m_Name: NormalEnemy
+  m_Name: BulletShooter
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -254,7 +255,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 45
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.45813623, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -276,7 +277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28136ab514195cc49ac4faf98db2811f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 3
+  _moveSpeed: 2
 --- !u!114 &3552005282547976627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,7 +293,7 @@ MonoBehaviour:
   _aiAgent: {fileID: 1754017539144427101}
   _stunEffect: {fileID: 2141444037406865515}
   freezeEffect: {fileID: 1359680425471040440}
-  _health: 30
+  _health: 10
   _decreaseAmount: 2
   isStunning: 0
   raycastDistance: 1
@@ -304,7 +305,7 @@ MonoBehaviour:
   _healthUI: {fileID: 710457376287878317}
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
 --- !u!58 &9136401385096076173
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -367,6 +368,24 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &6343006467374959628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1703859074394605504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76e4af9f6cf766d4cba58e95e51b130a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 7371278301712798364, guid: 5d2bb6365d02b104f9ecab831ddf17e8, type: 3}
+  firePoint: {fileID: 0}
+  fireRate: 0.5
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &1859427047558852469
 GameObject:
   m_ObjectHideFlags: 0
