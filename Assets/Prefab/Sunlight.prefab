@@ -126,6 +126,7 @@ MonoBehaviour:
   sunlightDamageToHuman: 1
   hole: {fileID: 8030402335014482249, guid: 6c854820bd1c3ea4c988bc68c888e4ec, type: 3}
   createHoldTime: 1
+  circleCollider2D: {fileID: 4933593121755393694}
 --- !u!58 &4933593121755393694
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -160,7 +161,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.75
+  m_Radius: 1
 --- !u!1 &6139306861385431008
 GameObject:
   m_ObjectHideFlags: 0

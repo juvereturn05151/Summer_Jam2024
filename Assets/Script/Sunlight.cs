@@ -45,6 +45,8 @@ public class Sunlight : MonoBehaviour
     [SerializeField] private float createHoldTime;
     private float currentCreateHoleTime;
 
+    [SerializeField] private CircleCollider2D circleCollider2D;
+
     private void Start()
     {
         SetAlpha(_startingAlpha);
@@ -81,6 +83,21 @@ public class Sunlight : MonoBehaviour
                 if (light.intensity < sunlightFlashIntensity)
                     light.intensity += Time.deltaTime;
 
+                if (sightedEnemies.Count > 1)
+                {
+                    light.pointLightOuterRadius = sightedEnemies.Count;
+                    light.pointLightInnerRadius = sightedEnemies.Count * 0.75f;
+                    circleCollider2D.radius = sightedEnemies.Count;
+                }
+                else 
+                {
+                    light.pointLightOuterRadius = 1f;
+                    light.pointLightInnerRadius = 0.75f;
+                    circleCollider2D.radius = 1f;
+                }
+
+                
+
                 if (_currentAlpha >= _maximumAlpha || light.intensity >= sunlightFlashIntensity)
                 {
                     if (Human.Instance.AmountWater > 0) 
@@ -96,6 +113,9 @@ public class Sunlight : MonoBehaviour
                 SetAlpha(_startingAlpha);
 
                 light.intensity = normalSunlightIntensity;
+                light.pointLightOuterRadius = 1f;
+                light.pointLightInnerRadius = 0.75f;
+                circleCollider2D.radius = 1f;
                 ActivateSunlight = false;
             }
 
