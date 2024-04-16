@@ -42,10 +42,20 @@ public class Enemy : MonoBehaviour
     [SerializeField] private bool foundHuman;
     [SerializeField] private float scorePoint;
 
+    [SerializeField]
+    private GameObject _healthUI;
+
+    private float _maxHealth;
+
     public bool FoundHuman
     {
         get => foundHuman;
         set => foundHuman = value;
+    }
+
+    private void Start()
+    {
+        _maxHealth = _health;
     }
 
     private void Update()
@@ -56,6 +66,11 @@ public class Enemy : MonoBehaviour
         {
             if(isStunning) 
                 _aiAgent.ChangeState(new StateSeek(_aiAgent, Human.Instance.gameObject));
+        }
+
+        if (_healthUI != null) 
+        {
+            _healthUI.transform.localScale = new Vector3(_health / _maxHealth, _healthUI.transform.localScale.y, _healthUI.transform.localScale.z);
         }
     }
 
@@ -78,7 +93,6 @@ public class Enemy : MonoBehaviour
             ScoreManager.score += scorePoint;
             var water = Instantiate(dropItemPrefab, transform.position, quaternion.identity);
             Destroy(gameObject);
-            // Destroy(water, destroyDropItemTime);
         }
     }
 

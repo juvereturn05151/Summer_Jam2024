@@ -118,13 +118,7 @@ public class Sunlight : MonoBehaviour
             if (collision.gameObject.GetComponent<Enemy>() is Enemy enemy)
             {
                 enemy.Stun();
-                
-                timer += Time.deltaTime;
-                if (timer >= timeTargetToDamage)
-                {
-                    enemy.DecreaseHealth(sunlightDamageToEnemy);
-                    timer = 0;
-                }
+                enemy.DecreaseHealth(sunlightDamageToEnemy * Time.deltaTime);
             }
 
             if (collision.GetComponent<Human>() is Human human)
