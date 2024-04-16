@@ -230,9 +230,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 701dec495c7e69c40aba30a847a1d021, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waterSlider: {fileID: 0}
+  startWater: 100
+  maxWater: 100
+  amountWater: 0
   _humanAIAgent: {fileID: 6140603534495596400}
   health: 10
   drinkWaterTimer: 2
+  gameOver: {fileID: 0}
 --- !u!114 &6140603534495596400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,4 +250,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bd5b00f3fc67874aa3e58b45983afd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 5
+  _moveSpeed: 4

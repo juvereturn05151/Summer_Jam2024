@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 9136401385096076173}
   - component: {fileID: 8509672912424950501}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Tank
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -169,7 +169,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 45
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.2216981, g: 1, b: 0.2320942, a: 1}
+  m_Color: {r: 1, g: 0.8653184, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -191,7 +191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28136ab514195cc49ac4faf98db2811f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 6
+  _moveSpeed: 1
 --- !u!114 &3552005282547976627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,7 +207,7 @@ MonoBehaviour:
   _aiAgent: {fileID: 1754017539144427101}
   _stunEffect: {fileID: 2141444037406865515}
   freezeEffect: {fileID: 1359680425471040440}
-  _health: 10
+  _health: 30
   _decreaseAmount: 2
   isStunning: 0
   dropItemPrefab: {fileID: 5472125496726947528, guid: a56ef9622bfbb764797a1bdc726d7a78, type: 3}

@@ -25,7 +25,7 @@ public class StateStun : State
         if (currentStunTime <= 0)
         {
             _enemy.IsStunning = true;
-            AIAgent.ChangeState(new StateSeek(AIAgent, PlayerBase.Instance.gameObject));
+            AIAgent.ChangeState(new StateSeek(AIAgent, Human.Instance.gameObject));
         }
         else _enemy.IsStunning = false;
     }

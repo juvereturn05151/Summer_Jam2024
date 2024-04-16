@@ -49,6 +49,7 @@ public class MainMenuPanel : MonoBehaviour
     {
         //Call tutorial panal
         Debug.Log($"OnClickTutorial");
+        UIManager.TutorialPanel.Show();
     }
 
     private void OnClickSetting()
