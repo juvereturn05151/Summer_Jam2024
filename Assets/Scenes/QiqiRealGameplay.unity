@@ -208,7 +208,7 @@ MonoBehaviour:
   m_Direction: 0
   m_MinValue: 0
   m_MaxValue: 1
-  m_WholeNumbers: 1
+  m_WholeNumbers: 0
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1339,6 +1339,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 484948019225786585, guid: cf355eb5efee57743baa3ffba459e0c8, type: 3}
+      propertyPath: lerpSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 484948019225786585, guid: cf355eb5efee57743baa3ffba459e0c8, type: 3}
       propertyPath: waterSlider
       value: 

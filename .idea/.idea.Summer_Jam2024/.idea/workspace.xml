@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b9982210-07de-4cf7-8416-60902d8d8432" name="Changes" comment="" />
+    <list default="true" id="b9982210-07de-4cf7-8416-60902d8d8432" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Summer_Jam2024/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Summer_Jam2024/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/PlayerBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/PlayerBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Spawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Spawner.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,7 +19,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Script/GameComponent/Human.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/GameController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/StateMachine/StateFreeze.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Script/WaterBar.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://D:/practiceworks/Feel-Practice/Assets/Script/HpBar.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -95,6 +99,8 @@
       <workItem from="1713090879237" duration="20384000" />
       <workItem from="1713141822895" duration="3586000" />
       <workItem from="1713163882390" duration="22195000" />
+      <workItem from="1713240637913" duration="3318000" />
+      <workItem from="1713264151981" duration="1243000" />
     </task>
     <servers />
   </component>

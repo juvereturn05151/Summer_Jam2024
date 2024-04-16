@@ -37,10 +37,8 @@ public class PlayerBase : MonoBehaviour
 
     [Header("Water Bar")] 
     [SerializeField] private Slider waterSlider;
-
-    private bool isThirsty;
-    private float velocity = 0f;
-    private float lerpSpeed = 2f;
+    
+    public float lerpSpeed = 2f;
     
     [SerializeField] private float startWater;
     [SerializeField] private float maxWater;
@@ -56,7 +54,7 @@ public class PlayerBase : MonoBehaviour
     [SerializeField] private Transform spawnPoint;
 
     private GameObject humanInstantiate;
-    
+
     #endregion
 
     // Optional Awake method to ensure the instance is created before any other script's Start method
@@ -85,11 +83,8 @@ public class PlayerBase : MonoBehaviour
 
     private void Update()
     {
+        StartCoroutine(LerpWater());
         HumanMidnightSpawn();
-        if (isThirsty)
-        {
-            waterSlider.value = Mathf.SmoothDamp(waterSlider.value, amountWater, ref velocity, Time.deltaTime * lerpSpeed);
-        }
     }
 
     void HumanMidnightSpawn()
@@ -102,8 +97,6 @@ public class PlayerBase : MonoBehaviour
 
     public void IncreaseWaterAmount(float increaseAmount)
     {
-        isThirsty = true;
-        waterSlider.value = amountWater;
         amountWater += increaseAmount;
 
         if (amountWater >= maxWater)
@@ -112,11 +105,15 @@ public class PlayerBase : MonoBehaviour
 
     public void DecreaseWaterAmount(float increaseAmount)
     {
-        isThirsty = true;
-        waterSlider.value = amountWater;
         amountWater -= increaseAmount;
 
         if (amountWater <= 0)
             amountWater = 0;
+    }
+
+    IEnumerator LerpWater()
+    {
+        waterSlider.value = Mathf.Lerp(waterSlider.value, amountWater, Time.deltaTime * lerpSpeed);
+        yield return null;
     }
 }
