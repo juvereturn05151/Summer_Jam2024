@@ -91,7 +91,7 @@ public class Human : MonoBehaviour
         Debug.Log("moveDirection: " + moveDirection);
         transform.position += moveDirection * 2* Time.deltaTime;
 
-        DecreaseWaterAmount(Time.deltaTime);
+        //DecreaseWaterAmount(Time.deltaTime);
     }
 
     public void DecreaseHealth(float damage)
@@ -109,7 +109,7 @@ public class Human : MonoBehaviour
     {
         if (other.gameObject.GetComponent<Enemy>() is Enemy enemy)
         {
-            GameplayUIManager.Instance.gameOverUI.SetActive(true);
+            DecreaseWaterAmount(30);
         }
     }
 
