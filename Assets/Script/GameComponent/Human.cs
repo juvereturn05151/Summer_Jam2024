@@ -74,6 +74,7 @@ public class Human : MonoBehaviour
 
     [SerializeField] private float health;
     [SerializeField] private float drinkWaterTimer = 2f;
+    [SerializeField] private GameObject gameOver;
 
     public float DrinkWaterTimer
     {
@@ -105,14 +106,11 @@ public class Human : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.GetComponent<Moonlight>() is Moonlight moonlight)
+        if (other.gameObject.GetComponent<Enemy>() is Enemy enemy)
         {
-            if (moonlight.MoonLightActivated)
-                _humanAIAgent.ChangeState(new StateSeek(_humanAIAgent, moonlight.gameObject));
-            else
-                _humanAIAgent.ChangeState(new StateRetreat(_humanAIAgent));
+            gameOver.SetActive(true);
         }
     }
 

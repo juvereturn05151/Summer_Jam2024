@@ -76,7 +76,7 @@ public class Sunlight : MonoBehaviour
                     if (Human.Instance.AmountWater > 0) 
                     {
                         ActivateSunlight = true;
-                        Human.Instance.DecreaseWaterAmount(Time.deltaTime);
+                        Human.Instance.DecreaseWaterAmount(Time.deltaTime * 2.0f);
                     } 
                 }
             }
