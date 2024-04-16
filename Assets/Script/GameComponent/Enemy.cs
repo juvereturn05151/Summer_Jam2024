@@ -40,6 +40,7 @@ public class Enemy : MonoBehaviour
     }
 
     [SerializeField] private bool foundHuman;
+    [SerializeField] private float scorePoint;
 
     public bool FoundHuman
     {
@@ -74,8 +75,9 @@ public class Enemy : MonoBehaviour
         Debug.Log("_health" + _health);
         if (_health <= 0) 
         {
-            Destroy(gameObject);
+            ScoreManager.score += scorePoint;
             var water = Instantiate(dropItemPrefab, transform.position, quaternion.identity);
+            Destroy(gameObject);
             // Destroy(water, destroyDropItemTime);
         }
     }

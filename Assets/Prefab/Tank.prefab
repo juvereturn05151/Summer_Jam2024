@@ -207,13 +207,14 @@ MonoBehaviour:
   _aiAgent: {fileID: 1754017539144427101}
   _stunEffect: {fileID: 2141444037406865515}
   freezeEffect: {fileID: 1359680425471040440}
-  _health: 30
+  _health: 25
   _decreaseAmount: 2
   isStunning: 0
   dropItemPrefab: {fileID: 5472125496726947528, guid: a56ef9622bfbb764797a1bdc726d7a78, type: 3}
   destroyDropItemTime: 10
   isFreeze: 0
   foundHuman: 0
+  scorePoint: 25
 --- !u!58 &9136401385096076173
 CircleCollider2D:
   m_ObjectHideFlags: 0

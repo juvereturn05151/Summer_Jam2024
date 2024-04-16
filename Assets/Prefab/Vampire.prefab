@@ -214,6 +214,7 @@ MonoBehaviour:
   destroyDropItemTime: 10
   isFreeze: 0
   foundHuman: 0
+  scorePoint: 20
 --- !u!58 &9136401385096076173
 CircleCollider2D:
   m_ObjectHideFlags: 0
