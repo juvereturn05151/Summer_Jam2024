@@ -42,7 +42,7 @@ public class MainMenuPanel : MonoBehaviour
     {
         //Call start game
         Debug.Log($"OnClickStart");
-        SceneManager.LoadScene("QiqiRealGameplay");
+        SceneManager.LoadScene("Tutorial");
         Hide();
         UIManager.GameplayPanel.Show();
     }

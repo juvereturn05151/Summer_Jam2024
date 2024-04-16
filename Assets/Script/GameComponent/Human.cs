@@ -141,7 +141,7 @@ public class Human : MonoBehaviour
         if (amountWater <= 0) 
         {
             amountWater = 0;
-            gameOver.SetActive(true);
+            GameplayUIManager.Instance.gameOverUI.SetActive(true);
         }
             
     }
