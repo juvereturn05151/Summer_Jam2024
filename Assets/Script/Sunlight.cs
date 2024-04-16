@@ -1,7 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
-
+using System.Collections.Generic;
 public class Sunlight : MonoBehaviour
 {
 
@@ -37,6 +37,8 @@ public class Sunlight : MonoBehaviour
     [Header("Sunlight Damage")]
     [SerializeField] private float sunlightDamageToEnemy = 10f;
     [SerializeField] private float sunlightDamageToHuman = 1;
+
+    List<Enemy> sightedEnemies = new List<Enemy>();
 
     private void Start()
     {
@@ -97,6 +99,20 @@ public class Sunlight : MonoBehaviour
                 Human.Instance.MoveTo(this.transform.position);
             }
         }
+
+        if (ActivateSunlight)
+        {
+            for(int i = 0; i < sightedEnemies.Count; i++)
+            {
+                if (sightedEnemies[i] != null)
+                {
+                    sightedEnemies[i].Stun();
+                    sightedEnemies[i].DecreaseHealth(sunlightDamageToEnemy * Time.deltaTime);
+                }
+            }
+        }
+
+
     }
 
     private void SetAlpha(float newAlpha) 
@@ -111,7 +127,30 @@ public class Sunlight : MonoBehaviour
         col.radius = radius;
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.GetComponent<Enemy>() is Enemy enemy)
+        {
+            if (!sightedEnemies.Contains(enemy))
+            {
+                sightedEnemies.Add(enemy);
+            }
+        }
+
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.GetComponent<Enemy>() is Enemy enemy)
+        {
+            if (sightedEnemies.Contains(enemy))
+            {
+                sightedEnemies.Remove(enemy);
+            }
+        }
+    }
+
+   /* private void OnTriggerStay2D(Collider2D collision)
     {
         if (ActivateSunlight) 
         {
@@ -131,5 +170,5 @@ public class Sunlight : MonoBehaviour
                 }
             }
         }
-    }
+    }*/
 }

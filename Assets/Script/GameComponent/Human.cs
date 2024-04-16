@@ -110,7 +110,7 @@ public class Human : MonoBehaviour
     {
         if (other.gameObject.GetComponent<Enemy>() is Enemy enemy)
         {
-            gameOver.SetActive(true);
+            GameplayUIManager.Instance.gameOverUI.SetActive(true);
         }
     }
 
