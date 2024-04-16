@@ -50,7 +50,7 @@ public class AIAgent : MonoBehaviour
         Vector3 direction = (TargetPos.transform.position - transform.position).normalized;
 
         // Move towards the target position
-        transform.Translate(direction * Time.deltaTime);
+        transform.Translate(direction * _moveSpeed *Time.deltaTime);
 
         // Check if the AI agent has reached the target position with some tolerance
         // Debug.Log(Vector3.Distance(transform.position, TargetPos.transform.position));
@@ -66,7 +66,7 @@ public class AIAgent : MonoBehaviour
         Vector3 direction = (TargetPos - transform.position).normalized;
 
         // Move towards the target position
-        transform.Translate(direction * Time.deltaTime);
+        transform.Translate(direction * _moveSpeed * Time.deltaTime);
 
         // Check if the AI agent has reached the target position with some tolerance
         Debug.Log(Vector3.Distance(transform.position, TargetPos));

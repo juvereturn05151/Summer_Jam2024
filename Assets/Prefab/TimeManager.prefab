@@ -47,11 +47,12 @@ MonoBehaviour:
   timeText: {fileID: 0}
   gameHourInSeconds: 3
   currentTimeInSeconds: 0
-  timeSpeed: 1
+  timeSpeed: 2
   time: 0
   hour: 0
-  timePhase: 0
+  dayCount: 0
+  _timePhase: 0
   globalLight: {fileID: 0}
-  morningLight: 1
+  morningLight: 0.1
   nightLight: 0
   lightTime: 0.06

@@ -22,10 +22,12 @@ public class StateStun : State
     {
         currentStunTime -= Time.deltaTime;
 
-        if (currentStunTime <= 0) 
+        if (currentStunTime <= 0)
         {
+            _enemy.IsStunning = true;
             AIAgent.ChangeState(new StateSeek(AIAgent, PlayerBase.Instance.gameObject));
         }
+        else _enemy.IsStunning = false;
     }
     public override void OnExit()
     {

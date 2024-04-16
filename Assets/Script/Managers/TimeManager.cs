@@ -108,6 +108,7 @@ public class TimeManager : MonoBehaviour
         {
             case TimePhase.Morning:
                 currentTimeInSeconds = 4 * gameHourInSeconds;
+                Spawner.Instance.spawnInterval *= 1.25f;
                 UpdateTimeText();
                 break;
             case TimePhase.Night:

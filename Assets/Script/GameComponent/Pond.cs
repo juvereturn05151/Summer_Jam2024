@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -56,6 +57,13 @@ public class Pond : MonoBehaviour
         set => objectStat = value;
     }
 
+    [SerializeField] private float pondFillOnDay;
+    public float PondFillOnDay => pondFillOnDay;
+    [SerializeField] private float pondFillOnNight;
+    public float PondFillOnNight => pondFillOnNight;
+
+    private float timer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -76,7 +84,10 @@ public class Pond : MonoBehaviour
                 objectStat = Status.Liquid;
                 break;
             case Status.Liquid:
-                objectStat = Status.Gas;
+                if(TimeManager.Instance._TimePhase == TimePhase.Night) 
+                    objectStat = Status.Freeze;
+                if (TimeManager.Instance._TimePhase == TimePhase.Morning)
+                    objectStat = Status.Gas;    
                 break;
         }
     }
@@ -95,10 +106,20 @@ public class Pond : MonoBehaviour
         CheckObjectStatus();
     }
 
-    public void FreezePondToMelt()
+    public void FreezePond()
     {
         print("Pond have freeze into ice...");
         _spriteRenderer.color = Color.white;
         CheckObjectStatus();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.GetComponent<Human>() is Human human)
+        {
+            print("human drink water");
+            PlayerBase.Instance.IncreaseWaterAmount(PondFillOnDay);
+            Destroy(gameObject);
+        }
     }
 }

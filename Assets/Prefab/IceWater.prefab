@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0, g: 0, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 7513228382025021311}
   - component: {fileID: 6579137709329881310}
   m_Layer: 0
-  m_Name: Water
+  m_Name: IceWater
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -205,8 +205,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 1440477751235517290}
   iceMeltTimeBySun: 3
-  pondTimeEvaporate: 1
+  pondTimeEvaporate: 5
   freezeTimeByMoon: 5
-  objectStat: 1
-  pondFillOnDay: 5
-  pondFillOnNight: 5
+  objectStat: 0

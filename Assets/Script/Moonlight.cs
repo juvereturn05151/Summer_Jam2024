@@ -84,24 +84,24 @@ public class Moonlight : MonoBehaviour
     {
         if (moonlightActivated)
         {
-            if (other.GetComponent<Enemy>() is Enemy enemy)
-            {
-                enemy.Stun();
-
-                timer += Time.deltaTime;
-                if (timer >= timeTargetToDealDamage)
-                {
-                    enemy.DecreaseHealth(moonlightDamageToEnemy);
-                    timer = 0;
-                }
-            }
+            // if (other.GetComponent<Enemy>() is Enemy enemy)
+            // {
+            //     enemy.Stun();
+            //
+            //     timer += Time.deltaTime;
+            //     if (timer >= timeTargetToDealDamage)
+            //     {
+            //         enemy.DecreaseHealth(moonlightDamageToEnemy);
+            //         timer = 0;
+            //     }
+            // }
 
             if (other.GetComponent<Pond>() is Pond pond)
             {
                 timer += Time.deltaTime;
                 if (timer >= pond.FreezeTimeByMoon && pond.ObjectStat == Status.Liquid)
                 {
-                    pond.FreezePondToMelt();
+                    pond.FreezePond();
                     timer = 0;
                 }
             }
