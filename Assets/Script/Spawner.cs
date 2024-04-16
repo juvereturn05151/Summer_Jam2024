@@ -81,7 +81,7 @@ public class Spawner : MonoBehaviour
         {
             // Instantiate the prefab at the spawn point
             AIAgent aiAgent = Instantiate(prefabToSpawn[random], spawnPoint, Quaternion.identity).GetComponent<AIAgent>();
-            aiAgent.SetOnSpawn(PlayerBase.Instance.gameObject);
+            aiAgent.SetOnSpawn(Human.Instance.gameObject);
         }
         else
         {

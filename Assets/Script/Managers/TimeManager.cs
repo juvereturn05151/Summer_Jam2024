@@ -96,9 +96,9 @@ public class TimeManager : MonoBehaviour
             case 4:
                 _timePhase = TimePhase.Morning;
                 break;
-            case 17:
+            /*case 17:
                 _timePhase = TimePhase.Night;
-                break;
+                break;*/
         }
     }
 

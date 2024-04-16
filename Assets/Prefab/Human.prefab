@@ -230,6 +230,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 701dec495c7e69c40aba30a847a1d021, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waterSlider: {fileID: 0}
+  startWater: 100
+  maxWater: 100
+  amountWater: 0
   _humanAIAgent: {fileID: 6140603534495596400}
   health: 10
   drinkWaterTimer: 2

@@ -54,20 +54,15 @@ public class Enemy : MonoBehaviour
         else
         {
             if(isStunning) 
-                _aiAgent.ChangeState(new StateSeek(_aiAgent, PlayerBase.Instance.gameObject));
+                _aiAgent.ChangeState(new StateSeek(_aiAgent, Human.Instance.gameObject));
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<PlayerBase>() is PlayerBase playerBase)
-        {
-            playerBase.DecreaseWaterAmount(_decreaseAmount);
-        }
-
         if (collision.gameObject.GetComponent<Human>() is Human Human)
         {
-            PlayerBase.Instance.DecreaseWaterAmount(_decreaseAmount);
+            Human.DecreaseWaterAmount(_decreaseAmount);
         }
     }
 
