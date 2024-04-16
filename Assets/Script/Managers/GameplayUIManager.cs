@@ -7,6 +7,45 @@ using UnityEngine.SceneManagement;
 
 public class GameplayUIManager : MonoBehaviour
 {
+    private static GameplayUIManager instance;
+
+    // Public property to access the singleton instance
+    public static GameplayUIManager Instance
+    {
+        get
+        {
+            // If the instance doesn't exist, try to find it in the scene
+            if (instance == null)
+            {
+                instance = FindObjectOfType<GameplayUIManager>();
+
+                // If it still doesn't exist, create a new GameObject with the SingletonExample component
+                if (instance == null)
+                {
+                    GameObject singletonObject = new GameObject("GameplayUIManager");
+                    instance = singletonObject.AddComponent<GameplayUIManager>();
+                }
+
+                // Ensure the instance persists between scene changes
+                DontDestroyOnLoad(instance.gameObject);
+            }
+            return instance;
+        }
+    }
+
+    private void Awake()
+    {
+        // If an instance already exists and it's not this one, destroy this instance
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        // If this is the first instance, set it as the singleton instance
+        instance = this;
+    }
+
     [SerializeField]
     private TextMeshProUGUI scoreText;
 
@@ -15,6 +54,12 @@ public class GameplayUIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gameOverUI.activeSelf)
+        {
+            ScoreManager.score = 0;
+            SceneManager.LoadScene("QiqiRealGameplay");
+        }
+
         scoreText.text = "Score: " + ScoreManager.score.ToString();
     }
 

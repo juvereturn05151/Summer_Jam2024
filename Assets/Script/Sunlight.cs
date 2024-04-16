@@ -4,6 +4,8 @@ using UnityEngine.Rendering.Universal;
 
 public class Sunlight : MonoBehaviour
 {
+
+
     [SerializeField] private bool isMorning;
     public bool IsMorning
     {
@@ -49,6 +51,7 @@ public class Sunlight : MonoBehaviour
 
     private void Update()
     {
+
         if (TimeManager.Instance._TimePhase == TimePhase.Morning)
         {
             isMorning = true;
