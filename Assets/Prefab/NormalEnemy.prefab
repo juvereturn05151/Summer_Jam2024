@@ -182,8 +182,8 @@ GameObject:
   - component: {fileID: 3552005282547976627}
   - component: {fileID: 9136401385096076173}
   - component: {fileID: 8509672912424950501}
-  m_Layer: 0
-  m_Name: Tank
+  m_Layer: 7
+  m_Name: NormalEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -254,7 +254,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 45
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0.8653184, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -292,7 +292,7 @@ MonoBehaviour:
   _aiAgent: {fileID: 1754017539144427101}
   _stunEffect: {fileID: 2141444037406865515}
   freezeEffect: {fileID: 1359680425471040440}
-  _health: 60
+  _health: 30
   _decreaseAmount: 2
   isStunning: 0
   raycastDistance: 1
@@ -304,7 +304,7 @@ MonoBehaviour:
   _healthUI: {fileID: 710457376287878317}
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
 --- !u!58 &9136401385096076173
 CircleCollider2D:
   m_ObjectHideFlags: 0

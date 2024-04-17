@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField]
+    private GameObject spawner2;
+
+    [SerializeField]
+    private GameObject spawner3;
     void Start()
     {
         
@@ -13,6 +17,16 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (ScoreManager.score >= 300)
+        {
+            if (spawner3)
+                spawner3.gameObject.SetActive(true);
+        }
+        else if(ScoreManager.score >= 150)
+        {
+            if (spawner2)
+                spawner2.gameObject.SetActive(true);
+        }
+
     }
 }

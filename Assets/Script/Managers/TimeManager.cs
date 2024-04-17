@@ -15,9 +15,6 @@ public enum TimePhase
 public class TimeManager : MonoBehaviour
 {
     public static TimeManager Instance { get; private set; }
-    
-    [Header("Time")]
-    [SerializeField] private TextMeshProUGUI timeText;
 
     [Space]
     [SerializeField] private float gameHourInSeconds;
@@ -75,7 +72,6 @@ public class TimeManager : MonoBehaviour
         }
         
         UpdateTimeText();
-        UpdateTimePhase();
         
         UpdateLightByTime();
     }
@@ -84,22 +80,6 @@ public class TimeManager : MonoBehaviour
     {
         int currentHour = Mathf.FloorToInt(currentTimeInSeconds / gameHourInSeconds) % 24;
         int currentMinute = Mathf.FloorToInt((currentTimeInSeconds % gameHourInSeconds) / (gameHourInSeconds / 60f));
-
-        timeText.text = string.Format($"Day: {dayCount} || " + "{0:00}:{1:00}", currentHour, currentMinute);
-    }
-
-    void UpdateTimePhase()
-    {
-        int currentHour = Mathf.FloorToInt(currentTimeInSeconds / gameHourInSeconds) % 24;
-        switch (currentHour)
-        {
-            case 4:
-                _timePhase = TimePhase.Morning;
-                break;
-            /*case 17:
-                _timePhase = TimePhase.Night;
-                break;*/
-        }
     }
 
     public void SetTimePhase(TimePhase phase)
@@ -108,7 +88,6 @@ public class TimeManager : MonoBehaviour
         {
             case TimePhase.Morning:
                 currentTimeInSeconds = 4 * gameHourInSeconds;
-                Spawner.Instance.spawnInterval *= 1.25f;
                 UpdateTimeText();
                 break;
             case TimePhase.Night:

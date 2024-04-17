@@ -1,9 +1,11 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
-
+using System.Collections.Generic;
 public class Sunlight : MonoBehaviour
 {
+
+
     [SerializeField] private bool isMorning;
     public bool IsMorning
     {
@@ -36,6 +38,15 @@ public class Sunlight : MonoBehaviour
     [SerializeField] private float sunlightDamageToEnemy = 10f;
     [SerializeField] private float sunlightDamageToHuman = 1;
 
+    List<Enemy> sightedEnemies = new List<Enemy>();
+
+    [SerializeField] private GameObject hole;
+
+    [SerializeField] private float createHoldTime;
+    private float currentCreateHoleTime;
+
+    [SerializeField] private CircleCollider2D circleCollider2D;
+
     private void Start()
     {
         SetAlpha(_startingAlpha);
@@ -49,6 +60,7 @@ public class Sunlight : MonoBehaviour
 
     private void Update()
     {
+
         if (TimeManager.Instance._TimePhase == TimePhase.Morning)
         {
             isMorning = true;
@@ -71,6 +83,21 @@ public class Sunlight : MonoBehaviour
                 if (light.intensity < sunlightFlashIntensity)
                     light.intensity += Time.deltaTime;
 
+                if (sightedEnemies.Count > 1)
+                {
+                    light.pointLightOuterRadius = sightedEnemies.Count;
+                    light.pointLightInnerRadius = sightedEnemies.Count * 0.75f;
+                    circleCollider2D.radius = sightedEnemies.Count;
+                }
+                else 
+                {
+                    light.pointLightOuterRadius = 1f;
+                    light.pointLightInnerRadius = 0.75f;
+                    circleCollider2D.radius = 1f;
+                }
+
+                
+
                 if (_currentAlpha >= _maximumAlpha || light.intensity >= sunlightFlashIntensity)
                 {
                     if (Human.Instance.AmountWater > 0) 
@@ -86,6 +113,9 @@ public class Sunlight : MonoBehaviour
                 SetAlpha(_startingAlpha);
 
                 light.intensity = normalSunlightIntensity;
+                light.pointLightOuterRadius = 1f;
+                light.pointLightInnerRadius = 0.75f;
+                circleCollider2D.radius = 1f;
                 ActivateSunlight = false;
             }
 
@@ -94,6 +124,28 @@ public class Sunlight : MonoBehaviour
                 Human.Instance.MoveTo(this.transform.position);
             }
         }
+
+        if (ActivateSunlight)
+        {
+            for(int i = 0; i < sightedEnemies.Count; i++)
+            {
+                if (sightedEnemies[i] != null)
+                {
+                    sightedEnemies[i].Stun();
+                    sightedEnemies[i].DecreaseHealth(sunlightDamageToEnemy * Time.deltaTime);
+                    currentCreateHoleTime = 0;
+                }
+            }
+
+            currentCreateHoleTime += Time.deltaTime;
+            if (currentCreateHoleTime >= createHoldTime) 
+            {
+                Instantiate(hole, transform.position, transform.rotation);
+                currentCreateHoleTime = 0;
+            }
+        }
+
+
     }
 
     private void SetAlpha(float newAlpha) 
@@ -108,20 +160,37 @@ public class Sunlight : MonoBehaviour
         col.radius = radius;
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.GetComponent<Enemy>() is Enemy enemy)
+        {
+            if (!sightedEnemies.Contains(enemy))
+            {
+                sightedEnemies.Add(enemy);
+            }
+        }
+
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.GetComponent<Enemy>() is Enemy enemy)
+        {
+            if (sightedEnemies.Contains(enemy))
+            {
+                sightedEnemies.Remove(enemy);
+            }
+        }
+    }
+
+   /* private void OnTriggerStay2D(Collider2D collision)
     {
         if (ActivateSunlight) 
         {
             if (collision.gameObject.GetComponent<Enemy>() is Enemy enemy)
             {
                 enemy.Stun();
-                
-                timer += Time.deltaTime;
-                if (timer >= timeTargetToDamage)
-                {
-                    enemy.DecreaseHealth(sunlightDamageToEnemy);
-                    timer = 0;
-                }
+                enemy.DecreaseHealth(sunlightDamageToEnemy * Time.deltaTime);
             }
 
             if (collision.GetComponent<Human>() is Human human)
@@ -134,5 +203,5 @@ public class Sunlight : MonoBehaviour
                 }
             }
         }
-    }
+    }*/
 }

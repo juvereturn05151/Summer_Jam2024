@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MainMenuPanel : MonoBehaviour
 {
@@ -41,6 +42,7 @@ public class MainMenuPanel : MonoBehaviour
     {
         //Call start game
         Debug.Log($"OnClickStart");
+        SceneManager.LoadScene("Tutorial");
         Hide();
         UIManager.GameplayPanel.Show();
     }

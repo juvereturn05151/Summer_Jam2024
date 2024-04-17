@@ -122,4 +122,14 @@ public class Pond : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.GetComponent<Human>() is Human human)
+        {
+            print("human drink water");
+            human.IncreaseWaterAmount(PondFillOnDay);
+            Destroy(gameObject);
+        }
+    }
 }
