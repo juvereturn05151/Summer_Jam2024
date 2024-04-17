@@ -7,6 +7,7 @@ public class StateStun : State
     Enemy _enemy;
     float stunTime = 3.0f;
     float currentStunTime;
+    private GameObject stunFX;
 
     public StateStun(AIAgent aiAgent, Enemy enemy) : base(aiAgent)
     {

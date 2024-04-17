@@ -13,8 +13,13 @@ public class GameManager : MonoBehaviour
         EndGame
     }
 
-    public GameState State => state;
     private GameState state;
+
+    public GameState State 
+    {
+        get => state;
+        set => state = value;
+    }
 
     [SerializeField]
     private GameObject spawner2;

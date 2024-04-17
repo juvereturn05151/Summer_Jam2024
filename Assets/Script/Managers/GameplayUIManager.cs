@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using MoreMountains.Feedbacks;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -46,14 +47,26 @@ public class GameplayUIManager : MonoBehaviour
         instance = this;
     }
 
-    [SerializeField]
-    private TextMeshProUGUI scoreText;
-
+    [SerializeField] private TextMeshProUGUI scoreText;
+    
     public GameObject gameOverUI;
 
     public Slider waterSlider;
 
+    [SerializeField] private MMF_Player scoreFeedback;
+
+    [SerializeField] private GameObject waterSplashFX;
+
+    public GameObject WaterSplashFX
+    {
+        get => waterSplashFX;
+        set => waterSplashFX = value;
+    }
+
+    public Transform waterSplashParent;
+
     // Update is called once per frame
+
     void Update()
     {
         //if (Input.GetMouseButtonDown(0)) 
@@ -65,6 +78,12 @@ public class GameplayUIManager : MonoBehaviour
         //}
 
         scoreText.text = "Score: " + ScoreManager.score.ToString();
+    }
+
+    public void IncreaseScore(float value)
+    {
+        ScoreManager.score += value;
+        scoreFeedback.PlayFeedbacks();
     }
 
     public void Restart() 

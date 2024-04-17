@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using MoreMountains.Feedbacks;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Enemy : MonoBehaviour
 {
@@ -45,8 +46,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private bool foundHuman;
     [SerializeField] private float scorePoint;
 
-    [SerializeField]
-    private GameObject _healthUI;
+    [SerializeField] private GameObject _healthUI;
+    [SerializeField] private GameObject innerHealthUI;
 
     private float _maxHealth;
 
@@ -57,15 +58,19 @@ public class Enemy : MonoBehaviour
         get => foundHuman;
         set => foundHuman = value;
     }
-    
-    [Header("Feedbacks")]
-    [SerializeField] private GameObject _particleSystem;
 
+    [Header("Feedbacks")]
     [SerializeField] private MMF_Player feedbacks;
+    
+    [Header("Particle & FX")]
+    [SerializeField] private GameObject smokeFX;
+    [SerializeField] private GameObject damageFX;
+
 
     private void Start()
     {
         _maxHealth = _health;
+        innerHealthUI.transform.localScale = new Vector3(_health / _maxHealth, _healthUI.transform.localScale.y, _healthUI.transform.localScale.z);
     }
 
     private void Update()
@@ -104,8 +109,13 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<Human>() is Human human)
         {
+            human.IsHurt = true;
             human.PlayerHurtFeedback.PlayFeedbacks();
             human.DecreaseWaterAmount(_decreaseAmount);
+
+            var water = Instantiate(GameplayUIManager.Instance.WaterSplashFX, GameplayUIManager.Instance.waterSplashParent.transform.position, 
+                quaternion.identity, GameplayUIManager.Instance.waterSplashParent.transform);
+            Destroy(water, 1f);
         }
     }
 
@@ -113,22 +123,25 @@ public class Enemy : MonoBehaviour
     {
         // _health -= Time.deltaTime;
         _health -= damage;
+
+        var dmgFX = Instantiate(damageFX, transform.position, quaternion.identity, transform);
+        Destroy(dmgFX, 1f);
         
         feedbacks.PlayFeedbacks();
         
         Debug.Log("_health" + _health);
         if (_health <= 0) 
         {
-            var burnMeltFx = Instantiate(_particleSystem, transform.position + Vector3.up, quaternion.identity);
-            _particleSystem.GetComponent<ParticleSystem>().Play(true);
-            ScoreManager.score += scorePoint;
+            var burnMeltFx = Instantiate(smokeFX, transform.position + Vector3.up, quaternion.identity);
+            smokeFX.GetComponent<ParticleSystem>().Play(true);
+            GameplayUIManager.Instance.IncreaseScore(scorePoint);
             var water = Instantiate(dropItemPrefab, transform.position, quaternion.identity);
-            Destroy(burnMeltFx, 2f);
+            Destroy(burnMeltFx, 0.5f);
             Destroy(gameObject);
         }
     }
 
-    public void Stun() 
+    public void Stun()
     {
         _aiAgent.ChangeState(new StateStun(_aiAgent, this));
     }

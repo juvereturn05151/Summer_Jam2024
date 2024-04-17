@@ -2,8 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using MoreMountains.Feedbacks;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class Human : MonoBehaviour
 {
@@ -34,8 +36,7 @@ public class Human : MonoBehaviour
     }
 
     #region -Declared Variables-
-
-    private bool isThirsty;
+    
     private float velocity = 0f;
     private float lerpSpeed = 2f;
 
@@ -69,20 +70,28 @@ public class Human : MonoBehaviour
     [SerializeField] private HumanAIAgent _humanAIAgent;
     public HumanAIAgent HumanAIAgent => _humanAIAgent;
 
-    [SerializeField] private float health;
+    private bool isHurt;
+
+    public bool IsHurt
+    {
+        get => isHurt;
+        set => isHurt = value;
+    }
 
     [Header("Feedbacks")] 
     [SerializeField] private MMF_Player playerHurtFeedback;
-    [SerializeField] private MMF_Player playerFeedback;
-    
     public MMF_Player PlayerHurtFeedback
-    private HumanAnimatorController animator;
-
-    public float DrinkWaterTimer
     {
         get => playerHurtFeedback;
         set => playerHurtFeedback = value;
     }
+    [SerializeField] private MMF_Player playerFeedback;
+    
+    [Header("Particle Prefab")]
+    [SerializeField] private GameObject[] bloodParticle;
+    [SerializeField] private GameObject deadParticle;
+    
+    private HumanAnimatorController animator;
 
     private void Start()
     {
@@ -117,24 +126,13 @@ public class Human : MonoBehaviour
         //DecreaseWaterAmount(Time.deltaTime);
         DecreaseWaterAmount(Time.deltaTime);
     }
-
-    public void DecreaseHealth(float damage)
-    {
-        health -= damage;
-
-        print($"health : {health}");
-        if (health <= 0)
-        {
-            Destroy(gameObject);
-        }
-    }
-
+    
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.GetComponent<Enemy>() is Enemy enemy)
-        {
-            DecreaseWaterAmount(30);
-        }
+        // if (other.gameObject.GetComponent<Enemy>() is Enemy enemy)
+        // {
+        //     DecreaseWaterAmount(30);
+        // }
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -159,12 +157,22 @@ public class Human : MonoBehaviour
     {
         // GameplayUIManager.Instance.waterSlider.value = amountWater;
         amountWater -= increaseAmount;
-        isThirsty = true;
+
+        if (isHurt)
+        {
+            var random = Random.Range(0, 1);
+            var blood = Instantiate(bloodParticle[random], transform.position, quaternion.identity, transform);
+            Destroy(blood, 5f);
+            isHurt = false;
+        }
+
         amountWater = (amountWater - increaseAmount <= 0) ? 0 : amountWater - increaseAmount;
+        
         GameplayUIManager.Instance.waterSlider.value = amountWater;
 
-        if (amountWater <= 0) 
+        if (amountWater <= 0)
         {
+            var soul = Instantiate(deadParticle, transform.position, quaternion.identity);
             animator.StartDeadAnimation();
             GameManager.Instance.OnEndGame();
             GameplayUIManager.Instance.gameOverUI.SetActive(true);

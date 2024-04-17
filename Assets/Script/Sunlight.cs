@@ -2,6 +2,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using System.Collections.Generic;
+using Unity.Mathematics;
+
 public class Sunlight : MonoBehaviour
 {
 
@@ -36,7 +38,6 @@ public class Sunlight : MonoBehaviour
 
     [Header("Sunlight Damage")]
     [SerializeField] private float sunlightDamageToEnemy = 10f;
-    [SerializeField] private float sunlightDamageToHuman = 1;
 
     List<Enemy> sightedEnemies = new List<Enemy>();
 
@@ -46,6 +47,9 @@ public class Sunlight : MonoBehaviour
     private float currentCreateHoleTime;
 
     [SerializeField] private CircleCollider2D circleCollider2D;
+
+    [Header("Particle FX")]
+    [SerializeField] private GameObject lightParticle;
 
     private void Start()
     {
@@ -60,6 +64,10 @@ public class Sunlight : MonoBehaviour
 
     private void Update()
     {
+        if(GameManager.Instance.State == GameManager.GameState.EndGame)
+            gameObject.SetActive(false);
+        else
+            gameObject.SetActive(true);
 
         if (TimeManager.Instance._TimePhase == TimePhase.Morning)
         {
@@ -122,21 +130,6 @@ public class Sunlight : MonoBehaviour
                 circleCollider2D.radius = 1f;
                 ActivateSunlight = false;
             }
-
-            //if (Input.GetMouseButtonDown(1))
-            //{
-            //    Human.Instance.SetMovingAnimation(true);
-            //}
-            
-            //if (Input.GetMouseButton(1)) 
-            //{
-            //    Human.Instance.MoveTo(this.transform.position);
-            //}
-
-            //if (Input.GetMouseButtonUp(1))
-            //{
-            //    Human.Instance.SetMovingAnimation(false);
-            //}
         }
 
         if (ActivateSunlight)
@@ -154,8 +147,11 @@ public class Sunlight : MonoBehaviour
             currentCreateHoleTime += Time.deltaTime;
             if (currentCreateHoleTime >= createHoldTime) 
             {
-                Instantiate(hole, transform.position, transform.rotation);
+                var holeClone = Instantiate(hole, transform.position, transform.rotation);
                 currentCreateHoleTime = 0;
+
+                var lightFX = Instantiate(lightParticle, holeClone.transform.position, quaternion.identity);
+                Destroy(lightFX, 2f);
             }
         }
 
