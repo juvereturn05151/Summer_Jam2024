@@ -75,6 +75,10 @@ public class Sunlight : MonoBehaviour
             
         if (isMorning)
         {
+
+            if (GameManager.Instance.State == GameManager.GameState.EndGame)
+                return;
+
             if (Input.GetMouseButton(0))
             {
                 _currentAlpha += Time.deltaTime * 2.0f;
@@ -119,9 +123,19 @@ public class Sunlight : MonoBehaviour
                 ActivateSunlight = false;
             }
 
+            if (Input.GetMouseButtonDown(1))
+            {
+                Human.Instance.SetMovingAnimation(true);
+            }
+            
             if (Input.GetMouseButton(1)) 
             {
                 Human.Instance.MoveTo(this.transform.position);
+            }
+
+            if (Input.GetMouseButtonUp(1))
+            {
+                Human.Instance.SetMovingAnimation(false);
             }
         }
 

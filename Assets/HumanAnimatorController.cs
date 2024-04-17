@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class character1AnimationController : MonoBehaviour
+public class HumanAnimatorController : MonoBehaviour
 {
     public Animator animatorController;
     

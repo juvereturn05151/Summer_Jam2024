@@ -64,6 +64,11 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
+        if(GameManager.Instance.State == GameManager.GameState.EndGame)
+        {
+            Freeze();
+            return;
+        }
         if (TimeManager.Instance._TimePhase == TimePhase.Night)
             Freeze();
         else

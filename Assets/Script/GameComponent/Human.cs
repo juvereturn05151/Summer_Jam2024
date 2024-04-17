@@ -61,6 +61,8 @@ public class Human : MonoBehaviour
 
         // If this is the first instance, set it as the singleton instance
         instance = this;
+
+        animator = GetComponent<HumanAnimatorController>();
     }
 
     [SerializeField] private HumanAIAgent _humanAIAgent;
@@ -68,6 +70,8 @@ public class Human : MonoBehaviour
 
     [SerializeField] private float health;
     [SerializeField] private float drinkWaterTimer = 2f;
+
+    private HumanAnimatorController animator;
 
     public float DrinkWaterTimer
     {
@@ -85,11 +89,11 @@ public class Human : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-        Vector3 moveDirection = new Vector3(horizontalInput, verticalInput, 0f).normalized;
-        Debug.Log("moveDirection: " + moveDirection);
-        transform.position += moveDirection * 2* Time.deltaTime;
+        //float horizontalInput = Input.GetAxis("Horizontal");
+        //float verticalInput = Input.GetAxis("Vertical");
+        //Vector3 moveDirection = new Vector3(horizontalInput, verticalInput, 0f).normalized;
+        //Debug.Log("moveDirection: " + moveDirection);
+        //transform.position += moveDirection * 2* Time.deltaTime;
 
         //DecreaseWaterAmount(Time.deltaTime);
     }
@@ -134,15 +138,28 @@ public class Human : MonoBehaviour
     public void DecreaseWaterAmount(float increaseAmount)
     {
         isThirsty = true;
+        amountWater = (amountWater - increaseAmount <= 0) ? 0 : amountWater - increaseAmount;
         GameplayUIManager.Instance.waterSlider.value = amountWater;
-        amountWater -= increaseAmount;
 
         if (amountWater <= 0) 
         {
             amountWater = 0;
+            GameManager.Instance.OnEndGame();
             GameplayUIManager.Instance.gameOverUI.SetActive(true);
         }
             
+    }
+
+    public void SetMovingAnimation(bool isMoving)
+    {
+        if(isMoving)
+        {
+            animator.StartWalkingAnimation();
+        }
+        else
+        {
+            animator.StopWalkingAnimation();
+        }
     }
 
     public void MoveTo(Vector3 pos) 

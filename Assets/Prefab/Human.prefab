@@ -77,10 +77,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1936869138664244983}
   - component: {fileID: 4575952913866915234}
-  - component: {fileID: 101473229877315710}
+  - component: {fileID: 242156887299036844}
   - component: {fileID: 7713227816175463476}
   - component: {fileID: 7044077412557546384}
   - component: {fileID: 6140603534495596400}
+  - component: {fileID: 5489588960916444530}
+  - component: {fileID: 4787006980189151522}
   m_Layer: 0
   m_Name: Human
   m_TagString: Human
@@ -98,7 +100,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.475546, y: -2.3546448, z: 0}
-  m_LocalScale: {x: 0.35, y: 0.35, z: 1}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2593481345518506554}
@@ -145,7 +147,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 45
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 618e44afeac76fb409580ae1cdfef1d0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -156,8 +158,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &101473229877315710
-CircleCollider2D:
+--- !u!61 &242156887299036844
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -189,8 +191,18 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 20.48, y: 20.48}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.65
+  m_Size: {x: 12.5, y: 20}
+  m_EdgeRadius: 0
 --- !u!50 &7713227816175463476
 Rigidbody2D:
   serializedVersion: 4
@@ -217,7 +229,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &7044077412557546384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,14 +242,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 701dec495c7e69c40aba30a847a1d021, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waterSlider: {fileID: 0}
   startWater: 100
   maxWater: 100
   amountWater: 0
   _humanAIAgent: {fileID: 6140603534495596400}
   health: 10
   drinkWaterTimer: 2
-  gameOver: {fileID: 0}
 --- !u!114 &6140603534495596400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,3 +261,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 4
+--- !u!114 &5489588960916444530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6975150998743173204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7f9bc229343d6644854da8b95e0891a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animatorController: {fileID: 4787006980189151522}
+--- !u!95 &4787006980189151522
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6975150998743173204}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8f6787a2e656b2540a37a52425c7bf9b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
