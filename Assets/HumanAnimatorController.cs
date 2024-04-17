@@ -18,4 +18,9 @@ public class HumanAnimatorController : MonoBehaviour
     {
         animatorController.SetBool("isWalking", false);
     }
+
+    public void StartDeadAnimation()
+    {
+        animatorController.SetBool("isDead", true);
+    }
 }

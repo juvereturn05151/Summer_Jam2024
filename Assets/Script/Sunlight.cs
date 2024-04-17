@@ -123,20 +123,20 @@ public class Sunlight : MonoBehaviour
                 ActivateSunlight = false;
             }
 
-            if (Input.GetMouseButtonDown(1))
-            {
-                Human.Instance.SetMovingAnimation(true);
-            }
+            //if (Input.GetMouseButtonDown(1))
+            //{
+            //    Human.Instance.SetMovingAnimation(true);
+            //}
             
-            if (Input.GetMouseButton(1)) 
-            {
-                Human.Instance.MoveTo(this.transform.position);
-            }
+            //if (Input.GetMouseButton(1)) 
+            //{
+            //    Human.Instance.MoveTo(this.transform.position);
+            //}
 
-            if (Input.GetMouseButtonUp(1))
-            {
-                Human.Instance.SetMovingAnimation(false);
-            }
+            //if (Input.GetMouseButtonUp(1))
+            //{
+            //    Human.Instance.SetMovingAnimation(false);
+            //}
         }
 
         if (ActivateSunlight)

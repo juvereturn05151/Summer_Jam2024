@@ -89,13 +89,26 @@ public class Human : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //float horizontalInput = Input.GetAxis("Horizontal");
-        //float verticalInput = Input.GetAxis("Vertical");
-        //Vector3 moveDirection = new Vector3(horizontalInput, verticalInput, 0f).normalized;
-        //Debug.Log("moveDirection: " + moveDirection);
-        //transform.position += moveDirection * 2* Time.deltaTime;
+        if (GameManager.Instance.State == GameManager.GameState.EndGame)
+            return;
 
-        //DecreaseWaterAmount(Time.deltaTime);
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+        Vector3 moveDirection = new Vector3(horizontalInput, verticalInput, 0f).normalized;
+
+        if(horizontalInput != 0f || verticalInput != 0f)
+        {
+            animator.StartWalkingAnimation();
+        }
+        else
+        {
+            animator.StopWalkingAnimation();
+        }
+
+        Debug.Log("moveDirection: " + moveDirection);
+        transform.position += moveDirection * 2 * Time.deltaTime;
+
+        DecreaseWaterAmount(Time.deltaTime);
     }
 
     public void DecreaseHealth(float damage)
@@ -143,7 +156,7 @@ public class Human : MonoBehaviour
 
         if (amountWater <= 0) 
         {
-            amountWater = 0;
+            animator.StartDeadAnimation();
             GameManager.Instance.OnEndGame();
             GameplayUIManager.Instance.gameOverUI.SetActive(true);
         }
