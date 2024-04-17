@@ -56,21 +56,25 @@ public class GameplayUIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)) 
-        {
-            if (gameOverUI.activeSelf)
-            {
-                Restart();
-            }
-        }
+        //if (Input.GetMouseButtonDown(0)) 
+        //{
+        //    if (gameOverUI.activeSelf)
+        //    {
+        //        Restart();
+        //    }
+        //}
 
         scoreText.text = "Score: " + ScoreManager.score.ToString();
     }
 
     public void Restart() 
     {
-        gameOverUI.SetActive(false);
-        ScoreManager.score = 0;
+        //gameOverUI.SetActive(false);
         SceneManager.LoadScene("QiqiRealGameplay");
+    }
+
+    public void Quit()
+    {
+        SceneManager.LoadScene("MainScene");
     }
 }

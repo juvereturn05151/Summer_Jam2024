@@ -4,14 +4,39 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance => instance;
+    private static GameManager instance;
+
+    public enum GameState
+    {
+        StartGame,
+        EndGame
+    }
+
+    public GameState State => state;
+    private GameState state;
+
     [SerializeField]
     private GameObject spawner2;
 
     [SerializeField]
     private GameObject spawner3;
+
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
+
     void Start()
     {
-        
+        OnStartGame();
     }
 
     // Update is called once per frame
@@ -28,5 +53,16 @@ public class GameManager : MonoBehaviour
                 spawner2.gameObject.SetActive(true);
         }
 
+    }
+
+    public void OnStartGame()
+    {
+        state = GameState.StartGame;
+        ScoreManager.score = 0;
+    }
+
+    public void OnEndGame()
+    {
+        state = GameState.EndGame;
     }
 }

@@ -62,6 +62,8 @@ public class Human : MonoBehaviour
 
         // If this is the first instance, set it as the singleton instance
         instance = this;
+
+        animator = GetComponent<HumanAnimatorController>();
     }
 
     [SerializeField] private HumanAIAgent _humanAIAgent;
@@ -74,6 +76,9 @@ public class Human : MonoBehaviour
     [SerializeField] private MMF_Player playerFeedback;
     
     public MMF_Player PlayerHurtFeedback
+    private HumanAnimatorController animator;
+
+    public float DrinkWaterTimer
     {
         get => playerHurtFeedback;
         set => playerHurtFeedback = value;
@@ -89,14 +94,28 @@ public class Human : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance.State == GameManager.GameState.EndGame)
+            return;
+
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
         Vector3 moveDirection = new Vector3(horizontalInput, verticalInput, 0f).normalized;
+
+        if(horizontalInput != 0f || verticalInput != 0f)
+        {
+            animator.StartWalkingAnimation();
+        }
+        else
+        {
+            animator.StopWalkingAnimation();
+        }
+
         Debug.Log("moveDirection: " + moveDirection);
-        transform.position += moveDirection * 2* Time.deltaTime;
+        transform.position += moveDirection * 2 * Time.deltaTime;
 
         StartCoroutine(LerpWater());
         //DecreaseWaterAmount(Time.deltaTime);
+        DecreaseWaterAmount(Time.deltaTime);
     }
 
     public void DecreaseHealth(float damage)
@@ -140,13 +159,29 @@ public class Human : MonoBehaviour
     {
         // GameplayUIManager.Instance.waterSlider.value = amountWater;
         amountWater -= increaseAmount;
+        isThirsty = true;
+        amountWater = (amountWater - increaseAmount <= 0) ? 0 : amountWater - increaseAmount;
+        GameplayUIManager.Instance.waterSlider.value = amountWater;
 
         if (amountWater <= 0) 
         {
-            amountWater = 0;
+            animator.StartDeadAnimation();
+            GameManager.Instance.OnEndGame();
             GameplayUIManager.Instance.gameOverUI.SetActive(true);
         }
             
+    }
+
+    public void SetMovingAnimation(bool isMoving)
+    {
+        if(isMoving)
+        {
+            animator.StartWalkingAnimation();
+        }
+        else
+        {
+            animator.StopWalkingAnimation();
+        }
     }
 
     public void MoveTo(Vector3 pos) 
