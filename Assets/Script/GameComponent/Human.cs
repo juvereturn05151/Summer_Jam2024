@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using MoreMountains.Feedbacks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -67,12 +68,15 @@ public class Human : MonoBehaviour
     public HumanAIAgent HumanAIAgent => _humanAIAgent;
 
     [SerializeField] private float health;
-    [SerializeField] private float drinkWaterTimer = 2f;
 
-    public float DrinkWaterTimer
+    [Header("Feedbacks")] 
+    [SerializeField] private MMF_Player playerHurtFeedback;
+    [SerializeField] private MMF_Player playerFeedback;
+    
+    public MMF_Player PlayerHurtFeedback
     {
-        get => drinkWaterTimer;
-        set => drinkWaterTimer = value;
+        get => playerHurtFeedback;
+        set => playerHurtFeedback = value;
     }
 
     private void Start()
@@ -91,6 +95,7 @@ public class Human : MonoBehaviour
         Debug.Log("moveDirection: " + moveDirection);
         transform.position += moveDirection * 2* Time.deltaTime;
 
+        StartCoroutine(LerpWater());
         //DecreaseWaterAmount(Time.deltaTime);
     }
 
@@ -123,8 +128,8 @@ public class Human : MonoBehaviour
 
     public void IncreaseWaterAmount(float increaseAmount)
     {
-        isThirsty = true;
-        GameplayUIManager.Instance.waterSlider.value = amountWater;
+        // GameplayUIManager.Instance.waterSlider.value = amountWater;
+        playerFeedback.PlayFeedbacks();
         amountWater += increaseAmount;
 
         if (amountWater >= maxWater)
@@ -133,8 +138,7 @@ public class Human : MonoBehaviour
 
     public void DecreaseWaterAmount(float increaseAmount)
     {
-        isThirsty = true;
-        GameplayUIManager.Instance.waterSlider.value = amountWater;
+        // GameplayUIManager.Instance.waterSlider.value = amountWater;
         amountWater -= increaseAmount;
 
         if (amountWater <= 0) 
@@ -148,5 +152,11 @@ public class Human : MonoBehaviour
     public void MoveTo(Vector3 pos) 
     {
         _humanAIAgent.Seek(pos);
+    }
+    
+    IEnumerator LerpWater()
+    {
+        GameplayUIManager.Instance.waterSlider.value = Mathf.Lerp(GameplayUIManager.Instance.waterSlider.value, amountWater, Time.deltaTime * lerpSpeed);
+        yield return null;
     }
 }

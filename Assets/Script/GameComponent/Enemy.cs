@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using MoreMountains.Feedbacks;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -56,6 +57,11 @@ public class Enemy : MonoBehaviour
         get => foundHuman;
         set => foundHuman = value;
     }
+    
+    [Header("Feedbacks")]
+    [SerializeField] private GameObject _particleSystem;
+
+    [SerializeField] private MMF_Player feedbacks;
 
     private void Start()
     {
@@ -91,9 +97,10 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<Human>() is Human Human)
+        if (collision.gameObject.GetComponent<Human>() is Human human)
         {
-            Human.DecreaseWaterAmount(_decreaseAmount);
+            human.PlayerHurtFeedback.PlayFeedbacks();
+            human.DecreaseWaterAmount(_decreaseAmount);
         }
     }
 
@@ -102,11 +109,16 @@ public class Enemy : MonoBehaviour
         // _health -= Time.deltaTime;
         _health -= damage;
         
+        feedbacks.PlayFeedbacks();
+        
         Debug.Log("_health" + _health);
         if (_health <= 0) 
         {
+            var burnMeltFx = Instantiate(_particleSystem, transform.position + Vector3.up, quaternion.identity);
+            _particleSystem.GetComponent<ParticleSystem>().Play(true);
             ScoreManager.score += scorePoint;
             var water = Instantiate(dropItemPrefab, transform.position, quaternion.identity);
+            Destroy(burnMeltFx, 2f);
             Destroy(gameObject);
         }
     }
