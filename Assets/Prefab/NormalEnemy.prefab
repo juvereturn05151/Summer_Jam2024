@@ -312,6 +312,7 @@ MonoBehaviour:
   feedbacks: {fileID: 7916563371668484358}
   smokeFX: {fileID: 7803121286815431195, guid: 92143f0d8337d4740a2c409d1f81b2c4, type: 3}
   damageFX: {fileID: 6710806040289404186, guid: 140b30224bf48aa4d80a676b453b46bd, type: 3}
+  lightFX: {fileID: 4226614812645000377, guid: e1527692eabfc1049a7e1f746dbfc554, type: 3}
 --- !u!58 &9136401385096076173
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1653,8 +1654,8 @@ MonoBehaviour:
           Duration: 0.1
           Amplitude: 0.2
           Frequency: 20
-          AmplitudeX: 2
-          AmplitudeY: 2
+          AmplitudeX: 1.5
+          AmplitudeY: 1.5
           AmplitudeZ: 0
 --- !u!1 &8548896959198548842
 GameObject:

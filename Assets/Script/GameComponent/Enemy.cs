@@ -65,6 +65,9 @@ public class Enemy : MonoBehaviour
     [Header("Particle & FX")]
     [SerializeField] private GameObject smokeFX;
     [SerializeField] private GameObject damageFX;
+    [SerializeField] private GameObject lightFX;
+
+    private float timer;
 
 
     private void Start()
@@ -124,18 +127,26 @@ public class Enemy : MonoBehaviour
         // _health -= Time.deltaTime;
         _health -= damage;
 
-        var dmgFX = Instantiate(damageFX, transform.position, quaternion.identity, transform);
-        Destroy(dmgFX, 1f);
-        
+        timer += Time.deltaTime;
+        if (timer > 0.25f)
+        {
+            var dmgFX = Instantiate(damageFX, transform.position, quaternion.identity, transform);
+            Destroy(dmgFX, 1f);
+            timer = 0;
+        }
+
         feedbacks.PlayFeedbacks();
         
         Debug.Log("_health" + _health);
         if (_health <= 0) 
         {
             var burnMeltFx = Instantiate(smokeFX, transform.position + Vector3.up, quaternion.identity);
-            smokeFX.GetComponent<ParticleSystem>().Play(true);
+            // smokeFX.GetComponent<ParticleSystem>().Play(true);
             GameplayUIManager.Instance.IncreaseScore(scorePoint);
             var water = Instantiate(dropItemPrefab, transform.position, quaternion.identity);
+            var waterSplashFX = Instantiate(lightFX, transform.position, quaternion.identity, water.transform);
+            
+            Destroy(waterSplashFX, 2f);
             Destroy(burnMeltFx, 0.5f);
             Destroy(gameObject);
         }

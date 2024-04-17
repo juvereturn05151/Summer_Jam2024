@@ -65,6 +65,8 @@ public class Pond : MonoBehaviour
 
     private float timer;
 
+    [SerializeField] private GameObject waterSplash;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -121,6 +123,9 @@ public class Pond : MonoBehaviour
             print("human drink water");
             human.IncreaseWaterAmount(PondFillOnDay);
             Destroy(gameObject);
+            
+            var waterFX = Instantiate(waterSplash, transform.position, quaternion.identity);
+            Destroy(waterFX, 1f);
         }
     }
 
