@@ -41,6 +41,8 @@ public class TutorialUIManager : MonoBehaviour
     // Show the specified page and hide others
     void ShowPage(int pageIndex)
     {
+        SoundManager.Instance.PlayOneShot("SFX_Click");
+
         for (int i = 0; i < tutorialPages.Length; i++)
         {
             if (i == pageIndex)
