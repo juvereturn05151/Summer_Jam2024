@@ -560,6 +560,9 @@ MonoBehaviour:
   pondTimeEvaporate: 5
   freezeTimeByMoon: 5
   objectStat: 0
+  pondFillOnDay: 0
+  pondFillOnNight: 0
+  waterSplash: {fileID: 0}
 --- !u!212 &404915947
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -685,6 +688,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef72068ea32b6e04789543e54834aed4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawner2: {fileID: 0}
+  spawner3: {fileID: 0}
 --- !u!4 &894329857
 Transform:
   m_ObjectHideFlags: 0
@@ -796,67 +801,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &928484964
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1703859074394605504, guid: 998459fb3f3275e4585251bd5229d3d8, type: 3}
-      propertyPath: m_Name
-      value: Vampire
-      objectReference: {fileID: 0}
-    - target: {fileID: 1703859074394605504, guid: 998459fb3f3275e4585251bd5229d3d8, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3521896468766609592, guid: 998459fb3f3275e4585251bd5229d3d8, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1.5375785
-      objectReference: {fileID: 0}
-    - target: {fileID: 3521896468766609592, guid: 998459fb3f3275e4585251bd5229d3d8, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -2.9479399
-      objectReference: {fileID: 0}
-    - target: {fileID: 3521896468766609592, guid: 998459fb3f3275e4585251bd5229d3d8, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3521896468766609592, guid: 998459fb3f3275e4585251bd5229d3d8, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3521896468766609592, guid: 998459fb3f3275e4585251bd5229d3d8, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3521896468766609592, guid: 998459fb3f3275e4585251bd5229d3d8, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3521896468766609592, guid: 998459fb3f3275e4585251bd5229d3d8, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3521896468766609592, guid: 998459fb3f3275e4585251bd5229d3d8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3521896468766609592, guid: 998459fb3f3275e4585251bd5229d3d8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3521896468766609592, guid: 998459fb3f3275e4585251bd5229d3d8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 998459fb3f3275e4585251bd5229d3d8, type: 3}
 --- !u!1 &1171163970
 GameObject:
   m_ObjectHideFlags: 0
@@ -1388,6 +1332,9 @@ MonoBehaviour:
   pondTimeEvaporate: 5
   freezeTimeByMoon: 5
   objectStat: 1
+  pondFillOnDay: 0
+  pondFillOnNight: 0
+  waterSplash: {fileID: 0}
 --- !u!212 &1983226201
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1837,7 +1784,6 @@ SceneRoots:
   - {fileID: 1906081977}
   - {fileID: 9182162286155040314}
   - {fileID: 7685985294873589299}
-  - {fileID: 928484964}
   - {fileID: 404915948}
   - {fileID: 1983226202}
   - {fileID: 894329857}
