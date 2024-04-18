@@ -57,9 +57,15 @@ public class MainMenuPanel : MonoBehaviour
         //Call start game
         Debug.Log($"OnClickStart");
         SoundManager.Instance.PlayOneShot("SFX_Click");
-        SceneManager.LoadScene("Tutorial");
+        FadingUI.Instance.StartFadeIn();
+        FadingUI.Instance.OnStopFading.AddListener(LoadTutorialScene);
         //Hide();
         //UIManager.GameplayPanel.Show();
+    }
+
+    private void LoadTutorialScene() 
+    {
+        SceneManager.LoadScene("Tutorial");
     }
 
     private void OnClickTutorial()
