@@ -6,6 +6,16 @@ using UnityEngine.SceneManagement;
 public class TutorialUIManager : MonoBehaviour
 {
     public GameObject[] tutorialPages; // Array of tutorial pages
+
+    [SerializeField]
+    private GameObject previousButton;
+
+    [SerializeField]
+    private GameObject nextButton;
+
+    [SerializeField]
+    private GameObject startButton;
+
     private int currentPageIndex = 0;
 
     // Start is called before the first frame update
@@ -42,6 +52,10 @@ public class TutorialUIManager : MonoBehaviour
                 tutorialPages[i].SetActive(false);
             }
         }
+
+        previousButton.SetActive(pageIndex > 0);
+        nextButton.SetActive(pageIndex < tutorialPages.Length - 1);
+        startButton.SetActive(pageIndex == tutorialPages.Length - 1);
     }
 
     // Show the previous page

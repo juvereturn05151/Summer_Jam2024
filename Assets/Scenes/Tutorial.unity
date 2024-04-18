@@ -1458,6 +1458,9 @@ MonoBehaviour:
   tutorialPages:
   - {fileID: 1142482378}
   - {fileID: 1706583325}
+  previousButton: {fileID: 1147164640}
+  nextButton: {fileID: 1401663855}
+  startButton: {fileID: 955618164}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
