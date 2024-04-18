@@ -6,16 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="b9982210-07de-4cf7-8416-60902d8d8432" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Summer_Jam2024/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Summer_Jam2024/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ArtAssets/Character1/Character1.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ArtAssets/Character1/Character1.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/HumanAnimatorController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/HumanAnimatorController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/BulletShooter.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/BulletShooter.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/NormalEnemy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/NormalEnemy.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/SpeedEnemy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/SpeedEnemy.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/TankEnemy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/TankEnemy.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/QiqiRealGameplay.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/QiqiRealGameplay.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/GameComponent/Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/GameComponent/Enemy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/GameComponent/Human.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/GameComponent/Human.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animations/ButtonAnim.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/ButtonAnim.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animations/MenuGroup.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/MenuGroup.controller" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +18,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Script/FollowMouse.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/GameComponent/Human.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/GameController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/OnMouseOverUI.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/StateMachine/StateFreeze.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.sprite@1.0.0/Editor/SpriteEditorModule/SpriteFrameModule/SpriteFrameModule.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://D:/practiceworks/Feel-Practice/Assets/Script/HpBar.cs" root0="SKIP_HIGHLIGHTING" />
@@ -121,7 +114,7 @@
       <workItem from="1713330451559" duration="7603000" />
       <workItem from="1713368971199" duration="15149000" />
       <workItem from="1713412137431" duration="13734000" />
-      <workItem from="1713449282916" duration="4755000" />
+      <workItem from="1713449282916" duration="6195000" />
     </task>
     <servers />
   </component>
