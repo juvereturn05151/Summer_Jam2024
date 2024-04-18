@@ -50,6 +50,7 @@ public class GameplayUIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreText;
     
     public GameObject gameOverUI;
+    public GameObject gamePlayUI;
 
     public Slider waterSlider;
 
@@ -65,6 +66,9 @@ public class GameplayUIManager : MonoBehaviour
 
     public Transform waterSplashParent;
 
+    [Header("GameOver Panel")]
+    [SerializeField] private TextMeshProUGUI scoreTextGameOver;
+    [SerializeField] private TextMeshProUGUI highScoreTextGameOver;
     // Update is called once per frame
 
     private void Start()
@@ -83,6 +87,14 @@ public class GameplayUIManager : MonoBehaviour
         //}
 
         scoreText.text = "Score: " + ScoreManager.score.ToString() + " HighScore: " + ScoreManager.highscore;
+
+        if (GameManager.Instance.State == GameManager.GameState.EndGame)
+        {
+            gamePlayUI.SetActive(false);
+            waterSlider.gameObject.SetActive(false);
+            scoreTextGameOver.text = $"Score: {ScoreManager.score}";
+            highScoreTextGameOver.text = $"HighScore: {ScoreManager.highscore}";
+        }
     }
 
     public void IncreaseScore(float value)
