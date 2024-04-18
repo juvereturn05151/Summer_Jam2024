@@ -84,6 +84,18 @@ PrefabInstance:
       propertyPath: scorePoint
       value: 150
       objectReference: {fileID: 0}
+    - target: {fileID: 7783745605821132605, guid: 780bc14468e64a84baadfe7365934a87, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 8116641273206418744, guid: 780bc14468e64a84baadfe7365934a87, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417066730326897, guid: 780bc14468e64a84baadfe7365934a87, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.52000016
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

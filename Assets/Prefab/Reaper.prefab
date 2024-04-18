@@ -154,6 +154,10 @@ PrefabInstance:
       propertyPath: scorePoint
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 7880811712823949915, guid: 38948e335220fc24aacf0a4c764b5653, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
