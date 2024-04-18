@@ -123,7 +123,7 @@ public class Human : MonoBehaviour
         }
 
         // Debug.Log("moveDirection: " + moveDirection);
-        transform.position += moveDirection * 2 * Time.deltaTime;
+        transform.position += moveDirection * 2f * Time.deltaTime;
 
         StartCoroutine(LerpWater());
         

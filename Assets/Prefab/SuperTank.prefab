@@ -82,7 +82,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3552005282547976627, guid: 780bc14468e64a84baadfe7365934a87, type: 3}
       propertyPath: scorePoint
-      value: 150
+      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -121,9 +121,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 7371278301712798364, guid: 5d2bb6365d02b104f9ecab831ddf17e8, type: 3}
-  firePoint: {fileID: 0}
-  fireRate: 0.5
+  fireRate: 0.7
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 64
+  isImmuneToStun: 1
   enemy: {fileID: 2245922817062468033}

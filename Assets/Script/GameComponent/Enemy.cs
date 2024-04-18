@@ -93,7 +93,7 @@ public class Enemy : MonoBehaviour
             Freeze();
         else
         {
-            if(isStunning) 
+            if(!isStunning) 
                 _aiAgent.ChangeState(new StateSeek(_aiAgent, Human.Instance.gameObject));
         }
 

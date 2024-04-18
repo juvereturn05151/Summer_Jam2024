@@ -5,9 +5,9 @@ using UnityEngine;
 public class BulletSpawner : MonoBehaviour
 {
     public GameObject bulletPrefab;
-    public Transform firePoint;
     public float fireRate = 0.5f;
     public LayerMask obstacleLayer; // Layer mask for obstacles to prevent spawning bullets inside obstacles
+    public bool isImmuneToStun;
 
     private float fireTimer;
 
@@ -25,7 +25,7 @@ public class BulletSpawner : MonoBehaviour
         // Check if it's time to fire
         if (enemy != null) 
         {
-            if (fireTimer <= 0f && !enemy.IsStunning)
+            if (fireTimer <= 0f )
             {
                 FireBullet();
                 fireTimer = 1f / fireRate; // Reset the fire timer
@@ -36,6 +36,12 @@ public class BulletSpawner : MonoBehaviour
 
     void FireBullet()
     {
+        if (!isImmuneToStun && enemy.IsStunning) 
+        {
+            return;
+        }
+
+
         // Instantiate a new bullet at the fire point's position and rotation
         GameObject bullet = Instantiate(bulletPrefab, this.transform.position, this.transform.rotation);
 
