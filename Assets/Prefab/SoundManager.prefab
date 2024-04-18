@@ -62,7 +62,7 @@ MonoBehaviour:
     SpatialBlend: 1
     Source: {fileID: 0}
   - Name: SFX_MonsterDead
-    clip: {fileID: 8300000, guid: 5be4f11b539b346d88ccfec4a7455294, type: 3}
+    clip: {fileID: 8300000, guid: 92eace025af3c7a4982d375ef8976866, type: 3}
     IsPlayOnAwake: 0
     IsLoop: 0
     Vol: 0.5
