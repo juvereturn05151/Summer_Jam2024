@@ -68,7 +68,12 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject lightFX;
 
     private float timer;
+    private Animator animator;
 
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     private void Start()
     {
@@ -124,6 +129,9 @@ public class Enemy : MonoBehaviour
 
     public void DecreaseHealth(float damage)
     {
+        if (_health <= 0)
+            return;
+
         // _health -= Time.deltaTime;
         _health -= damage;
 
@@ -143,12 +151,9 @@ public class Enemy : MonoBehaviour
             var burnMeltFx = Instantiate(smokeFX, transform.position + Vector3.up, quaternion.identity);
             // smokeFX.GetComponent<ParticleSystem>().Play(true);
             GameplayUIManager.Instance.IncreaseScore(scorePoint);
-            var water = Instantiate(dropItemPrefab, transform.position, quaternion.identity);
-            var waterSplashFX = Instantiate(lightFX, transform.position, quaternion.identity, water.transform);
             
-            Destroy(waterSplashFX, 2f);
             Destroy(burnMeltFx, 0.5f);
-            Destroy(gameObject);
+            animator.SetBool("isDead", true);
         }
     }
 
@@ -161,5 +166,13 @@ public class Enemy : MonoBehaviour
     {
         if(!foundHuman)
             _aiAgent.ChangeState(new StateFreeze(_aiAgent, this));
+    }
+
+    public void OnDead()
+    {
+        var water = Instantiate(dropItemPrefab, transform.position, quaternion.identity);
+        var waterSplashFX = Instantiate(lightFX, transform.position, quaternion.identity, water.transform);
+        Destroy(waterSplashFX, 2f);
+        Destroy(gameObject);
     }
 }

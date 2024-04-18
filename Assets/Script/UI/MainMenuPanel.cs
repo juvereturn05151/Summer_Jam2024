@@ -43,15 +43,15 @@ public class MainMenuPanel : MonoBehaviour
         //Call start game
         Debug.Log($"OnClickStart");
         SceneManager.LoadScene("Tutorial");
-        Hide();
-        UIManager.GameplayPanel.Show();
+        //Hide();
+        //UIManager.GameplayPanel.Show();
     }
 
     private void OnClickTutorial()
     {
         //Call tutorial panal
         Debug.Log($"OnClickTutorial");
-        UIManager.TutorialPanel.Show();
+        //UIManager.TutorialPanel.Show();
     }
 
     private void OnClickSetting()
