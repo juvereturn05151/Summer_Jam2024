@@ -40,6 +40,11 @@ public class TimeManager : MonoBehaviour
     
     [Space]
     [SerializeField] private float morningLight;
+    public float MorningLight
+    {
+        get => morningLight;
+        set => morningLight = value;
+    }
     [SerializeField] private float nightLight;
 
     [SerializeField] private float lightTime = 0.025f;

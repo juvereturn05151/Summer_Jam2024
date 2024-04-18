@@ -164,8 +164,7 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 0}
   iceMeltTimeBySun: 3
   pondTimeEvaporate: 5
-  freezeTimeByMoon: 5
   objectStat: 1
   pondFillOnDay: 20
-  pondFillOnNight: 20
+  melt: {fileID: 0}
   waterSplash: {fileID: 0}

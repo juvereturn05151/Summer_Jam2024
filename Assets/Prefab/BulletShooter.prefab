@@ -433,7 +433,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.67
+  m_Radius: 0.48
 --- !u!50 &8509672912424950501
 Rigidbody2D:
   serializedVersion: 4
@@ -479,6 +479,7 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 0
+  enemy: {fileID: 3552005282547976627}
 --- !u!95 &7008620222367127422
 Animator:
   serializedVersion: 5

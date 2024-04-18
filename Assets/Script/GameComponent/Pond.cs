@@ -36,19 +36,6 @@ public class Pond : MonoBehaviour
 
     #endregion
 
-    #region -Moonlight-
-
-    [Header("Moonlight Variables")]
-    [SerializeField] private float freezeTimeByMoon = 5f;
-
-    public float FreezeTimeByMoon
-    {
-        get => freezeTimeByMoon;
-        set => freezeTimeByMoon = value;
-    }
-
-    #endregion
-
     [Space]
     [SerializeField] private Status objectStat;
 
@@ -60,10 +47,10 @@ public class Pond : MonoBehaviour
 
     [SerializeField] private float pondFillOnDay;
     public float PondFillOnDay => pondFillOnDay;
-    [SerializeField] private float pondFillOnNight;
-    public float PondFillOnNight => pondFillOnNight;
 
     private float timer;
+
+    [SerializeField] private GameObject melt;
 
     [SerializeField] private GameObject waterSplash;
 
@@ -76,7 +63,13 @@ public class Pond : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (pondTimeEvaporate <= 0) 
+        {
+            var meltFX = Instantiate(melt, transform.position, quaternion.identity);
+            SoundManager.Instance.PlayOneShot("SFX_EnemyHunt");
+            Destroy(meltFX, 1f);
+            Destroy(this.gameObject);
+        }
     }
 
     void CheckObjectStatus()
