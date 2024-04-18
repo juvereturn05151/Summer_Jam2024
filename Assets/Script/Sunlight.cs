@@ -42,6 +42,8 @@ public class Sunlight : MonoBehaviour
 
     List<Enemy> sightedEnemies = new List<Enemy>();
 
+    List<Pond> sightedPonds = new List<Pond>();
+
     [SerializeField] private GameObject hole;
 
     [SerializeField] private float createHoldTime;
@@ -111,8 +113,6 @@ public class Sunlight : MonoBehaviour
 
                 if (light.intensity < sunlightFlashIntensity)
                     light.intensity += Time.deltaTime;
-
-                
 
                 if (sightedEnemies.Count > 1)
                 {
@@ -185,6 +185,15 @@ public class Sunlight : MonoBehaviour
                 }
             }
 
+            for (int i = 0; i < sightedPonds.Count; i++)
+            {
+                if (sightedPonds[i] != null)
+                {
+                    sightedPonds[i].PondTimeEvaporate -= Time.deltaTime;
+                    currentCreateHoleTime = 0;
+                }
+            }
+
             currentCreateHoleTime += Time.deltaTime;
             if (currentCreateHoleTime >= createHoldTime) 
             {
@@ -243,6 +252,14 @@ public class Sunlight : MonoBehaviour
             }
         }
 
+        if (collision.gameObject.GetComponent<Pond>() is Pond pond)
+        {
+            if (!sightedPonds.Contains(pond))
+            {
+                sightedPonds.Add(pond);
+            }
+        }
+
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -252,6 +269,14 @@ public class Sunlight : MonoBehaviour
             if (sightedEnemies.Contains(enemy))
             {
                 sightedEnemies.Remove(enemy);
+            }
+        }
+
+        if (collision.gameObject.GetComponent<Pond>() is Pond pond)
+        {
+            if (sightedPonds.Contains(pond))
+            {
+                sightedPonds.Remove(pond);
             }
         }
     }

@@ -44,7 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 670aaee3ada0f504ba55bf8bab23ea78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeText: {fileID: 0}
   gameHourInSeconds: 3
   currentTimeInSeconds: 0
   timeSpeed: 2
@@ -53,6 +52,6 @@ MonoBehaviour:
   dayCount: 0
   _timePhase: 0
   globalLight: {fileID: 0}
-  morningLight: 0.1
+  morningLight: 0.5
   nightLight: 0
   lightTime: 0.06

@@ -27,6 +27,12 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject spawner3;
 
+    [SerializeField]
+    private GameObject spawner4;
+
+    [SerializeField]
+    private GameObject spawner5;
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -47,7 +53,18 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (ScoreManager.score >= 300)
+        if (ScoreManager.score >= 1800)
+        {
+            if (spawner5)
+                spawner5.gameObject.SetActive(true);
+        }
+        else
+        if(ScoreManager.score >= 1000)
+        {
+            if (spawner4)
+                spawner4.gameObject.SetActive(true);
+        }
+        else if (ScoreManager.score >= 300)
         {
             if (spawner3)
                 spawner3.gameObject.SetActive(true);

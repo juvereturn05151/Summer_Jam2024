@@ -11,6 +11,9 @@ public class BulletSpawner : MonoBehaviour
 
     private float fireTimer;
 
+    [SerializeField]
+    private Enemy enemy;
+
     void Update()
     {
         if (GameManager.Instance.State == GameManager.GameState.EndGame)
@@ -20,11 +23,15 @@ public class BulletSpawner : MonoBehaviour
         fireTimer -= Time.deltaTime;
 
         // Check if it's time to fire
-        if (fireTimer <= 0f)
+        if (enemy != null) 
         {
-            FireBullet();
-            fireTimer = 1f / fireRate; // Reset the fire timer
+            if (fireTimer <= 0f && !enemy.IsStunning)
+            {
+                FireBullet();
+                fireTimer = 1f / fireRate; // Reset the fire timer
+            }
         }
+
     }
 
     void FireBullet()

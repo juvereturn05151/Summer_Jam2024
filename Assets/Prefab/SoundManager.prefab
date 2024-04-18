@@ -160,7 +160,7 @@ MonoBehaviour:
   - Name: SFX_Expand
     clip: {fileID: 8300000, guid: d9f448a333716374a9962e21e7412387, type: 3}
     IsPlayOnAwake: 0
-    IsLoop: 1
+    IsLoop: 0
     Vol: 0.15
     Pitch: 1
     SpatialBlend: 1
