@@ -79,6 +79,7 @@ public class Enemy : MonoBehaviour
     {
         _maxHealth = _health;
         innerHealthUI.transform.localScale = new Vector3(_health / _maxHealth, _healthUI.transform.localScale.y, _healthUI.transform.localScale.z);
+        SoundManager.Instance.PlayOneShot("SFX_MonsterSpawn");
     }
 
     private void Update()
@@ -120,6 +121,8 @@ public class Enemy : MonoBehaviour
             human.IsHurt = true;
             human.PlayerHurtFeedback.PlayFeedbacks();
             human.DecreaseWaterAmount(_decreaseAmount);
+
+            SoundManager.Instance.PlayOneShot("SFX_VillagerHit");
 
             var water = Instantiate(GameplayUIManager.Instance.WaterSplashFX, GameplayUIManager.Instance.waterSplashParent.transform.position, 
                 quaternion.identity, GameplayUIManager.Instance.waterSplashParent.transform);
@@ -170,6 +173,7 @@ public class Enemy : MonoBehaviour
 
     public void OnDead()
     {
+        SoundManager.Instance.PlayOneShot("SFX_MonsterDead");
         var water = Instantiate(dropItemPrefab, transform.position, quaternion.identity);
         var waterSplashFX = Instantiate(lightFX, transform.position, quaternion.identity, water.transform);
         Destroy(waterSplashFX, 2f);

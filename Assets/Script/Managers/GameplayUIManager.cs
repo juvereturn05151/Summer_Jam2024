@@ -89,11 +89,13 @@ public class GameplayUIManager : MonoBehaviour
     public void Restart() 
     {
         //gameOverUI.SetActive(false);
+        SoundManager.Instance.PlayOneShot("SFX_Click");
         SceneManager.LoadScene("QiqiRealGameplay");
     }
 
     public void Quit()
     {
+        SoundManager.Instance.PlayOneShot("SFX_Click");
         SceneManager.LoadScene("MainScene");
     }
 }
