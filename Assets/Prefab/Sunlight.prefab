@@ -123,10 +123,12 @@ MonoBehaviour:
   sunlightFlashIntensity: 1
   timeTargetToDamage: 1
   sunlightDamageToEnemy: 10
-  sunlightDamageToHuman: 1
   hole: {fileID: 8030402335014482249, guid: 6c854820bd1c3ea4c988bc68c888e4ec, type: 3}
   createHoldTime: 1
   circleCollider2D: {fileID: 4933593121755393694}
+  lightParticle: {fileID: 8600904210304158374, guid: a74f5d4fb70d94948a7a8cbee0693f89, type: 3}
+  meltSnowFX: {fileID: 7803121286815431195, guid: 7b4fc252a8df6b141bc43160f83d8760, type: 3}
+  fireMeltFX: {fileID: 7198792262499221365, guid: 0b902de12d185304482c960bcea0b239, type: 3}
 --- !u!58 &4933593121755393694
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -210,7 +212,7 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.616
-  m_Color: {r: 1, g: 0.569441, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.64705884, b: 0, a: 1}
   m_Intensity: 2.11
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0

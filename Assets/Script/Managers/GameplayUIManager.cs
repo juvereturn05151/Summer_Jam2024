@@ -100,12 +100,24 @@ public class GameplayUIManager : MonoBehaviour
     {
         //gameOverUI.SetActive(false);
         SoundManager.Instance.PlayOneShot("SFX_Click");
+        FadingUI.Instance.StartFadeIn();
+        FadingUI.Instance.OnStopFading.AddListener(LoadGameplay);
+    }
+
+    private void LoadGameplay()
+    {
         SceneManager.LoadScene("QiqiRealGameplay");
     }
 
     public void Quit()
     {
         SoundManager.Instance.PlayOneShot("SFX_Click");
+        FadingUI.Instance.StartFadeIn();
+        FadingUI.Instance.OnStopFading.AddListener(LoadMainScene);
+    }
+
+    private void LoadMainScene()
+    {
         SceneManager.LoadScene("MainScene");
     }
 }

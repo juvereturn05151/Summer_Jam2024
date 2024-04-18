@@ -80,6 +80,12 @@ public class TutorialUIManager : MonoBehaviour
 
     public void Play()
     {
+        FadingUI.Instance.StartFadeIn();
+        FadingUI.Instance.OnStopFading.AddListener(LoadScene);
+    }
+
+    private void LoadScene() 
+    {
         SceneManager.LoadScene("QiqiRealGameplay");
     }
 }

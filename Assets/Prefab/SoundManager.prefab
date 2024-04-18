@@ -54,7 +54,7 @@ MonoBehaviour:
     SpatialBlend: 1
     Source: {fileID: 0}
   - Name: SFX_MonsterSpawn
-    clip: {fileID: 8300000, guid: 60a6a4a6a4e0c4a7891700b471dbaa86, type: 3}
+    clip: {fileID: 8300000, guid: 4ddc5286d23f3604aa4a2c66d46dbe61, type: 3}
     IsPlayOnAwake: 0
     IsLoop: 0
     Vol: 0.2
@@ -62,10 +62,10 @@ MonoBehaviour:
     SpatialBlend: 1
     Source: {fileID: 0}
   - Name: SFX_MonsterDead
-    clip: {fileID: 8300000, guid: 5be4f11b539b346d88ccfec4a7455294, type: 3}
+    clip: {fileID: 8300000, guid: 92eace025af3c7a4982d375ef8976866, type: 3}
     IsPlayOnAwake: 0
     IsLoop: 0
-    Vol: 0.5
+    Vol: 0.4
     Pitch: 1
     SpatialBlend: 0.1
     Source: {fileID: 0}
@@ -118,7 +118,7 @@ MonoBehaviour:
     SpatialBlend: 1
     Source: {fileID: 0}
   - Name: SFX_EnemyHurt
-    clip: {fileID: 8300000, guid: db6bc21c05342644293ea84d9909d3f6, type: 3}
+    clip: {fileID: 8300000, guid: cf7858e8c3d4b0149a8f7a5456dcf54a, type: 3}
     IsPlayOnAwake: 0
     IsLoop: 0
     Vol: 0.5
@@ -151,6 +151,14 @@ MonoBehaviour:
     Source: {fileID: 0}
   - Name: BGM_Gameplay
     clip: {fileID: 8300000, guid: 2a6abadf588a3430cbbe3431d4205e89, type: 3}
+    IsPlayOnAwake: 0
+    IsLoop: 1
+    Vol: 0.15
+    Pitch: 1
+    SpatialBlend: 1
+    Source: {fileID: 0}
+  - Name: SFX_Expand
+    clip: {fileID: 8300000, guid: d9f448a333716374a9962e21e7412387, type: 3}
     IsPlayOnAwake: 0
     IsLoop: 1
     Vol: 0.15
