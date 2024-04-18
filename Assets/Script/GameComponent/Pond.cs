@@ -66,7 +66,7 @@ public class Pond : MonoBehaviour
         if (pondTimeEvaporate <= 0) 
         {
             var meltFX = Instantiate(melt, transform.position, quaternion.identity);
-            SoundManager.Instance.PlayOneShot("SFX_EnemyHunt");
+            SoundManager.Instance.PlayOneShot("SFX_EnemyHurt");
             Destroy(meltFX, 1f);
             Destroy(this.gameObject);
         }
