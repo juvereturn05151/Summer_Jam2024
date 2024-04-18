@@ -6,8 +6,24 @@
   <component name="ChangeListManager">
     <list default="true" id="b9982210-07de-4cf7-8416-60902d8d8432" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Summer_Jam2024/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Summer_Jam2024/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/ButtonAnim.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/ButtonAnim.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/MenuGroup.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/MenuGroup.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animations/Logo.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/Logo.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Feel/MMTools/Demos/MMTween/Fonts/Lato/SDF/Lato-Bold SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Feel/MMTools/Demos/MMTween/Fonts/Lato/SDF/Lato-Bold SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Feel/MMTools/Demos/MMTween/Fonts/Lato/SDF/Lato-BoldItalic SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Feel/MMTools/Demos/MMTween/Fonts/Lato/SDF/Lato-BoldItalic SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Feel/MMTools/Demos/MMTween/Fonts/Lato/SDF/Lato-Hairline SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Feel/MMTools/Demos/MMTween/Fonts/Lato/SDF/Lato-Hairline SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Feel/MMTools/Demos/MMTween/Fonts/Lato/SDF/Lato-HeavyItalic SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Feel/MMTools/Demos/MMTween/Fonts/Lato/SDF/Lato-HeavyItalic SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Feel/MMTools/Demos/MMTween/Fonts/Lato/SDF/Lato-Italic SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Feel/MMTools/Demos/MMTween/Fonts/Lato/SDF/Lato-Italic SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Feel/MMTools/Demos/MMTween/Fonts/Lato/SDF/Lato-Light SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Feel/MMTools/Demos/MMTween/Fonts/Lato/SDF/Lato-Light SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Feel/MMTools/Demos/MMTween/Fonts/Lato/SDF/Lato-LightItalic SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Feel/MMTools/Demos/MMTween/Fonts/Lato/SDF/Lato-LightItalic SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Feel/MMTools/Demos/MMTween/Fonts/Lato/SDF/Lato-MediumItalic SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Feel/MMTools/Demos/MMTween/Fonts/Lato/SDF/Lato-MediumItalic SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Feel/MMTools/Demos/MMTween/Fonts/Lato/SDF/Lato-Semibold SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Feel/MMTools/Demos/MMTween/Fonts/Lato/SDF/Lato-Semibold SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Feel/MMTools/Demos/MMTween/Fonts/Lato/SDF/Lato-SemiboldItalic SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Feel/MMTools/Demos/MMTween/Fonts/Lato/SDF/Lato-SemiboldItalic SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Feel/MMTools/Demos/MMTween/Fonts/Lato/SDF/Lato-Thin SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Feel/MMTools/Demos/MMTween/Fonts/Lato/SDF/Lato-Thin SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Feel/MMTools/Demos/MMTween/Fonts/Lato/SDF/Lato-ThinItalic SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Feel/MMTools/Demos/MMTween/Fonts/Lato/SDF/Lato-ThinItalic SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Canvas.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Canvas.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/GameplayCanvas.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/GameplayCanvas.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/QiqiRealGameplay.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/QiqiRealGameplay.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Managers/GameplayUIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Managers/GameplayUIManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +130,7 @@
       <workItem from="1713330451559" duration="7603000" />
       <workItem from="1713368971199" duration="15149000" />
       <workItem from="1713412137431" duration="13734000" />
-      <workItem from="1713449282916" duration="6195000" />
+      <workItem from="1713449282916" duration="8435000" />
     </task>
     <servers />
   </component>
