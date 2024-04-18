@@ -98,6 +98,16 @@ public class Sunlight : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 SoundManager.Instance.Play("SFX_Burn");
+                for (int i = 0; i < sightedEnemies.Count; i++)
+                {
+                    if (sightedEnemies[i] != null)
+                    {
+                        sightedEnemies[i].Stun();
+                        sightedEnemies[i].DecreaseHealth(sunlightDamageToEnemy * Time.deltaTime);
+                        currentCreateHoleTime = 0;
+                    }
+                }
+
             }
 
             if (Input.GetMouseButtonUp(0))
