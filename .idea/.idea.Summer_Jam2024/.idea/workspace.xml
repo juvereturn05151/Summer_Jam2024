@@ -6,23 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="b9982210-07de-4cf7-8416-60902d8d8432" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Summer_Jam2024/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Summer_Jam2024/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FX/BurnMelt_FX.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FX/BurnMelt_FX.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FX/Light/CFXR4 Sword Hit FIRE (Cross).prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FX/Light/CFXR4 Sword Hit FIRE (Cross).prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FX/Light/CFXR4 Sword Hit ICE (Cross).prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FX/Light/CFXR4 Sword Hit ICE (Cross).prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/BulletShooter.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/BulletShooter.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/NormalEnemy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/NormalEnemy.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/SpeedEnemy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/SpeedEnemy.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/TankEnemy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/TankEnemy.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Water.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Water.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/QiqiRealGameplay.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/QiqiRealGameplay.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SunlightQiqi/PostProcessing Profile.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SunlightQiqi/PostProcessing Profile.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/GameComponent/Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/GameComponent/Enemy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/GameComponent/Pond.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/GameComponent/Pond.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SimpleFX/Materials/FX_Glow.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SimpleFX/Materials/FX_Glow.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SimpleFX/Materials/FX_GunFlash.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SimpleFX/Materials/FX_GunFlash.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SimpleFX/Materials/FX_Rubble.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SimpleFX/Materials/FX_Rubble.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SimpleFX/Materials/FX_Splash.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SimpleFX/Materials/FX_Splash.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SimpleFX/Prefabs/FX_Explosion_Rubble.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SimpleFX/Prefabs/FX_Explosion_Rubble.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/GameComponent/Human.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/GameComponent/Human.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Sunlight.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Sunlight.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,7 +105,8 @@
       <workItem from="1713240637913" duration="3318000" />
       <workItem from="1713264151981" duration="1243000" />
       <workItem from="1713330451559" duration="7603000" />
-      <workItem from="1713368971199" duration="14289000" />
+      <workItem from="1713368971199" duration="15149000" />
+      <workItem from="1713412137431" duration="6066000" />
     </task>
     <servers />
   </component>

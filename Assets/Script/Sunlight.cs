@@ -2,6 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using System.Collections.Generic;
+using MoreMountains.Feedbacks;
 using Unity.Mathematics;
 
 public class Sunlight : MonoBehaviour
@@ -50,6 +51,12 @@ public class Sunlight : MonoBehaviour
 
     [Header("Particle FX")]
     [SerializeField] private GameObject lightParticle;
+
+    private GameObject lightFX_Temp;
+    private bool isLighting;
+
+    [Header("Feedbacks")]
+    [SerializeField] private MMF_Player sunlightFeedback;
 
     private void Start()
     {
@@ -134,6 +141,12 @@ public class Sunlight : MonoBehaviour
 
         if (ActivateSunlight)
         {
+            if (lightFX_Temp == null && !isLighting)
+            {
+                isLighting = true;
+                lightFX_Temp = Instantiate(lightParticle, transform.position, quaternion.identity, transform);
+            }
+            
             for(int i = 0; i < sightedEnemies.Count; i++)
             {
                 if (sightedEnemies[i] != null)
@@ -153,6 +166,11 @@ public class Sunlight : MonoBehaviour
                 var lightFX = Instantiate(lightParticle, holeClone.transform.position, quaternion.identity);
                 Destroy(lightFX, 2f);
             }
+        }
+        else
+        {
+            isLighting = false;
+            Destroy(lightFX_Temp);
         }
 
 

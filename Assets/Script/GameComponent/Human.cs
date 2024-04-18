@@ -172,10 +172,13 @@ public class Human : MonoBehaviour
 
         if (amountWater <= 0)
         {
-            var soul = Instantiate(deadParticle, transform.position, quaternion.identity);
             animator.StartDeadAnimation();
             GameManager.Instance.OnEndGame();
             GameplayUIManager.Instance.gameOverUI.SetActive(true);
+            if (GameManager.Instance.State == GameManager.GameState.EndGame)
+            {
+                var soul = Instantiate(deadParticle, transform.position, quaternion.identity);
+            }
         }
             
     }
