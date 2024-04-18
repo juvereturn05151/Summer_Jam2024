@@ -112,10 +112,12 @@ public class Human : MonoBehaviour
 
         if(horizontalInput != 0f || verticalInput != 0f)
         {
+            SoundManager.Instance.PlayWhileOtherSoundIsNotPlaying("SFX_VillagerMove");
             animator.StartWalkingAnimation();
         }
         else
         {
+            SoundManager.Instance.Stop("SFX_VillagerMove");
             animator.StopWalkingAnimation();
         }
 
@@ -149,6 +151,8 @@ public class Human : MonoBehaviour
         playerFeedback.PlayFeedbacks();
         amountWater += increaseAmount;
 
+        SoundManager.Instance.PlayOneShot("SFX_VillagerDrink");
+
         if (amountWater >= maxWater)
             amountWater = maxWater;
     }
@@ -172,6 +176,8 @@ public class Human : MonoBehaviour
 
         if (amountWater <= 0)
         {
+            var soul = Instantiate(deadParticle, transform.position, quaternion.identity);
+            SoundManager.Instance.PlayOneShot("SFX_VillagerDead");
             animator.StartDeadAnimation();
             GameManager.Instance.OnEndGame();
             GameplayUIManager.Instance.gameOverUI.SetActive(true);

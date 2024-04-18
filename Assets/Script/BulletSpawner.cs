@@ -13,6 +13,9 @@ public class BulletSpawner : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance.State == GameManager.GameState.EndGame)
+            return;
+
         // Update the fire timer
         fireTimer -= Time.deltaTime;
 

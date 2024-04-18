@@ -94,8 +94,19 @@ public class Sunlight : MonoBehaviour
             if (GameManager.Instance.State == GameManager.GameState.EndGame)
                 return;
 
+            if (Input.GetMouseButtonDown(0))
+            {
+                SoundManager.Instance.Play("SFX_Burn");
+            }
+
+            if (Input.GetMouseButtonUp(0))
+            {
+                SoundManager.Instance.Stop("SFX_Burn");
+            }
+
             if (Input.GetMouseButton(0))
             {
+
                 _currentAlpha += Time.deltaTime * 2.0f;
                 SetAlpha(_currentAlpha);
 

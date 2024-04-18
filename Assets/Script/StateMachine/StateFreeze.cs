@@ -14,7 +14,7 @@ public class StateFreeze : State
 
     public override void OnEnter()
     {
-        _enemy.FreezeEffect.SetActive(true);
+        //_enemy.FreezeEffect.SetActive(true);
     }
 
     public override void OnState()
@@ -32,6 +32,6 @@ public class StateFreeze : State
 
     public override void OnExit()
     {
-        _enemy.FreezeEffect.SetActive(false);
+        //_enemy.FreezeEffect.SetActive(false);
     }
 }
