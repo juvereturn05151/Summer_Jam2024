@@ -12,6 +12,7 @@ public class Bullet : MonoBehaviour
 
     void Start()
     {
+        SoundManager.Instance.Play("SnowBulletSFX");
         direction = (Human.Instance.transform.position - transform.position).normalized;
         // Destroy the bullet after the specified lifetime
         Destroy(gameObject, lifetime);
@@ -19,8 +20,6 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
-        
-
         // Move towards the target position
         transform.Translate(direction * speed * Time.deltaTime);
     }
@@ -34,10 +33,16 @@ public class Bullet : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         // Check if the bullet collided with an object other than an obstacle
-        if (other.gameObject.tag == "Wall" || other.gameObject.tag == "Human")
+        if (other.gameObject.tag == "Human")
         {
+            SoundManager.Instance.Play("SFX_VillagerHurt");
+            Human.Instance.IsHurt = true;
+            Human.Instance.PlayerHurtFeedback.PlayFeedbacks();
             Human.Instance.DecreaseWaterAmount(10f);
             DestroyBullet();
         }
+
+        if (other.gameObject.tag == "Wall")
+            DestroyBullet();
     }
 }

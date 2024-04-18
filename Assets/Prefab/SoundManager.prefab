@@ -1,0 +1,144 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4396507084178042146
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1563036264012753588}
+  - component: {fileID: 5049992123906394697}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1563036264012753588
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4396507084178042146}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5049992123906394697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4396507084178042146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df35a1d636f98ac4d8ed8167b4bd318f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sounds:
+  - Name: SFX_Click
+    clip: {fileID: 8300000, guid: f93eeffed20c5488cb847f73f8cbce22, type: 3}
+    IsPlayOnAwake: 0
+    IsLoop: 0
+    Vol: 1
+    Pitch: 1
+    SpatialBlend: 1
+    Source: {fileID: 0}
+  - Name: SFX_MonsterSpawn
+    clip: {fileID: 8300000, guid: 60a6a4a6a4e0c4a7891700b471dbaa86, type: 3}
+    IsPlayOnAwake: 0
+    IsLoop: 0
+    Vol: 0.2
+    Pitch: 1
+    SpatialBlend: 1
+    Source: {fileID: 0}
+  - Name: SFX_MonsterDead
+    clip: {fileID: 8300000, guid: 5be4f11b539b346d88ccfec4a7455294, type: 3}
+    IsPlayOnAwake: 0
+    IsLoop: 0
+    Vol: 1
+    Pitch: 1
+    SpatialBlend: 0.1
+    Source: {fileID: 0}
+  - Name: SFX_VillagerMove
+    clip: {fileID: 8300000, guid: a7eb462d0b0b0483d89b3c4da28c63ae, type: 3}
+    IsPlayOnAwake: 0
+    IsLoop: 0
+    Vol: 0.04
+    Pitch: 1
+    SpatialBlend: 1
+    Source: {fileID: 0}
+  - Name: SFX_VillagerDead
+    clip: {fileID: 8300000, guid: d47281300b2f449629513f4947222bc3, type: 3}
+    IsPlayOnAwake: 0
+    IsLoop: 0
+    Vol: 1
+    Pitch: 1
+    SpatialBlend: 0.1
+    Source: {fileID: 0}
+  - Name: SFX_VillagerDrink
+    clip: {fileID: 8300000, guid: f2d3a0458cbfa41319a09a71061e8680, type: 3}
+    IsPlayOnAwake: 0
+    IsLoop: 0
+    Vol: 1
+    Pitch: 2
+    SpatialBlend: 1
+    Source: {fileID: 0}
+  - Name: SFX_Burn
+    clip: {fileID: 8300000, guid: eca8640eecdd14fbb8455f20c12b65bb, type: 3}
+    IsPlayOnAwake: 0
+    IsLoop: 0
+    Vol: 0.35
+    Pitch: 1
+    SpatialBlend: 1
+    Source: {fileID: 0}
+  - Name: SFX_VillagerHit
+    clip: {fileID: 8300000, guid: e01a139f9870948b480b4fe9b166abf2, type: 3}
+    IsPlayOnAwake: 0
+    IsLoop: 0
+    Vol: 1
+    Pitch: 1
+    SpatialBlend: 1
+    Source: {fileID: 0}
+  - Name: SFX_VillagerHurt
+    clip: {fileID: 8300000, guid: 45a81a8ab7264474f928b6c6b3e0f583, type: 3}
+    IsPlayOnAwake: 0
+    IsLoop: 0
+    Vol: 1
+    Pitch: 1
+    SpatialBlend: 1
+    Source: {fileID: 0}
+  - Name: SFX_EnemyHurt
+    clip: {fileID: 8300000, guid: db6bc21c05342644293ea84d9909d3f6, type: 3}
+    IsPlayOnAwake: 0
+    IsLoop: 0
+    Vol: 0.5
+    Pitch: 1.5
+    SpatialBlend: 1
+    Source: {fileID: 0}
+  - Name: PondSFX
+    clip: {fileID: 8300000, guid: 3a445af828229cf4f999febdb8c9847e, type: 3}
+    IsPlayOnAwake: 0
+    IsLoop: 0
+    Vol: 1
+    Pitch: 1
+    SpatialBlend: 1
+    Source: {fileID: 0}
+  - Name: SnowBulletSFX
+    clip: {fileID: 8300000, guid: 77372901fd0e11446a7a5e7c3e974d67, type: 3}
+    IsPlayOnAwake: 0
+    IsLoop: 0
+    Vol: 1
+    Pitch: 1
+    SpatialBlend: 1
+    Source: {fileID: 0}
+  masterVolume: 5

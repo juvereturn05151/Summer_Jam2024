@@ -121,7 +121,7 @@ public class Human : MonoBehaviour
             animator.StopWalkingAnimation();
         }
 
-        Debug.Log("moveDirection: " + moveDirection);
+        // Debug.Log("moveDirection: " + moveDirection);
         transform.position += moveDirection * 2 * Time.deltaTime;
 
         StartCoroutine(LerpWater());
@@ -176,7 +176,6 @@ public class Human : MonoBehaviour
 
         if (amountWater <= 0)
         {
-            var soul = Instantiate(deadParticle, transform.position, quaternion.identity);
             SoundManager.Instance.PlayOneShot("SFX_VillagerDead");
             animator.StartDeadAnimation();
             GameManager.Instance.OnEndGame();

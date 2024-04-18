@@ -122,6 +122,7 @@ public class Enemy : MonoBehaviour
             human.PlayerHurtFeedback.PlayFeedbacks();
             human.DecreaseWaterAmount(_decreaseAmount);
 
+            SoundManager.Instance.Play("SFX_VillagerHurt");
             SoundManager.Instance.PlayOneShot("SFX_VillagerHit");
 
             var water = Instantiate(GameplayUIManager.Instance.WaterSplashFX, GameplayUIManager.Instance.waterSplashParent.transform.position, 
@@ -137,10 +138,12 @@ public class Enemy : MonoBehaviour
 
         // _health -= Time.deltaTime;
         _health -= damage;
+        
 
         timer += Time.deltaTime;
         if (timer > 0.25f)
         {
+            SoundManager.Instance.Play("SFX_EnemyHurt");
             var dmgFX = Instantiate(damageFX, transform.position, quaternion.identity, transform);
             Destroy(dmgFX, 1f);
             timer = 0;

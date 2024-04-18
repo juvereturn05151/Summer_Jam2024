@@ -51,12 +51,11 @@ public class Sunlight : MonoBehaviour
 
     [Header("Particle FX")]
     [SerializeField] private GameObject lightParticle;
-
+    [SerializeField] private GameObject meltSnowFX;
+    [SerializeField] private GameObject fireMeltFX;
+    
     private GameObject lightFX_Temp;
     private bool isLighting;
-
-    [Header("Feedbacks")]
-    [SerializeField] private MMF_Player sunlightFeedback;
 
     private void Start()
     {
@@ -152,12 +151,30 @@ public class Sunlight : MonoBehaviour
 
         if (ActivateSunlight)
         {
-            if (lightFX_Temp == null && !isLighting)
+            timer += Time.deltaTime;
+            if (timer >= 1f)
             {
-                isLighting = true;
-                lightFX_Temp = Instantiate(lightParticle, transform.position, quaternion.identity, transform);
+                var snowMelt = Instantiate(meltSnowFX, transform.position + Vector3.up, quaternion.identity);
+                Destroy(snowMelt, 1f);
+                timer = 0;
             }
-            
+
+            if (lightFX_Temp == null)
+            {
+                if (!isLighting)
+                {
+                    isLighting = true;
+                    lightFX_Temp = Instantiate(lightParticle, transform.position, quaternion.identity, transform);   
+                }
+
+                // timer += Time.deltaTime;
+                // if (timer >= 0.25f)
+                // {
+                //     var fireFX = Instantiate(fireMeltFX, transform.position, quaternion.identity);
+                //     Destroy(fireFX, 0.7f);
+                // }
+            }
+
             for(int i = 0; i < sightedEnemies.Count; i++)
             {
                 if (sightedEnemies[i] != null)
@@ -171,6 +188,11 @@ public class Sunlight : MonoBehaviour
             currentCreateHoleTime += Time.deltaTime;
             if (currentCreateHoleTime >= createHoldTime) 
             {
+                SoundManager.Instance.PlayOneShot("PondSFX");
+                
+                var fireFX = Instantiate(fireMeltFX, transform.position, quaternion.identity);
+                Destroy(fireFX, 0.7f);
+                
                 var holeClone = Instantiate(hole, transform.position, transform.rotation);
                 currentCreateHoleTime = 0;
 
