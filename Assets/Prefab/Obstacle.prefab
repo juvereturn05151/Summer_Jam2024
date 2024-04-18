@@ -143,7 +143,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -166,5 +166,5 @@ MonoBehaviour:
   pondTimeEvaporate: 5
   objectStat: 1
   pondFillOnDay: 20
-  melt: {fileID: 0}
-  waterSplash: {fileID: 0}
+  melt: {fileID: 7510160176912914525, guid: 4552f4224a720744f934420baa38cb28, type: 3}
+  waterSplash: {fileID: 4226614812645000377, guid: e1527692eabfc1049a7e1f746dbfc554, type: 3}
