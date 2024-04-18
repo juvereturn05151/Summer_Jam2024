@@ -67,6 +67,11 @@ public class GameplayUIManager : MonoBehaviour
 
     // Update is called once per frame
 
+    private void Start()
+    {
+        ScoreManager.highscore = PlayerPrefs.GetFloat("HighScore", 0);
+    }
+
     void Update()
     {
         //if (Input.GetMouseButtonDown(0)) 
@@ -77,12 +82,17 @@ public class GameplayUIManager : MonoBehaviour
         //    }
         //}
 
-        scoreText.text = "Score: " + ScoreManager.score.ToString();
+        scoreText.text = "Score: " + ScoreManager.score.ToString() + " HighScore: " + ScoreManager.highscore;
     }
 
     public void IncreaseScore(float value)
     {
         ScoreManager.score += value;
+        if (ScoreManager.score >= ScoreManager.highscore) 
+        {
+            ScoreManager.highscore = ScoreManager.score;
+            PlayerPrefs.SetFloat("HighScore", ScoreManager.highscore);
+        }
         scoreFeedback.PlayFeedbacks();
     }
 
