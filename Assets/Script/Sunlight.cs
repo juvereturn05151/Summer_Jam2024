@@ -112,6 +112,8 @@ public class Sunlight : MonoBehaviour
                 if (light.intensity < sunlightFlashIntensity)
                     light.intensity += Time.deltaTime;
 
+                
+
                 if (sightedEnemies.Count > 1)
                 {
                     light.pointLightOuterRadius = sightedEnemies.Count;
@@ -123,9 +125,7 @@ public class Sunlight : MonoBehaviour
                     light.pointLightOuterRadius = 1f;
                     light.pointLightInnerRadius = 0.75f;
                     circleCollider2D.radius = 1f;
-                }
-
-                
+                }               
 
                 if (_currentAlpha >= _maximumAlpha || light.intensity >= sunlightFlashIntensity)
                 {
@@ -206,7 +206,14 @@ public class Sunlight : MonoBehaviour
             Destroy(lightFX_Temp);
         }
 
-
+        if (sightedEnemies.Count == 0)
+        {
+            light.color = new Color(1.0f, 0.64f, 0.0f, 1);
+        }
+        else 
+        {
+            light.color = new Color(1.0f, 0.20f, 0.0f, 1);
+        }
     }
 
     private void SetAlpha(float newAlpha) 
@@ -228,6 +235,11 @@ public class Sunlight : MonoBehaviour
             if (!sightedEnemies.Contains(enemy))
             {
                 sightedEnemies.Add(enemy);
+
+                if (ActivateSunlight && sightedEnemies.Count > 1) 
+                {
+                    SoundManager.Instance.PlayOneShot("SFX_Expand");
+                }
             }
         }
 
@@ -243,26 +255,4 @@ public class Sunlight : MonoBehaviour
             }
         }
     }
-
-   /* private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (ActivateSunlight) 
-        {
-            if (collision.gameObject.GetComponent<Enemy>() is Enemy enemy)
-            {
-                enemy.Stun();
-                enemy.DecreaseHealth(sunlightDamageToEnemy * Time.deltaTime);
-            }
-
-            if (collision.GetComponent<Human>() is Human human)
-            {
-                timer += Time.deltaTime;
-                if (timer >= timeTargetToDamage)
-                {
-                    human.DecreaseHealth(sunlightDamageToHuman);
-                    timer = 0;
-                }
-            }
-        }
-    }*/
 }

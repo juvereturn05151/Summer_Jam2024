@@ -157,4 +157,12 @@ MonoBehaviour:
     Pitch: 1
     SpatialBlend: 1
     Source: {fileID: 0}
+  - Name: SFX_Expand
+    clip: {fileID: 8300000, guid: d9f448a333716374a9962e21e7412387, type: 3}
+    IsPlayOnAwake: 0
+    IsLoop: 1
+    Vol: 0.15
+    Pitch: 1
+    SpatialBlend: 1
+    Source: {fileID: 0}
   masterVolume: 5
