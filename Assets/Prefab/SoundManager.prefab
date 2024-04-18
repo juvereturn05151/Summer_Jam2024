@@ -65,7 +65,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 5be4f11b539b346d88ccfec4a7455294, type: 3}
     IsPlayOnAwake: 0
     IsLoop: 0
-    Vol: 1
+    Vol: 0.5
     Pitch: 1
     SpatialBlend: 0.1
     Source: {fileID: 0}
@@ -113,7 +113,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 45a81a8ab7264474f928b6c6b3e0f583, type: 3}
     IsPlayOnAwake: 0
     IsLoop: 0
-    Vol: 1
+    Vol: 0
     Pitch: 1
     SpatialBlend: 1
     Source: {fileID: 0}
@@ -122,7 +122,7 @@ MonoBehaviour:
     IsPlayOnAwake: 0
     IsLoop: 0
     Vol: 0.5
-    Pitch: 1.5
+    Pitch: 1
     SpatialBlend: 1
     Source: {fileID: 0}
   - Name: PondSFX
@@ -145,7 +145,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 4f2f2ded23c89490f9ea237457d66948, type: 3}
     IsPlayOnAwake: 0
     IsLoop: 1
-    Vol: 0.5
+    Vol: 0.1
     Pitch: 1
     SpatialBlend: 1
     Source: {fileID: 0}
@@ -153,7 +153,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 2a6abadf588a3430cbbe3431d4205e89, type: 3}
     IsPlayOnAwake: 0
     IsLoop: 1
-    Vol: 0.8
+    Vol: 0.15
     Pitch: 1
     SpatialBlend: 1
     Source: {fileID: 0}
