@@ -23,4 +23,14 @@ public class HumanAnimatorController : MonoBehaviour
     {
         animatorController.SetBool("isDead", true);
     }
+
+    public void StartHurtAnimation()
+    {
+        animatorController.SetBool("isHurt", true);
+    }
+
+    public void StopHurtAnimation()
+    {
+        animatorController.SetBool("isHurt", false);
+    }
 }

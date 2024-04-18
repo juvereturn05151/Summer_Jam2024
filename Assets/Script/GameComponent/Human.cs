@@ -92,6 +92,7 @@ public class Human : MonoBehaviour
     [SerializeField] private GameObject deadParticle;
     
     private HumanAnimatorController animator;
+    private GameObject blood;
 
     private void Start()
     {
@@ -125,6 +126,8 @@ public class Human : MonoBehaviour
         transform.position += moveDirection * 2 * Time.deltaTime;
 
         StartCoroutine(LerpWater());
+        
+        CheckPlayerHurtAnim();
         //DecreaseWaterAmount(Time.deltaTime);
         DecreaseWaterAmount(Time.deltaTime);
     }
@@ -165,7 +168,7 @@ public class Human : MonoBehaviour
         if (isHurt)
         {
             var random = Random.Range(0, 1);
-            var blood = Instantiate(bloodParticle[random], transform.position, quaternion.identity, transform);
+            blood = Instantiate(bloodParticle[random], transform.position, quaternion.identity, transform);
             Destroy(blood, 5f);
             isHurt = false;
         }
@@ -209,5 +212,18 @@ public class Human : MonoBehaviour
     {
         GameplayUIManager.Instance.waterSlider.value = Mathf.Lerp(GameplayUIManager.Instance.waterSlider.value, amountWater, Time.deltaTime * lerpSpeed);
         yield return null;
+    }
+
+    void CheckPlayerHurtAnim()
+    {
+        if (blood == null)
+        {
+            animator.StopHurtAnimation();
+        }
+        else
+        {
+            animator.StopWalkingAnimation();
+            animator.StartHurtAnimation();
+        }
     }
 }

@@ -151,7 +151,7 @@ public class Enemy : MonoBehaviour
 
         feedbacks.PlayFeedbacks();
         
-        Debug.Log("_health" + _health);
+        // Debug.Log("_health" + _health);
         if (_health <= 0) 
         {
             var burnMeltFx = Instantiate(smokeFX, transform.position + Vector3.up, quaternion.identity);

@@ -1728,8 +1728,8 @@ MonoBehaviour:
           Duration: 0.1
           Amplitude: 0.2
           Frequency: 20
-          AmplitudeX: 1.5
-          AmplitudeY: 1.5
+          AmplitudeX: 1.25
+          AmplitudeY: 1.25
           AmplitudeZ: 0
 --- !u!1001 &2877891170197478259
 PrefabInstance:
