@@ -62,6 +62,8 @@ public class GameManager : MonoBehaviour
 
     public void OnStartGame()
     {
+        SoundManager.Instance.Stop("BGM_Title");
+        SoundManager.Instance.Play("BGM_Gameplay");
         state = GameState.StartGame;
         ScoreManager.score = 0;
     }

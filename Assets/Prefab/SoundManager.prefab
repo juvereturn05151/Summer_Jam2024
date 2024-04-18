@@ -141,4 +141,20 @@ MonoBehaviour:
     Pitch: 1
     SpatialBlend: 1
     Source: {fileID: 0}
+  - Name: BGM_Title
+    clip: {fileID: 8300000, guid: 4f2f2ded23c89490f9ea237457d66948, type: 3}
+    IsPlayOnAwake: 0
+    IsLoop: 1
+    Vol: 0.5
+    Pitch: 1
+    SpatialBlend: 1
+    Source: {fileID: 0}
+  - Name: BGM_Gameplay
+    clip: {fileID: 8300000, guid: 2a6abadf588a3430cbbe3431d4205e89, type: 3}
+    IsPlayOnAwake: 0
+    IsLoop: 1
+    Vol: 0.8
+    Pitch: 1
+    SpatialBlend: 1
+    Source: {fileID: 0}
   masterVolume: 5

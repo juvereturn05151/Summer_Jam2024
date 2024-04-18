@@ -17,6 +17,11 @@ public class MainMenuPanel : MonoBehaviour
         InitButtonAction();
     }
 
+    private void Start()
+    {
+        SoundManager.Instance.Play("BGM_Title");
+    }
+
     private void InitButtonAction()
     {
         startButton.onClick.AddListener(OnClickStart);
@@ -25,14 +30,14 @@ public class MainMenuPanel : MonoBehaviour
         quitButton.onClick.AddListener(OnClickQuit);
     }
 
-    private void Update()
-    {
-        if(Input.GetMouseButtonDown(0))
-        {
-            Debug.Log($"OnClick");
-            SoundManager.Instance.PlayOneShot("SFX_Click");
-        }
-    }
+    //private void Update()
+    //{
+    //    if(Input.GetMouseButtonDown(0))
+    //    {
+    //        Debug.Log($"OnClick");
+    //        SoundManager.Instance.PlayOneShot("SFX_Click");
+    //    }
+    //}
 
     #region Panel Action
     public void Show()
