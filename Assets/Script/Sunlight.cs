@@ -213,10 +213,17 @@ public class Sunlight : MonoBehaviour
                 Destroy(fireFX, 0.7f);
                 
                 var holeClone = Instantiate(hole, transform.position, transform.rotation);
+                Pond pond = holeClone.GetComponent<Pond>();
+
+                if (!sightedPonds.Contains(pond))
+                {
+                    sightedPonds.Add(pond);
+                }
                 currentCreateHoleTime = 0;
 
                 var lightFX = Instantiate(lightParticle, holeClone.transform.position, quaternion.identity);
                 Destroy(lightFX, 2f);
+
             }
         }
         else

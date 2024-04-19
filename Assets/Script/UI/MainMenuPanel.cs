@@ -19,6 +19,7 @@ public class MainMenuPanel : MonoBehaviour
 
     private void Start()
     {
+        SoundManager.Instance.Stop("BGM_Gameplay");
         SoundManager.Instance.Play("BGM_Title");
     }
 
