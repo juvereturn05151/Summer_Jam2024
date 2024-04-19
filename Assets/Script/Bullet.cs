@@ -37,6 +37,7 @@ public class Bullet : MonoBehaviour
         {
             SoundManager.Instance.Play("SFX_VillagerHurt");
             Human.Instance.IsHurt = true;
+            Human.Instance.WaterFillImage.HurtSlider();
             Human.Instance.PlayerHurtFeedback.PlayFeedbacks();
             Human.Instance.DecreaseWaterAmount(10f);
             DestroyBullet();

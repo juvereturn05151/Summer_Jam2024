@@ -94,6 +94,14 @@ public class Human : MonoBehaviour
     private HumanAnimatorController animator;
     private GameObject blood;
 
+    [SerializeField] private ChangeFillImage waterFillImage;
+
+    public ChangeFillImage WaterFillImage
+    {
+        get => waterFillImage;
+        set => waterFillImage = value;
+    }
+
     private void Start()
     {
         amountWater = startWater;

@@ -128,6 +128,8 @@ public class Enemy : MonoBehaviour
             var water = Instantiate(GameplayUIManager.Instance.WaterSplashFX, GameplayUIManager.Instance.waterSplashParent.transform.position, 
                 quaternion.identity, GameplayUIManager.Instance.waterSplashParent.transform);
             Destroy(water, 1f);
+
+            human.WaterFillImage.HurtSlider();
         }
     }
 

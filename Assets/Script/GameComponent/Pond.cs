@@ -114,6 +114,7 @@ public class Pond : MonoBehaviour
         if (other.gameObject.GetComponent<Human>() is Human human)
         {
             print("human drink water");
+            human.WaterFillImage.FillWaterSlider();
             human.IncreaseWaterAmount(PondFillOnDay);
             Destroy(gameObject);
             
