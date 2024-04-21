@@ -6,9 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="b9982210-07de-4cf7-8416-60902d8d8432" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Summer_Jam2024/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Summer_Jam2024/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/GameComponent/Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/GameComponent/Enemy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/GameComponent/Human.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/GameComponent/Human.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/GameComponent/Pond.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/GameComponent/Pond.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/GameplayCanvas.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/GameplayCanvas.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/QiqiRealGameplay.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/QiqiRealGameplay.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Tutorial.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Tutorial.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Managers/GameplayUIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Managers/GameplayUIManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/UniversalRP.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/UniversalRP.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +57,7 @@
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="D:/Qiqi Game Build/Melt Em' Up!/SummerJamGameBuild0.0.1\Melt 'em up!.exe" />
+      <option name="EXE_PATH" value="D:/Qiqi Game Build/Melt Em' Up!/Melt 'Em Up!\Melt 'em up!.exe" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="D:\Qiqi Game Build\Melt Em' Up!\SummerJamGameBuild0.0.1" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -116,7 +120,7 @@
       <workItem from="1713368971199" duration="15149000" />
       <workItem from="1713412137431" duration="13734000" />
       <workItem from="1713449282916" duration="8435000" />
-      <workItem from="1713505003851" duration="1324000" />
+      <workItem from="1713505003851" duration="3902000" />
     </task>
     <servers />
   </component>

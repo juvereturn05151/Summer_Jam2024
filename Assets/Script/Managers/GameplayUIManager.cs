@@ -48,6 +48,7 @@ public class GameplayUIManager : MonoBehaviour
     }
 
     [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI highScoreText;
     
     public GameObject gameOverUI;
     public GameObject gamePlayUI;
@@ -74,6 +75,7 @@ public class GameplayUIManager : MonoBehaviour
     private void Start()
     {
         ScoreManager.highscore = PlayerPrefs.GetFloat("HighScore", 0);
+        highScoreText.text = $"High score: {ScoreManager.highscore}";
     }
 
     void Update()
@@ -86,7 +88,7 @@ public class GameplayUIManager : MonoBehaviour
         //    }
         //}
 
-        scoreText.text = "Score: " + ScoreManager.score.ToString() + " HighScore: " + ScoreManager.highscore;
+        scoreText.text = "Score: " + ScoreManager.score;
 
         if (GameManager.Instance.State == GameManager.GameState.EndGame)
         {

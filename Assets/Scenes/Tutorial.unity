@@ -424,6 +424,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2718123582700008364, guid: ee851c5f6b59a0341b116b1bd41de4b7, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 800
+      objectReference: {fileID: 0}
+    - target: {fileID: 2718123582700008364, guid: ee851c5f6b59a0341b116b1bd41de4b7, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 800
+      objectReference: {fileID: 0}
     - target: {fileID: 3406986754653126102, guid: ee851c5f6b59a0341b116b1bd41de4b7, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -519,6 +527,18 @@ PrefabInstance:
     - target: {fileID: 8138004004959924235, guid: ee851c5f6b59a0341b116b1bd41de4b7, type: 3}
       propertyPath: m_Name
       value: TutorialCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8727965468419020441, guid: ee851c5f6b59a0341b116b1bd41de4b7, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1144261226}
+    - target: {fileID: 8727965468419020441, guid: ee851c5f6b59a0341b116b1bd41de4b7, type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8727965468419020441, guid: ee851c5f6b59a0341b116b1bd41de4b7, type: 3}
+      propertyPath: m_VertexColorAlwaysGammaSpace
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
