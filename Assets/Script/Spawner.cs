@@ -61,16 +61,16 @@ public class Spawner : MonoBehaviour
         switch (side)
         {
             case 0: // Top side
-                spawnPosition = new Vector3(Random.Range(-cameraWidth, cameraWidth), cameraHeight - 3f, 0f);
+                spawnPosition = new Vector3(Random.Range(-cameraWidth, cameraWidth), cameraHeight, 0f);
                 break;
             case 1: // Bottom side
                 spawnPosition = new Vector3(Random.Range(-cameraWidth, cameraWidth), -cameraHeight, 0f);
                 break;
             case 2: // Left side
-                spawnPosition = new Vector3(-cameraWidth, Random.Range(-cameraHeight, cameraHeight - 3f), 0f);
+                spawnPosition = new Vector3(-cameraWidth, Random.Range(-cameraHeight, cameraHeight), 0f);
                 break;
             case 3: // Right side
-                spawnPosition = new Vector3(cameraWidth, Random.Range(-cameraHeight, cameraHeight - 3f), 0f);
+                spawnPosition = new Vector3(cameraWidth, Random.Range(-cameraHeight, cameraHeight), 0f);
                 break;
         }
 
