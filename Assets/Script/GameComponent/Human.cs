@@ -4,6 +4,11 @@ using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+/// <summary>
+/// Human is the player's main character that has Water as their energy and health
+/// The reason why it is singleton because we expected to have only 1 human in the stage
+/// </summary>
+
 public class Human : MonoBehaviour
 {
     private static Human instance;
@@ -39,10 +44,6 @@ public class Human : MonoBehaviour
     private float maxWater;
 
     [SerializeField] 
-    private float amountWater;
-    public float AmountWater => amountWater;
-
-    [SerializeField] 
     private HumanAIAgent _humanAIAgent;
     public HumanAIAgent HumanAIAgent => _humanAIAgent;
 
@@ -66,14 +67,18 @@ public class Human : MonoBehaviour
     public ChangeFillImage WaterFillImage => waterFillImage;
 
     public bool IsHurt { get; private set;}
+    public float CurrentWater { get; private set; }
 
     private const float _lerpSpeed = 2f;
     private const float _moveSpeed = 2f;
+    private const float _destroyBloodTime = 5f;
     private const string _horizontalInputString = "Horizontal";
     private const string _verticalInputString = "Vertical";
     private const string _sfx_villageMoveString = "SFX_VillagerMove";
     private const string _sfx_villageDrinkString = "SFX_VillagerDrink";
     private const string _sfx_villageDeadString = "SFX_VillagerDead";
+    private const string _sfx_villageHurtString = "SFX_VillagerHurt";
+    private const string _sfx_villageHitString = "SFX_VillagerHit";
     private HumanAnimatorController _animator;
     private GameObject _blood;
 
@@ -95,9 +100,9 @@ public class Human : MonoBehaviour
 
     private void Start()
     {
-        amountWater = startWater;
+        CurrentWater = startWater;
         GameplayUIManager.Instance.waterSlider.maxValue = maxWater;
-        GameplayUIManager.Instance.waterSlider.value = amountWater;
+        GameplayUIManager.Instance.waterSlider.value = CurrentWater;
     }
 
     // Update is called once per frame
@@ -114,39 +119,45 @@ public class Human : MonoBehaviour
         DecreaseWaterAmount(Time.deltaTime);
     }
 
-    public void SetIsHurt(bool isHurt) 
+    public void OnGettingHurt(float damage) 
     {
-        IsHurt = isHurt;
+        IsHurt = true;
+        WaterFillImage.HurtSlider();
+        PlayerHurtFeedback.PlayFeedbacks();
+        SoundManager.Instance.Play(_sfx_villageHurtString);
+        SoundManager.Instance.PlayOneShot(_sfx_villageHitString);
+        DecreaseWaterAmount(damage);
+        WaterFillImage.HurtSlider();
     }
 
     public void IncreaseWaterAmount(float increaseAmount)
     {
         playerFeedback.PlayFeedbacks();
-        amountWater += increaseAmount;
+        CurrentWater += increaseAmount;
         SoundManager.Instance.PlayOneShot(_sfx_villageDrinkString);
 
-        if (amountWater >= maxWater) 
+        if (CurrentWater >= maxWater) 
         {
-            amountWater = maxWater;
+            CurrentWater = maxWater;
         }
     }
 
     public void DecreaseWaterAmount(float increaseAmount)
     {
-        amountWater -= increaseAmount;
+        CurrentWater -= increaseAmount;
 
         if (IsHurt)
         {
             var random = Random.Range(0, 1);
             _blood = Instantiate(bloodParticle[random], transform.position, quaternion.identity, transform);
-            Destroy(_blood, 5f);
+            Destroy(_blood, _destroyBloodTime);
             IsHurt = false;
         }
 
-        amountWater = (amountWater - increaseAmount <= 0) ? 0 : amountWater - increaseAmount;
-        GameplayUIManager.Instance.waterSlider.value = amountWater;
+        CurrentWater = (CurrentWater - increaseAmount <= 0) ? 0 : CurrentWater - increaseAmount;
+        GameplayUIManager.Instance.waterSlider.value = CurrentWater;
 
-        if (amountWater <= 0)
+        if (CurrentWater <= 0)
         {
             SoundManager.Instance.PlayOneShot(_sfx_villageDeadString);
             _animator.StartDeadAnimation();
@@ -182,7 +193,7 @@ public class Human : MonoBehaviour
     
     private IEnumerator LerpWater()
     {
-        GameplayUIManager.Instance.waterSlider.value = Mathf.Lerp(GameplayUIManager.Instance.waterSlider.value, amountWater, Time.deltaTime * _lerpSpeed);
+        GameplayUIManager.Instance.waterSlider.value = Mathf.Lerp(GameplayUIManager.Instance.waterSlider.value, CurrentWater, Time.deltaTime * _lerpSpeed);
         yield return null;
     }
 
