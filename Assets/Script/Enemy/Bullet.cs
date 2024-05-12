@@ -36,7 +36,7 @@ public class Bullet : MonoBehaviour
         if (other.gameObject.tag == "Human")
         {
             SoundManager.Instance.Play("SFX_VillagerHurt");
-            Human.Instance.IsHurt = true;
+            Human.Instance.SetIsHurt(true);
             Human.Instance.WaterFillImage.HurtSlider();
             Human.Instance.PlayerHurtFeedback.PlayFeedbacks();
             Human.Instance.DecreaseWaterAmount(10f);

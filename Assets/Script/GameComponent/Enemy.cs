@@ -118,7 +118,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<Human>() is Human human)
         {
-            human.IsHurt = true;
+            human.SetIsHurt(true);
             human.PlayerHurtFeedback.PlayFeedbacks();
             human.DecreaseWaterAmount(_decreaseAmount);
 
