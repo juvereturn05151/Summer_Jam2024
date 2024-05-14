@@ -6,7 +6,7 @@ using Unity.Mathematics;
 public class Sunlight : MonoBehaviour
 {
     [SerializeField]
-    private bool isMorning;
+    private float _waterDecreaseSpeed = 1.5f;
     
     [Header("Sunlight (Sprite Renderer)")]
     [SerializeField] 
@@ -56,15 +56,27 @@ public class Sunlight : MonoBehaviour
     [Space]
     public bool ActivateSunlight;
 
+    private const float _alphaIncreaseSpeed = 2.0f;
+    private const float _pointLightIncrementRadiusJitter = 0.75f;
+    private const float _originalPointOuterRadiusSize = 1f;
+    private const float _originalPointInnerRadiusSize = 0.75f;
+    private const float _originalCircleColliderSize = 1f;
+    private const float _fireFxDestroyTime = 0.7f;
+    private const float _lightFxDestroyTime = 2f;
+    private const string _sfx_burn = "SFX_Burn";
+    private const string _sfx_pond = "PondSFX";
+    private const string _sfx_expand = "SFX_Expand";
+    private readonly Color _normal_color = new Color(1.0f, 0.64f, 0.0f, 1);
+    private readonly Color _attacking_color = new Color(1.0f, 0.20f, 0.0f, 1);
     private float _maximumAlpha = 1.0f;
     private float _currentAlpha;
-    private float timer;
-    private CircleCollider2D col;
-    private List<Enemy> sightedEnemies = new List<Enemy>();
-    private List<Pond> sightedPonds = new List<Pond>();
-    private float currentCreateHoleTime;
-    private GameObject lightFX_Temp;
-    private bool isLighting;
+    private float _timer;
+    private CircleCollider2D _col;
+    private List<Enemy> _sightedEnemies = new List<Enemy>();
+    private List<Pond> _sightedPonds = new List<Pond>();
+    private float _currentCreatePondTime;
+    private GameObject _lightFX_Temp;
+    private bool _isLighting;
 
     private void Start()
     {
@@ -73,171 +85,265 @@ public class Sunlight : MonoBehaviour
         light = GetComponentInChildren<Light2D>();
         light.intensity = normalSunlightIntensity;
 
-        col = GetComponent<CircleCollider2D>();
-        col.radius = sunlightRadius;
+        _col = GetComponent<CircleCollider2D>();
+        _col.radius = sunlightRadius;
     }
 
     private void Update()
     {
-        if(GameManager.Instance.State == GameManager.GameState.EndGame)
-            gameObject.SetActive(false);
-        else
-            gameObject.SetActive(true);
+        if (GameManager.Instance.State == GameManager.GameState.EndGame)
+            return;
 
-        if (TimeManager.Instance.TimePhase == TimePhase.Morning)
+        if (Input.GetMouseButtonDown(0))
         {
-            isMorning = true;
-            light.gameObject.SetActive(true);
+            HandleHitEnemyOnce();
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            SoundManager.Instance.Stop(_sfx_burn);
+        }
+
+        if (Input.GetMouseButton(0))
+        {
+            HandlePreparingSunlighting();
+
+            if (IsReadyToSunlighting())
+            {
+                if (Human.Instance.CurrentWater > 0)
+                {
+                    StartSunlighting();
+                }
+            }
         }
         else
         {
-            ActivateSunlight = false;
-            isMorning = false;
-            light.gameObject.SetActive(false);
-        }
-            
-        if (isMorning)
-        {
-            if (GameManager.Instance.State == GameManager.GameState.EndGame)
-                return;
-
-            if (Input.GetMouseButtonDown(0))
-            {
-                SoundManager.Instance.Play("SFX_Burn");
-                for (int i = 0; i < sightedEnemies.Count; i++)
-                {
-                    if (sightedEnemies[i] != null)
-                    {
-                        sightedEnemies[i].Stun();
-                        sightedEnemies[i].DecreaseHealth(sunlightDamageToEnemy * Time.deltaTime);
-                        currentCreateHoleTime = 0;
-                    }
-                }
-
-            }
-
-            if (Input.GetMouseButtonUp(0))
-            {
-                SoundManager.Instance.Stop("SFX_Burn");
-            }
-
-            if (Input.GetMouseButton(0))
-            {
-
-                _currentAlpha += Time.deltaTime * 2.0f;
-                SetAlpha(_currentAlpha);
-
-                if (light.intensity < sunlightFlashIntensity)
-                    light.intensity += Time.deltaTime;
-
-                if (sightedEnemies.Count > 1)
-                {
-                    light.pointLightOuterRadius = sightedEnemies.Count;
-                    light.pointLightInnerRadius = sightedEnemies.Count * 0.75f;
-                    circleCollider2D.radius = sightedEnemies.Count;
-                }
-                else 
-                {
-                    light.pointLightOuterRadius = 1f;
-                    light.pointLightInnerRadius = 0.75f;
-                    circleCollider2D.radius = 1f;
-                }               
-
-                if (_currentAlpha >= _maximumAlpha || light.intensity >= sunlightFlashIntensity)
-                {
-                    if (Human.Instance.CurrentWater > 0) 
-                    {
-                        ActivateSunlight = true;
-                        Human.Instance.DecreaseWaterAmount(Time.deltaTime * 1.5f);
-                    } 
-                }
-            }
-            else
-            {
-                _currentAlpha = _startingAlpha;
-                SetAlpha(_startingAlpha);
-
-                light.intensity = normalSunlightIntensity;
-                light.pointLightOuterRadius = 1f;
-                light.pointLightInnerRadius = 0.75f;
-                circleCollider2D.radius = 1f;
-                ActivateSunlight = false;
-            }
+            StopSunlightAttack();
         }
 
         if (ActivateSunlight)
         {
-            timer += Time.deltaTime;
-            if (timer >= 1f)
-            {
-                var snowMelt = Instantiate(meltSnowFX, transform.position + Vector3.up, quaternion.identity);
-                Destroy(snowMelt, 1f);
-                timer = 0;
-            }
+            HandleOnSunlighting();
+        }
 
-            if (lightFX_Temp == null)
+        HandleSunlightColor();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.GetComponent<Enemy>() is Enemy enemy)
+        {
+            if (!_sightedEnemies.Contains(enemy))
             {
-                if (!isLighting)
+                _sightedEnemies.Add(enemy);
+
+                if (ActivateSunlight && _sightedEnemies.Count > 1)
                 {
-                    isLighting = true;
-                    lightFX_Temp = Instantiate(lightParticle, transform.position, quaternion.identity, transform);   
+                    SoundManager.Instance.PlayOneShot(_sfx_expand);
                 }
             }
+        }
 
-            for(int i = 0; i < sightedEnemies.Count; i++)
+        if (collision.gameObject.GetComponent<Pond>() is Pond pond)
+        {
+            if (!_sightedPonds.Contains(pond))
             {
-                if (sightedEnemies[i] != null)
-                {
-                    sightedEnemies[i].Stun();
-                    sightedEnemies[i].DecreaseHealth(sunlightDamageToEnemy * Time.deltaTime);
-                    currentCreateHoleTime = 0;
-                }
+                _sightedPonds.Add(pond);
             }
+        }
+    }
 
-            for (int i = 0; i < sightedPonds.Count; i++)
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.GetComponent<Enemy>() is Enemy enemy)
+        {
+            if (_sightedEnemies.Contains(enemy))
             {
-                if (sightedPonds[i] != null)
-                {
-                    sightedPonds[i].PondTimeEvaporate -= Time.deltaTime;
-                    currentCreateHoleTime = 0;
-                }
+                _sightedEnemies.Remove(enemy);
             }
+        }
 
-            currentCreateHoleTime += Time.deltaTime;
-            if (currentCreateHoleTime >= createHoldTime) 
+        if (collision.gameObject.GetComponent<Pond>() is Pond pond)
+        {
+            if (_sightedPonds.Contains(pond))
             {
-                SoundManager.Instance.PlayOneShot("PondSFX");
-                
-                var fireFX = Instantiate(fireMeltFX, transform.position, quaternion.identity);
-                Destroy(fireFX, 0.7f);
-                
-                var holeClone = Instantiate(hole, transform.position, transform.rotation);
-                Pond pond = holeClone.GetComponent<Pond>();
-
-                if (!sightedPonds.Contains(pond))
-                {
-                    sightedPonds.Add(pond);
-                }
-                currentCreateHoleTime = 0;
-
-                var lightFX = Instantiate(lightParticle, holeClone.transform.position, quaternion.identity);
-                Destroy(lightFX, 2f);
-
+                _sightedPonds.Remove(pond);
             }
+        }
+    }
+
+    private void HandleHitEnemyOnce() 
+    {
+        SoundManager.Instance.Play(_sfx_burn);
+
+        for (int i = 0; i < _sightedEnemies.Count; i++)
+        {
+            if (_sightedEnemies[i] != null)
+            {
+                _sightedEnemies[i].Stun();
+                _sightedEnemies[i].DecreaseHealth(sunlightDamageToEnemy * Time.deltaTime);
+                _currentCreatePondTime = 0;
+            }
+        }
+    }
+
+    private void HandlePreparingSunlighting() 
+    {
+        IncreasingAlpha();
+        IncreasingLightIntensity();
+        HandleLightCircleSize();
+    }
+
+    private void IncreasingAlpha() 
+    {
+        _currentAlpha += Time.deltaTime * _alphaIncreaseSpeed;
+        SetAlpha(_currentAlpha);
+    }
+
+    private void IncreasingLightIntensity() 
+    {
+        if (light.intensity < sunlightFlashIntensity)
+        {
+            light.intensity += Time.deltaTime;
+        }
+    }
+
+    private void HandleLightCircleSize() 
+    {
+        if (_sightedEnemies.Count > 1)
+        {
+            ExpandRadiusWithEnemyCount();
         }
         else
         {
-            isLighting = false;
-            Destroy(lightFX_Temp);
+            ResetSunlightRadius();
+        }
+    }
+
+    private void ExpandRadiusWithEnemyCount() 
+    {
+        light.pointLightOuterRadius = _sightedEnemies.Count;
+        light.pointLightInnerRadius = _sightedEnemies.Count * _pointLightIncrementRadiusJitter;
+        circleCollider2D.radius = _sightedEnemies.Count;
+    }
+
+    private void ResetSunlightRadius() 
+    {
+        light.pointLightOuterRadius = _originalPointOuterRadiusSize;
+        light.pointLightInnerRadius = _originalPointInnerRadiusSize;
+        circleCollider2D.radius = _originalCircleColliderSize;
+    }
+
+    private bool IsReadyToSunlighting() 
+    {
+        return _currentAlpha >= _maximumAlpha || light.intensity >= sunlightFlashIntensity;
+    }
+
+    private void StartSunlighting() 
+    {
+        ActivateSunlight = true;
+        Human.Instance.DecreaseWaterAmount(Time.deltaTime * _waterDecreaseSpeed);
+    }
+
+    private void HandleOnSunlighting() 
+    {
+        HandleVfxOnSunlighting();
+        HandleSightedEnemies();
+        HandleSightedPond();
+        HandleCreatingBigPond();
+    }
+
+    private void HandleVfxOnSunlighting() 
+    {
+        _timer += Time.deltaTime;
+
+        if (_timer >= 1f)
+        {
+            var snowMelt = Instantiate(meltSnowFX, transform.position + Vector3.up, quaternion.identity);
+            Destroy(snowMelt, 1f);
+            _timer = 0;
         }
 
-        if (sightedEnemies.Count == 0)
+        if (_lightFX_Temp == null)
         {
-            light.color = new Color(1.0f, 0.64f, 0.0f, 1);
+            if (!_isLighting)
+            {
+                _isLighting = true;
+                _lightFX_Temp = Instantiate(lightParticle, transform.position, quaternion.identity, transform);
+            }
         }
-        else 
+    }
+
+    private void HandleSightedEnemies() 
+    {
+        for (int i = 0; i < _sightedEnemies.Count; i++)
         {
-            light.color = new Color(1.0f, 0.20f, 0.0f, 1);
+            if (_sightedEnemies[i] != null)
+            {
+                _sightedEnemies[i].Stun();
+                _sightedEnemies[i].DecreaseHealth(sunlightDamageToEnemy * Time.deltaTime);
+                _currentCreatePondTime = 0;
+            }
+        }
+    }
+
+    private void HandleSightedPond() 
+    {
+        for (int i = 0; i < _sightedPonds.Count; i++)
+        {
+            if (_sightedPonds[i] != null)
+            {
+                _sightedPonds[i].PondTimeEvaporate -= Time.deltaTime;
+                _currentCreatePondTime = 0;
+            }
+        }
+    }
+
+    private void HandleCreatingBigPond() 
+    {
+        _currentCreatePondTime += Time.deltaTime;
+
+        if (_currentCreatePondTime >= createHoldTime)
+        {
+            SoundManager.Instance.PlayOneShot(_sfx_pond);
+
+            var fireFX = Instantiate(fireMeltFX, transform.position, quaternion.identity);
+            Destroy(fireFX, _fireFxDestroyTime);
+
+            var holeClone = Instantiate(hole, transform.position, transform.rotation);
+            Pond pond = holeClone.GetComponent<Pond>();
+
+            if (!_sightedPonds.Contains(pond))
+            {
+                _sightedPonds.Add(pond);
+            }
+
+            _currentCreatePondTime = 0;
+
+            var lightFX = Instantiate(lightParticle, holeClone.transform.position, quaternion.identity);
+            Destroy(lightFX, _lightFxDestroyTime);
+        }
+    }
+
+    private void StopSunlightAttack() 
+    {
+        _currentAlpha = _startingAlpha;
+        SetAlpha(_startingAlpha);
+
+        light.intensity = normalSunlightIntensity;
+        ResetSunlightRadius();
+        ActivateSunlight = false;
+    }
+
+    private void HandleSunlightColor() 
+    {
+        if (_sightedEnemies.Count == 0)
+        {
+            light.color = _normal_color;
+        }
+        else
+        {
+            light.color = _attacking_color;
         }
     }
 
@@ -248,52 +354,8 @@ public class Sunlight : MonoBehaviour
         _sunlightImage.color = tempColor;
     }
 
-    void AdjustRadius(float radius)
+    private void AdjustRadius(float radius)
     {
-        col.radius = radius;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.GetComponent<Enemy>() is Enemy enemy)
-        {
-            if (!sightedEnemies.Contains(enemy))
-            {
-                sightedEnemies.Add(enemy);
-
-                if (ActivateSunlight && sightedEnemies.Count > 1) 
-                {
-                    SoundManager.Instance.PlayOneShot("SFX_Expand");
-                }
-            }
-        }
-
-        if (collision.gameObject.GetComponent<Pond>() is Pond pond)
-        {
-            if (!sightedPonds.Contains(pond))
-            {
-                sightedPonds.Add(pond);
-            }
-        }
-
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.GetComponent<Enemy>() is Enemy enemy)
-        {
-            if (sightedEnemies.Contains(enemy))
-            {
-                sightedEnemies.Remove(enemy);
-            }
-        }
-
-        if (collision.gameObject.GetComponent<Pond>() is Pond pond)
-        {
-            if (sightedPonds.Contains(pond))
-            {
-                sightedPonds.Remove(pond);
-            }
-        }
+        _col.radius = radius;
     }
 }
