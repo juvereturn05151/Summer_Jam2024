@@ -2,13 +2,23 @@ using UnityEngine;
 
 public class ReaperEnemy : MonoBehaviour
 {
+    private TimeManager _timeManager;
+
     private void Start()
     {
-        TimeManager.Instance.SetMorningLight(0.0f);
+        _timeManager = TimeManager.Instance;
+
+        if (_timeManager != null) 
+        {
+            _timeManager.SetTimePhase(TimePhase.Night);
+        }
     }
 
     private void OnDestroy()
     {
-        TimeManager.Instance.SetMorningLight(0.5f);
+        if (_timeManager != null)
+        {
+            _timeManager.SetTimePhase(TimePhase.Morning);
+        }
     }
 }

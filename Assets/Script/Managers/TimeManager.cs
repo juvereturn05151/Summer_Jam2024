@@ -25,14 +25,19 @@ public class TimeManager : MonoBehaviour
     [SerializeField] private Light2D globalLight; // Reference to the directional light representing the sun
     
     [Space]
-    [SerializeField] private float morningLight;
+    [SerializeField]
+    private float morningLight;
     public float MorningLight => morningLight;
 
-    [SerializeField] private float nightLight;
+    [SerializeField] 
+    private float nightLight;
+    public float NightLight => nightLight;
 
-    [SerializeField] private float lightTime = 0.025f;
+    [SerializeField] 
+    private float lightTime = 0.025f;
 
-    [SerializeField] private float _timeSpeed = 2.0f;
+    [SerializeField] 
+    private float _timeSpeed = 2.0f;
 
     private void Awake()
     {
