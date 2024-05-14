@@ -18,7 +18,7 @@ public class StateStun : State
     public override void OnEnter()
     {
         _enemy.StunEffect.SetActive(true);
-        _enemy.IsStunning = true;
+        _enemy.SetIsStunning(true);
     }
     public override void OnState()
     {
@@ -26,10 +26,13 @@ public class StateStun : State
 
         if (currentStunTime <= 0)
         {
-            _enemy.IsStunning = false;
+            _enemy.SetIsStunning(false);
             AIAgent.ChangeState(new StateSeek(AIAgent, Human.Instance.gameObject));
         }
-        else _enemy.IsStunning = true;
+        else
+        {
+            _enemy.SetIsStunning(true);
+        } 
     }
     public override void OnExit()
     {

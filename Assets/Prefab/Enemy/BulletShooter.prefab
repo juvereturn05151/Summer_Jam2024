@@ -293,7 +293,6 @@ Transform:
   - {fileID: 3797392595394760589}
   - {fileID: 4723436437284461390}
   - {fileID: 3839964176742372898}
-  - {fileID: 4870662667940782048}
   - {fileID: 9147593140693693066}
   - {fileID: 3414713066890477074}
   - {fileID: 8337883716840466214}
@@ -474,11 +473,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 7371278301712798364, guid: 5d2bb6365d02b104f9ecab831ddf17e8, type: 3}
-  firePoint: {fileID: 0}
   fireRate: 0.5
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 0
+  isImmuneToStun: 0
   enemy: {fileID: 3552005282547976627}
 --- !u!95 &7008620222367127422
 Animator:
@@ -1189,87 +1188,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &7401294094821030175
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4870662667940782048}
-  - component: {fileID: 3230960536474710521}
-  - component: {fileID: 4397881795506980773}
-  m_Layer: 0
-  m_Name: LineOfSight
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4870662667940782048
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7401294094821030175}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3521896468766609592}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &3230960536474710521
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7401294094821030175}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 4
---- !u!114 &4397881795506980773
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7401294094821030175}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 438a7e16c028cdd4586b2e50ca797a1c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _aiAgent: {fileID: 1754017539144427101}
 --- !u!1 &7485252761080568513
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,61 +1,68 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using System.Collections.Generic;
-using MoreMountains.Feedbacks;
 using Unity.Mathematics;
 
 public class Sunlight : MonoBehaviour
 {
-
-
-    [SerializeField] private bool isMorning;
-    public bool IsMorning
-    {
-        get => isMorning;
-        set => isMorning = value;
-    }
+    [SerializeField]
+    private bool isMorning;
     
     [Header("Sunlight (Sprite Renderer)")]
-    [SerializeField] private SpriteRenderer _sunlightImage;
-    [SerializeField] private float _startingAlpha = 0.25f;
-    private float _maximumAlpha = 1.0f;
-    private float _currentAlpha;
+    [SerializeField] 
+    private SpriteRenderer _sunlightImage;
+
+    [SerializeField] 
+    private float _startingAlpha = 0.25f;
+
+    [Header("Sunlight (Light)")]
+    [SerializeField] 
+    private Light2D light;
+
+    [SerializeField] 
+    private float sunlightRadius = 0.5f;
+
+    [SerializeField] 
+    private float normalSunlightIntensity = 0.1f;
+    [SerializeField]
+    private float sunlightFlashIntensity = 0.5f;
+
+    [SerializeField] 
+    private float timeTargetToDamage;
+
+    [Header("Sunlight Damage")]
+    [SerializeField] 
+    private float sunlightDamageToEnemy = 10f;
+
+    [SerializeField]
+    private GameObject hole;
+
+    [SerializeField]
+    private float createHoldTime;
+
+    [SerializeField] 
+    private CircleCollider2D circleCollider2D;
+
+    [Header("Particle FX")]
+    [SerializeField] 
+    private GameObject lightParticle;
+
+    [SerializeField] 
+    private GameObject meltSnowFX;
+
+    [SerializeField] 
+    private GameObject fireMeltFX;
 
     [Space]
     public bool ActivateSunlight;
 
-    [Header("Sunlight (Light)")]
-    [SerializeField] private Light2D light;
-    private CircleCollider2D col;
-    
-    [SerializeField] private float sunlightRadius = 0.5f;
-    
-    [SerializeField] private float normalSunlightIntensity = 0.1f;
-    [SerializeField] private float sunlightFlashIntensity = 0.5f;
-
+    private float _maximumAlpha = 1.0f;
+    private float _currentAlpha;
     private float timer;
-    [SerializeField] private float timeTargetToDamage;
-
-    [Header("Sunlight Damage")]
-    [SerializeField] private float sunlightDamageToEnemy = 10f;
-
-    List<Enemy> sightedEnemies = new List<Enemy>();
-
-    List<Pond> sightedPonds = new List<Pond>();
-
-    [SerializeField] private GameObject hole;
-
-    [SerializeField] private float createHoldTime;
+    private CircleCollider2D col;
+    private List<Enemy> sightedEnemies = new List<Enemy>();
+    private List<Pond> sightedPonds = new List<Pond>();
     private float currentCreateHoleTime;
-
-    [SerializeField] private CircleCollider2D circleCollider2D;
-
-    [Header("Particle FX")]
-    [SerializeField] private GameObject lightParticle;
-    [SerializeField] private GameObject meltSnowFX;
-    [SerializeField] private GameObject fireMeltFX;
-    
     private GameObject lightFX_Temp;
     private bool isLighting;
 
@@ -77,7 +84,7 @@ public class Sunlight : MonoBehaviour
         else
             gameObject.SetActive(true);
 
-        if (TimeManager.Instance._TimePhase == TimePhase.Morning)
+        if (TimeManager.Instance.TimePhase == TimePhase.Morning)
         {
             isMorning = true;
             light.gameObject.SetActive(true);
@@ -91,7 +98,6 @@ public class Sunlight : MonoBehaviour
             
         if (isMorning)
         {
-
             if (GameManager.Instance.State == GameManager.GameState.EndGame)
                 return;
 
@@ -139,7 +145,7 @@ public class Sunlight : MonoBehaviour
 
                 if (_currentAlpha >= _maximumAlpha || light.intensity >= sunlightFlashIntensity)
                 {
-                    if (Human.Instance.AmountWater > 0) 
+                    if (Human.Instance.CurrentWater > 0) 
                     {
                         ActivateSunlight = true;
                         Human.Instance.DecreaseWaterAmount(Time.deltaTime * 1.5f);
@@ -176,13 +182,6 @@ public class Sunlight : MonoBehaviour
                     isLighting = true;
                     lightFX_Temp = Instantiate(lightParticle, transform.position, quaternion.identity, transform);   
                 }
-
-                // timer += Time.deltaTime;
-                // if (timer >= 0.25f)
-                // {
-                //     var fireFX = Instantiate(fireMeltFX, transform.position, quaternion.identity);
-                //     Destroy(fireFX, 0.7f);
-                // }
             }
 
             for(int i = 0; i < sightedEnemies.Count; i++)

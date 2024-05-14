@@ -1,19 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed = 10f;
-    public float lifetime = 2f; // Time in seconds before the bullet is destroyed if it doesn't hit anything
-    public LayerMask obstacleLayer;
-    Vector3 direction;
-    private Rigidbody2D rb;
+    [SerializeField]
+    private float speed = 10f;
+
+    [SerializeField]
+    private float lifetime = 2f;
+
+    [SerializeField]
+    private float damage = 10f;
+
+    private const string _sfx_snowBulletSFXString = "SnowBulletSFX";
+    private Vector3 _direction;
 
     void Start()
     {
-        SoundManager.Instance.Play("SnowBulletSFX");
-        direction = (Human.Instance.transform.position - transform.position).normalized;
+        SoundManager.Instance.Play(_sfx_snowBulletSFXString);
+        _direction = (Human.Instance.transform.position - transform.position).normalized;
         // Destroy the bullet after the specified lifetime
         Destroy(gameObject, lifetime);
     }
@@ -21,7 +25,7 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         // Move towards the target position
-        transform.Translate(direction * speed * Time.deltaTime);
+        transform.Translate(_direction * speed * Time.deltaTime);
     }
 
     void DestroyBullet()
@@ -33,17 +37,15 @@ public class Bullet : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         // Check if the bullet collided with an object other than an obstacle
-        if (other.gameObject.tag == "Human")
+        if (other.gameObject.GetComponent<Human>() is Human human)
         {
-            SoundManager.Instance.Play("SFX_VillagerHurt");
-            Human.Instance.SetIsHurt(true);
-            Human.Instance.WaterFillImage.HurtSlider();
-            Human.Instance.PlayerHurtFeedback.PlayFeedbacks();
-            Human.Instance.DecreaseWaterAmount(10f);
+            human.OnGettingHurt(damage);
             DestroyBullet();
         }
 
-        if (other.gameObject.tag == "Wall")
+        if (other.gameObject.CompareTag(TagCollection.WallTag)) 
+        {
             DestroyBullet();
+        }
     }
 }
