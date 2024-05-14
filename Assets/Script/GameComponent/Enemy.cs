@@ -32,9 +32,6 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private GameObject dropItemPrefab;
 
-    [SerializeField]
-    private float destroyDropItemTime = 10f;
-
     [Space]
     [SerializeField]
     private bool isFreeze;

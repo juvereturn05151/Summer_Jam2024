@@ -2,7 +2,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
-using TMPro;
+
 public enum FadingPhase
 {
     FadeIn,
@@ -31,12 +31,13 @@ public class FadingUI : MonoBehaviour
     [SerializeField]
     private Image fadeImage;
 
+    [SerializeField]
+    private float fadingSpeed;
+
     public UnityEvent OnStopFading;
+
     private bool fading;
     private FadingPhase currentFadingPhase;
-
-    [SerializeField] private float fadingSpeed;
-
 
     private void Awake()
     {

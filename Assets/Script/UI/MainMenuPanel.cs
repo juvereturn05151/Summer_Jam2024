@@ -31,15 +31,6 @@ public class MainMenuPanel : MonoBehaviour
         quitButton.onClick.AddListener(OnClickQuit);
     }
 
-    //private void Update()
-    //{
-    //    if(Input.GetMouseButtonDown(0))
-    //    {
-    //        Debug.Log($"OnClick");
-    //        SoundManager.Instance.PlayOneShot("SFX_Click");
-    //    }
-    //}
-
     #region Panel Action
     public void Show()
     {
@@ -60,8 +51,6 @@ public class MainMenuPanel : MonoBehaviour
         SoundManager.Instance.PlayOneShot("SFX_Click");
         FadingUI.Instance.StartFadeIn();
         FadingUI.Instance.OnStopFading.AddListener(LoadTutorialScene);
-        //Hide();
-        //UIManager.GameplayPanel.Show();
     }
 
     private void LoadTutorialScene() 
@@ -72,21 +61,17 @@ public class MainMenuPanel : MonoBehaviour
     private void OnClickTutorial()
     {
         //Call tutorial panal
-        Debug.Log($"OnClickTutorial");
         SoundManager.Instance.PlayOneShot("SFX_Click");
-        //UIManager.TutorialPanel.Show();
     }
 
     private void OnClickSetting()
     {
         //Call setting panal
-        Debug.Log($"OnClickSetting");
         SoundManager.Instance.PlayOneShot("SFX_Click");
     }
 
     private void OnClickQuit()
     {
-        Debug.Log($"OnClickQuit");
         SoundManager.Instance.PlayOneShot("SFX_Click");
         Application.Quit();
     }
