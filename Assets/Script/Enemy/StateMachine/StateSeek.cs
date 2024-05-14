@@ -36,8 +36,6 @@ public class StateSeek : State
                 AIAgent.Seek(targetPos);
             }
         }
-
-
     }
 
     public override void OnExit() 

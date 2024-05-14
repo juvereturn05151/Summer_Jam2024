@@ -3,56 +3,39 @@ using UnityEngine;
 
 public class Pond : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField]
+    private SpriteRenderer _spriteRenderer;
 
-    #region -Sunlight-
+    [SerializeField]
+    private float pondTimeEvaporate = 5f;
 
-    [Header("Sunlight Variables")]
-    [SerializeField] private float iceMeltTimeBySun = 3f;
-    
-    public float IceMeltTimeBySun
-    {
-        get => iceMeltTimeBySun;
-        set => iceMeltTimeBySun = value;
-    }
-
-    [SerializeField] private float pondTimeEvaporate = 5f;
-
-    public float PondTimeEvaporate
-    {
-        get => pondTimeEvaporate;
-        set => pondTimeEvaporate = value;
-    }
-
-    #endregion
-
-    [Space]
-
-    [SerializeField] private float pondFillOnDay;
+    [SerializeField] 
+    private float pondFillOnDay;
     public float PondFillOnDay => pondFillOnDay;
 
-    [SerializeField] private GameObject melt;
+    [SerializeField]
+    private GameObject melt;
 
-    [SerializeField] private GameObject waterSplash;
+    [SerializeField] 
+    private GameObject waterSplash;
 
-    // Update is called once per frame
+    private const string _sfx_enemyHurt = "SFX_EnemyHurt";
+
     private void Update()
     {
         if (pondTimeEvaporate <= 0) 
         {
             var meltFX = Instantiate(melt, transform.position, quaternion.identity);
-            SoundManager.Instance.PlayOneShot("SFX_EnemyHurt");
+            SoundManager.Instance.PlayOneShot(_sfx_enemyHurt);
             Destroy(meltFX, 1f);
             Destroy(this.gameObject);
         }
     }
 
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.GetComponent<Human>() is Human human)
         {
-            print("human drink water");
             human.WaterFillImage.FillWaterSlider();
             human.IncreaseWaterAmount(PondFillOnDay);
             Destroy(gameObject);
@@ -69,5 +52,10 @@ public class Pond : MonoBehaviour
             human.IncreaseWaterAmount(PondFillOnDay);
             Destroy(gameObject);
         }
+    }
+
+    public void Evaporating() 
+    {
+        pondTimeEvaporate -= Time.deltaTime;
     }
 }

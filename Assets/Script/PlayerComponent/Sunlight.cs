@@ -293,7 +293,7 @@ public class Sunlight : MonoBehaviour
         {
             if (_sightedPonds[i] != null)
             {
-                _sightedPonds[i].PondTimeEvaporate -= Time.deltaTime;
+                _sightedPonds[i].Evaporating();
                 _currentCreatePondTime = 0;
             }
         }
