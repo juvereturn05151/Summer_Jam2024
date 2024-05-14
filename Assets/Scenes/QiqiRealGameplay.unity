@@ -1121,7 +1121,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &221005172
 Transform:
   m_ObjectHideFlags: 0
@@ -1291,7 +1291,7 @@ PrefabInstance:
     - target: {fileID: 5038164240262669759, guid: c8565501678b7b842baa8680bc7ff225, type: 3}
       propertyPath: prefabToSpawn.Array.data[0]
       value: 
-      objectReference: {fileID: 1703859074394605504, guid: 38948e335220fc24aacf0a4c764b5653, type: 3}
+      objectReference: {fileID: 1703859074394605504, guid: 780bc14468e64a84baadfe7365934a87, type: 3}
     - target: {fileID: 6368901718563106322, guid: c8565501678b7b842baa8680bc7ff225, type: 3}
       propertyPath: m_Name
       value: Spawner2
@@ -5445,7 +5445,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &630493400
 Transform:
   m_ObjectHideFlags: 0
@@ -5540,7 +5540,7 @@ Transform:
   m_GameObject: {fileID: 681000949}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.86, y: 5.14, z: 0}
+  m_LocalPosition: {x: 7.67, y: 6.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6695,7 +6695,7 @@ Transform:
   m_GameObject: {fileID: 1452903958}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.58, y: -4.85, z: 0}
+  m_LocalPosition: {x: 6, y: -4.92, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7304,7 +7304,7 @@ Transform:
   m_GameObject: {fileID: 1749929665}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.78, y: -4.14, z: 0}
+  m_LocalPosition: {x: -4.78, y: -5.18, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7607,7 +7607,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1839945711
 Transform:
   m_ObjectHideFlags: 0
@@ -9366,7 +9366,7 @@ PrefabInstance:
     - target: {fileID: 5038164240262669759, guid: c8565501678b7b842baa8680bc7ff225, type: 3}
       propertyPath: prefabToSpawn.Array.data[0]
       value: 
-      objectReference: {fileID: 1703859074394605504, guid: 780bc14468e64a84baadfe7365934a87, type: 3}
+      objectReference: {fileID: 1703859074394605504, guid: 38948e335220fc24aacf0a4c764b5653, type: 3}
     - target: {fileID: 5038164240262669759, guid: c8565501678b7b842baa8680bc7ff225, type: 3}
       propertyPath: prefabToSpawn.Array.data[1]
       value: 
