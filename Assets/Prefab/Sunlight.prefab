@@ -113,10 +113,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ba4057984709ef40b628c404073b02b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isMorning: 0
+  _waterDecreaseSpeed: 1
   _sunlightImage: {fileID: 4075066699219346150}
   _startingAlpha: 0.25
-  ActivateSunlight: 0
   light: {fileID: 2940887928499749680}
   sunlightRadius: 0.5
   normalSunlightIntensity: 0.5
@@ -129,6 +128,7 @@ MonoBehaviour:
   lightParticle: {fileID: 8600904210304158374, guid: a74f5d4fb70d94948a7a8cbee0693f89, type: 3}
   meltSnowFX: {fileID: 7803121286815431195, guid: 7b4fc252a8df6b141bc43160f83d8760, type: 3}
   fireMeltFX: {fileID: 7198792262499221365, guid: 0b902de12d185304482c960bcea0b239, type: 3}
+  ActivateSunlight: 0
 --- !u!58 &4933593121755393694
 CircleCollider2D:
   m_ObjectHideFlags: 0
