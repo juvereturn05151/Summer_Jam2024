@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ad9cca3d89289d428c331f779e94d15, type: 3}
+  m_Name: ExplainThirstyBar
+  m_EditorClassIdentifier: 
+  Type: 3
+  DialogueLines:
+  - "Hey, how\u2019s the exercise? Did you feel warmed up?"
+  - "Next, do you see a blue thingy here? This is called a \u201CThirsty bar\u201D."
+  - 'It represents the amount of water in your body. You will die when you run out
+    of it and it decreases overtime '
+  ObjectiveDialogue: None
+  TutorialAttribute: {fileID: 11400000, guid: 933416f9e62ddf44f9cd6c3c9d053de9, type: 2}

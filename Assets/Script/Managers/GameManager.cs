@@ -10,7 +10,8 @@ public class GameManager : MonoBehaviour
     public enum GameState
     {
         StartGame,
-        EndGame
+        EndGame,
+        Stop
     }
 
     private GameState state;
@@ -20,6 +21,16 @@ public class GameManager : MonoBehaviour
         get => state;
         set => state = value;
     }
+
+    #region Tutorial Only
+
+    [SerializeField]
+    private bool _isTutorial;
+    public bool IsTutorial => _isTutorial;
+
+    public int BigPondDrank = 0;
+
+    #endregion
 
     [SerializeField]
     private GameObject spawner2;

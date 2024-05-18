@@ -43,10 +43,6 @@ public class Human : MonoBehaviour
     [SerializeField] 
     private float maxWater;
 
-    [SerializeField] 
-    private HumanAIAgent _humanAIAgent;
-    public HumanAIAgent HumanAIAgent => _humanAIAgent;
-
     [Header("Feedbacks")]
     [SerializeField] 
     private MMF_Player playerHurtFeedback;
@@ -108,7 +104,7 @@ public class Human : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (GameManager.Instance.State == GameManager.GameState.EndGame) 
+        if (GameManager.Instance.State != GameManager.GameState.StartGame) 
         {
             return;
         }
@@ -156,6 +152,11 @@ public class Human : MonoBehaviour
 
         CurrentWater = (CurrentWater - increaseAmount <= 0) ? 0 : CurrentWater - increaseAmount;
         GameplayUIManager.Instance.waterSlider.value = CurrentWater;
+
+        if (GameManager.Instance.IsTutorial) 
+        {
+            return;
+        }
 
         if (CurrentWater <= 0)
         {

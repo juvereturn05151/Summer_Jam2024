@@ -91,7 +91,7 @@ public class Sunlight : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.Instance.State == GameManager.GameState.EndGame)
+        if (GameManager.Instance.State != GameManager.GameState.StartGame)
             return;
 
         if (Input.GetMouseButtonDown(0))

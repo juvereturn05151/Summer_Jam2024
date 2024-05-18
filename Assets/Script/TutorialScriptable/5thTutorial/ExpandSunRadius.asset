@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ad9cca3d89289d428c331f779e94d15, type: 3}
+  m_Name: ExpandSunRadius
+  m_EditorClassIdentifier: 
+  Type: 6
+  DialogueLines:
+  - 'Well Done! '
+  - Oh, there are more of them coming!!
+  - But don't worry, I can expand the sun radius.
+  ObjectiveDialogue: Survive This Horde Of Enemies
+  TutorialAttribute: {fileID: 11400000, guid: d141317cf002b9f42920b470f01b6e70, type: 2}

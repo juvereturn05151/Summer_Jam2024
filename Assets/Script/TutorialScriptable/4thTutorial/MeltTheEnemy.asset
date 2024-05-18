@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ad9cca3d89289d428c331f779e94d15, type: 3}
+  m_Name: MeltTheEnemy
+  m_EditorClassIdentifier: 
+  Type: 1
+  DialogueLines:
+  - As you can see you fill up your thirsty bar.
+  - 'Now, let me teach you how you use sunlight. '
+  - Oh wait, that's an Ice Monster overthere.
+  - Be careful. The Ice Monster will reduce your thirsty bar when they hit you
+  ObjectiveDialogue: Now, use the light energy to melt that monster by holding the
+    left mouse button to melt it.
+  TutorialAttribute: {fileID: 11400000, guid: 5148ba33ea8e3af41ac4b4827ace11b5, type: 2}

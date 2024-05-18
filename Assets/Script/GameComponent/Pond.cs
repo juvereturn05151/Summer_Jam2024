@@ -36,6 +36,11 @@ public class Pond : MonoBehaviour
     {
         if (other.gameObject.GetComponent<Human>() is Human human)
         {
+            if (pondFillOnDay >= 20) 
+            {
+                GameManager.Instance.BigPondDrank++;
+            }
+
             human.WaterFillImage.FillWaterSlider();
             human.IncreaseWaterAmount(PondFillOnDay);
             Destroy(gameObject);
