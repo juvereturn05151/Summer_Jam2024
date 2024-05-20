@@ -36,17 +36,22 @@ public class Pond : MonoBehaviour
     {
         if (other.gameObject.GetComponent<Human>() is Human human)
         {
-            if (pondFillOnDay >= 20) 
-            {
-                GameManager.Instance.BigPondDrank++;
-            }
-
             human.WaterFillImage.FillWaterSlider();
             human.IncreaseWaterAmount(PondFillOnDay);
+
+            if (pondFillOnDay >= 20)
+            {
+                if (GameManager.Instance.IsTutorial && AdvancedTutorialManager.Instance.CurrentTutorial.Type == TutorialType.CreateABigPond) 
+                {
+                    GameManager.Instance.BigPondDrank++;
+                }
+            }
+
             Destroy(gameObject);
 
             var waterFX = Instantiate(waterSplash, transform.position, quaternion.identity);
             Destroy(waterFX, 1f);
+
         }
     }
 

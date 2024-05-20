@@ -14,10 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 7
   DialogueLines:
-  - Wow!! Aren't you amazed at how much water you gained!!
-  - Remember this technique, it will be helpful during the battle.
-  - I believe now you've learned everything you need for the upcoming battle.
-  - Your goal is to kill the enemies until the boss appears to finish the stage.
-  - Enjoy the game!!
-  ObjectiveDialogue: Kill
+  - "Remember this, as it\u2019s essential for your survival."
+  - "I believe you\u2019ve now learned everything you need to face the greatest challenge
+    ahead."
+  - Your goal is to eliminate all Ice Monsters until their leader appears. Only then
+    can you complete your mission.
+  - Good luck, Doctor Elias! Melt Em Up!!
+  ShowTutorialGuideOnStart: 0
+  ShowTutorialGuideBackground: 1
+  ShowOnSecondDialogue: 1
+  ShowOnLastDialogue: 0
+  ObjectiveDialogue: Melt Em Up!!
+  WhatToDoDialogue: Good luck, Doctor Elias! Melt Em Up!!
   TutorialAttribute: {fileID: 11400000, guid: 904bb997bf603dd4285f6ede90a4f59f, type: 2}

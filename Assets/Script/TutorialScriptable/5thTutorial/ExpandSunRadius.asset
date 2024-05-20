@@ -14,8 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 6
   DialogueLines:
-  - 'Well Done! '
-  - Oh, there are more of them coming!!
-  - But don't worry, I can expand the sun radius.
+  - More of them are coming!
+  - "Don\u2019t worry, sun radiation will cover all enemies within the radius."
+  ShowTutorialGuideOnStart: 0
+  ShowTutorialGuideBackground: 1
+  ShowOnSecondDialogue: 1
+  ShowOnLastDialogue: 0
   ObjectiveDialogue: Survive This Horde Of Enemies
+  WhatToDoDialogue: 'Sunlight Power: Hold Left Mouse Button'
   TutorialAttribute: {fileID: 11400000, guid: d141317cf002b9f42920b470f01b6e70, type: 2}

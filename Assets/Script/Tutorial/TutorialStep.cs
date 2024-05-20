@@ -24,12 +24,29 @@ public class TutorialStep : ScriptableObject
             "Enjoy your adventure!"
     };
 
+    public bool ShowTutorialGuideOnStart;
+
+    public bool ShowTutorialGuideBackground = true;
+
+    public bool ShowOnSecondDialogue;
+
+    public bool ShowOnLastDialogue;
+
     public string ObjectiveDialogue = "Kill";
+
+    public string WhatToDoDialogue = "Kill";
 
     public TutorialAttribute TutorialAttribute;
 
     public void StartOperating() 
     {
         TutorialAttribute.SetBegin();
+    }
+
+    public bool IsWaterDecreasable() 
+    {
+        return (Type == TutorialType.ExpandSunRadius || Type == TutorialType.ExplainTheThirstyBar
+            || Type == TutorialType.WalkToDropWater || Type == TutorialType.CreateABigPond
+            || Type == TutorialType.AttackTheEnemy);
     }
 }

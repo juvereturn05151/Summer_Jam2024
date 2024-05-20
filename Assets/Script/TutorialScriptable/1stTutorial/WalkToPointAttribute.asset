@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 865177fab20073147b446a1f67ddd16c, type: 3}
   m_Name: WalkToPointAttribute
   m_EditorClassIdentifier: 
+  _prefabName: WaterCollection

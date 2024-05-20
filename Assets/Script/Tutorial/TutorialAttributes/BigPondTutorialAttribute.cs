@@ -7,6 +7,6 @@ public class BigPondTutorialAttribute : TutorialAttribute
 {
     public override void CheckingObjective()
     {
-        _clear = GameManager.Instance.BigPondDrank >= 1;
+        _clear = GameManager.Instance.BigPondDrank >= 2;
     }
 }

@@ -14,9 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 3
   DialogueLines:
-  - "Hey, how\u2019s the exercise? Did you feel warmed up?"
-  - "Next, do you see a blue thingy here? This is called a \u201CThirsty bar\u201D."
-  - 'It represents the amount of water in your body. You will die when you run out
-    of it and it decreases overtime '
+  - Do you feel refreshed after drinking the water?
+  - Do you see the blue interface here? This is called a "Hydro Energy Bar."
+  - It represents the amount of water in your body and it decreases over time
+  - If it runs out, you will die.
+  ShowTutorialGuideOnStart: 0
+  ShowTutorialGuideBackground: 0
+  ShowOnSecondDialogue: 1
+  ShowOnLastDialogue: 1
   ObjectiveDialogue: None
   TutorialAttribute: {fileID: 11400000, guid: 933416f9e62ddf44f9cd6c3c9d053de9, type: 2}

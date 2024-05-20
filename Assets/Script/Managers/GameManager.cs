@@ -92,7 +92,12 @@ public class GameManager : MonoBehaviour
     {
         SoundManager.Instance.Stop("BGM_Title");
         SoundManager.Instance.Play("BGM_Gameplay");
-        state = GameState.StartGame;
+
+        if (!IsTutorial) 
+        {
+            state = GameState.StartGame;
+        }
+
         ScoreManager.score = 0;
     }
 

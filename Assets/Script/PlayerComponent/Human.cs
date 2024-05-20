@@ -140,6 +140,9 @@ public class Human : MonoBehaviour
 
     public void DecreaseWaterAmount(float increaseAmount)
     {
+        if (GameManager.Instance.IsTutorial && !AdvancedTutorialManager.Instance.CurrentTutorial.IsWaterDecreasable())
+            return;
+
         CurrentWater -= increaseAmount;
 
         if (IsHurt)

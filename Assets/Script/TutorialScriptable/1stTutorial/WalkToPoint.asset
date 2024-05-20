@@ -12,10 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad9cca3d89289d428c331f779e94d15, type: 3}
   m_Name: WalkToPoint
   m_EditorClassIdentifier: 
-  Type: 0
+  Type: 2
   DialogueLines:
   - Hello, Doctor Elias. This is Nova calling.
-  - "I\u2019m the sunlight emitter AI here to assist you."
-  - Since you just landed on Earth, let me teach you what to do.
-  ObjectiveDialogue: Use WASD To Move <br>Move To The Yellow Targets
+  - "I\u2019m the sunlight AI here to assist you."
+  - Your journey from the Sun must have been long. Let's get you some water, the
+    true source of solar energy.
+  ShowTutorialGuideOnStart: 0
+  ShowTutorialGuideBackground: 1
+  ShowOnSecondDialogue: 0
+  ShowOnLastDialogue: 0
+  ObjectiveDialogue: Drink Water Drops
+  WhatToDoDialogue: 'Movement: Use WASD To Move'
   TutorialAttribute: {fileID: 11400000, guid: 9959942a842e97f47ab644acf2af1317, type: 2}

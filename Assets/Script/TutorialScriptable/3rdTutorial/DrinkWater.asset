@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 2
   DialogueLines:
-  - "Now, I think you might be thirsty. I\u2019ve spotted a water over there let\u2019s
-    drink it"
-  ObjectiveDialogue: Use WASD To Move <br>Move To The Water To Drink It
+  - "Oh, I see more water drops nearby. Let\u2019s drink as much as you can."
+  ShowTutorialGuideOnStart: 0
+  ObjectiveDialogue: 'Movement: Use WASD To Move <br>Objective: Move To Drink Water
+    Drops'
   TutorialAttribute: {fileID: 11400000, guid: 69a57da5b97bf794fbb4754b4cead027, type: 2}

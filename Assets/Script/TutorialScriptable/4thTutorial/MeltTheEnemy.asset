@@ -14,10 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 1
   DialogueLines:
-  - As you can see you fill up your thirsty bar.
-  - 'Now, let me teach you how you use sunlight. '
-  - Oh wait, that's an Ice Monster overthere.
-  - Be careful. The Ice Monster will reduce your thirsty bar when they hit you
-  ObjectiveDialogue: Now, use the light energy to melt that monster by holding the
-    left mouse button to melt it.
+  - Filling up your Hydro Energy is crucial for your survival.
+  - Next, you need to learn how to defend yourself with the Sunlight.
+  - Sunlight radiation is a powerful weapon against Ice Monsters.
+  - To use it, hold down the left mouse button.
+  - "Speak of the devil, there\u2019s an Ice Monster over there.  Melt Em Up!!"
+  - Be careful, Ice Monsters will deplete your Hydro Energy when they hit you.
+  ShowTutorialGuideOnStart: 0
+  ShowTutorialGuideBackground: 1
+  ShowOnSecondDialogue: 1
+  ShowOnLastDialogue: 1
+  ObjectiveDialogue: Eliminate The Ice Monster
+  WhatToDoDialogue: 'Sunlight Power: Hold Left Mouse Button'
   TutorialAttribute: {fileID: 11400000, guid: 5148ba33ea8e3af41ac4b4827ace11b5, type: 2}

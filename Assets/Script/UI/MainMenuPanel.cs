@@ -55,7 +55,7 @@ public class MainMenuPanel : MonoBehaviour
 
     private void LoadTutorialScene() 
     {
-        SceneManager.LoadScene("Tutorial");
+        SceneManager.LoadScene("AdvancedTutorial");
     }
 
     private void OnClickTutorial()

@@ -14,11 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 4
   DialogueLines:
-  - 'You Did Great There. '
-  - As you can see. More enemies the radius, the bigger the radius gets.
-  - Be careful of this system because sunlight can melt water too
-  - Next, I will teach you another important technique...
-  - Creating A Big Pond
-  ObjectiveDialogue: Create A Big Pond By Holding Left Mouse Button On The Empty
-    Area And Walk To Drink It
+  - As you can see, the more enemies there are, the larger the radiation radius becomes.
+  - Be cautious, though, because intense sunlight can also evaporate water.
+  - Now, I'll teach you how to create the Oasis.
+  - To Create the Oasis, hold the left mouse button on an empty area.
+  ShowTutorialGuideOnStart: 0
+  ShowTutorialGuideBackground: 0
+  ShowOnSecondDialogue: 1
+  ShowOnLastDialogue: 1
+  ObjectiveDialogue: Drink 2 Oases.
+  WhatToDoDialogue: 'Creating The Oasis: Holding Left Mouse Button On An Empty Area'
   TutorialAttribute: {fileID: 11400000, guid: 802c1281ef8b3024793f84df3a82553d, type: 2}

@@ -120,7 +120,10 @@ public class SoundManager : MonoBehaviour
             return;
         }
 
-        s.Source.Play();
+        if (!s.Source.isPlaying) 
+        {
+            s.Source.Play();
+        }
     }
 
     public void PlayWhileOtherSoundIsNotPlaying(string name)
@@ -221,7 +224,6 @@ public class SoundManager : MonoBehaviour
         }
 
         s.Source.Stop();
-        s.Source.loop = false;
     }
 
     public void PlayOneShot(string name)
