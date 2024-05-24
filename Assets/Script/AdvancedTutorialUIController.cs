@@ -15,4 +15,18 @@ public class AdvancedTutorialUIController : MonoBehaviour
     [SerializeField]
     private List<GameObject> _appearOnLastDialogue = new List<GameObject>();
     public List<GameObject> AppearOnLastDialogue => _appearOnLastDialogue;
+
+    public void OnTutorialEnd(int _currentTutorialIndex) 
+    {
+        AdvancedTutorialUI[_currentTutorialIndex].SetActive(false);
+        AppearOnSecondDialogue[_currentTutorialIndex].SetActive(false);
+        AppearOnLastDialogue[_currentTutorialIndex].SetActive(false);
+    }
+
+    public void OnDialogueEnd(int _currentTutorialIndex) 
+    {
+        AppearOnLastDialogue[_currentTutorialIndex].SetActive(false);
+        AppearOnSecondDialogue[_currentTutorialIndex].SetActive(false);
+        AdvancedTutorialUI[_currentTutorialIndex].SetActive(true);
+    }
 }

@@ -37,6 +37,7 @@ public class AdvancedTutorialManager : MonoBehaviour
 
     public TutorialStep CurrentTutorial { get; private set; }
 
+    private const string _firstGameplayScene = "QiqiRealGameplay";
     private bool _isOperating;
     private int _currentTutorialIndex;
 
@@ -60,15 +61,8 @@ public class AdvancedTutorialManager : MonoBehaviour
 
         if (_tutorialList != null && _tutorialList.Count > 0) 
         {
-            CurrentTutorial = _tutorialList[0];
-            dialogueManager.StartDialogue(CurrentTutorial.DialogueLines, CurrentTutorial.ObjectiveDialogue, CurrentTutorial.WhatToDoDialogue);
-            dialogueManager._onDialogueEnd.RemoveAllListeners();
-            dialogueManager._onSecondLineAppear.RemoveAllListeners();
-            dialogueManager._onLastLineAppear.RemoveAllListeners();
-            dialogueManager._onDialogueEnd.AddListener(CurrentTutorial.StartOperating);
-            dialogueManager._onDialogueEnd.AddListener(OnDialogueEnd);
-            dialogueManager._onSecondLineAppear.AddListener(OnSecondDialogue);
-            dialogueManager._onLastLineAppear.AddListener(OnLastDialogue);
+            InitializeDialogue();
+            ActivateTutorial();
         }
     }
 
@@ -82,11 +76,8 @@ public class AdvancedTutorialManager : MonoBehaviour
 
                 if (CurrentTutorial.TutorialAttribute.Clear) 
                 {
-                    _isOperating = false;
-                    GameManager.Instance.State = GameManager.GameState.Stop;
-                    _backGround.SetActive(true);
-                    _nextButton.SetActive(true);
-                    NextTutorial();
+
+                    OnTutorialEnd();
                 }
             }
         }
@@ -114,20 +105,19 @@ public class AdvancedTutorialManager : MonoBehaviour
         _isOperating = true;
         _backGround.SetActive(false);
         _nextButton.SetActive(false);
-        _tutorialDisplayBackGround.SetActive(true); 
-        _advancedTutorialUIController.AppearOnLastDialogue[_currentTutorialIndex].SetActive(false);
-        _advancedTutorialUIController.AppearOnSecondDialogue[_currentTutorialIndex].SetActive(false);
-        _advancedTutorialUIController.AdvancedTutorialUI[_currentTutorialIndex].SetActive(true);
+        _tutorialDisplayBackGround.SetActive(true);
+        _advancedTutorialUIController.OnDialogueEnd(_currentTutorialIndex);
         GameManager.Instance.State = GameManager.GameState.StartGame;
-        SoundManager.Instance.Play("BGM_Gameplay");
     }
 
-    private void NextTutorial() 
+    private void OnTutorialEnd() 
     {
-        _advancedTutorialUIController.AdvancedTutorialUI[_currentTutorialIndex].SetActive(false);
-        _advancedTutorialUIController.AppearOnSecondDialogue[_currentTutorialIndex].SetActive(false);
-        _advancedTutorialUIController.AppearOnLastDialogue[_currentTutorialIndex].SetActive(false);
+        _isOperating = false;
+        GameManager.Instance.State = GameManager.GameState.Stop;
+        _backGround.SetActive(true);
+        _nextButton.SetActive(true);
         _tutorialDisplayBackGround.SetActive(false);
+        _advancedTutorialUIController.OnTutorialEnd(_currentTutorialIndex);
         _currentTutorialIndex++;
 
         if (_currentTutorialIndex >= _tutorialList.Count) 
@@ -138,19 +128,43 @@ public class AdvancedTutorialManager : MonoBehaviour
 
         if (_tutorialList != null && _tutorialList.Count > 0)
         {
-            CurrentTutorial = _tutorialList[_currentTutorialIndex];
-
-            if (CurrentTutorial.ShowTutorialGuideOnStart) 
-            {
-                _advancedTutorialUIController.AdvancedTutorialUI[_currentTutorialIndex].SetActive(true);
-                _tutorialDisplayBackGround.SetActive(CurrentTutorial.ShowTutorialGuideBackground);
-            }
-
-            dialogueManager.StartDialogue(CurrentTutorial.DialogueLines, CurrentTutorial.ObjectiveDialogue, CurrentTutorial.WhatToDoDialogue);
-            dialogueManager._onDialogueEnd.RemoveAllListeners();
-            dialogueManager._onDialogueEnd.AddListener(CurrentTutorial.StartOperating);
-            dialogueManager._onDialogueEnd.AddListener(OnDialogueEnd);
+            ActivateTutorial();
+            ResetEndDialogue();
         }
+    }
+
+    private void ActivateTutorial() 
+    {
+        CurrentTutorial = _tutorialList[_currentTutorialIndex];
+
+        if (CurrentTutorial.ShowTutorialGuideOnStart)
+        {
+            _advancedTutorialUIController.AdvancedTutorialUI[_currentTutorialIndex].SetActive(true);
+            _tutorialDisplayBackGround.SetActive(CurrentTutorial.ShowTutorialGuideBackground);
+        }
+
+        dialogueManager.StartDialogue(CurrentTutorial.DialogueLines, CurrentTutorial.ObjectiveDialogue, CurrentTutorial.WhatToDoDialogue);
+    }
+
+    private void InitializeDialogue() 
+    {
+        ResetDialogueListener();
+        dialogueManager._onSecondLineAppear.AddListener(OnSecondDialogue);
+        dialogueManager._onLastLineAppear.AddListener(OnLastDialogue);
+    }
+
+    private void ResetEndDialogue() 
+    {
+        dialogueManager._onDialogueEnd.RemoveAllListeners();
+        dialogueManager._onDialogueEnd.AddListener(CurrentTutorial.StartOperating);
+        dialogueManager._onDialogueEnd.AddListener(OnDialogueEnd);
+    }
+
+    private void ResetDialogueListener() 
+    {
+        dialogueManager._onDialogueEnd.RemoveAllListeners();
+        dialogueManager._onSecondLineAppear.RemoveAllListeners();
+        dialogueManager._onLastLineAppear.RemoveAllListeners();
     }
 
     private void LoadGameScene() 
@@ -161,6 +175,6 @@ public class AdvancedTutorialManager : MonoBehaviour
 
     private void LoadScene()
     {
-        SceneManager.LoadScene("QiqiRealGameplay");
+        SceneManager.LoadScene(_firstGameplayScene);
     }
 }
