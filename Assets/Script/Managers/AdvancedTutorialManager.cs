@@ -37,7 +37,7 @@ public class AdvancedTutorialManager : MonoBehaviour
 
     public TutorialStep CurrentTutorial { get; private set; }
 
-    private const string _firstGameplayScene = "QiqiRealGameplay";
+    private const string _firstGameplayScene = "StageSelection";
     private bool _isOperating;
     private int _currentTutorialIndex;
 

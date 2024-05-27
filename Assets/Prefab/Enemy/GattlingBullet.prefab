@@ -134,6 +134,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: GattlingBullet
       objectReference: {fileID: 0}
+    - target: {fileID: 7673535375001208357, guid: 5d2bb6365d02b104f9ecab831ddf17e8, type: 3}
+      propertyPath: m_Color.b
+      value: 0.9804244
+      objectReference: {fileID: 0}
+    - target: {fileID: 7673535375001208357, guid: 5d2bb6365d02b104f9ecab831ddf17e8, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7673535375001208357, guid: 5d2bb6365d02b104f9ecab831ddf17e8, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9042172879431264713, guid: 5d2bb6365d02b104f9ecab831ddf17e8, type: 3}
+      propertyPath: _isDestroyableByLight
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
