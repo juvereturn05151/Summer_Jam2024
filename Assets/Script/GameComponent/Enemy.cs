@@ -21,6 +21,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] 
     private float _decreaseAmount;
 
+    [SerializeField]
+    private bool _unstunnable;
+
     [SerializeField] 
     private bool isStunning;
     public bool IsStunning => isStunning;
@@ -111,6 +114,12 @@ public class Enemy : MonoBehaviour
 
     public void SetIsStunning(bool stunning) 
     {
+        if (_unstunnable) 
+        {
+            isStunning = false;
+            return;
+        }
+
         isStunning = stunning;
     }
 

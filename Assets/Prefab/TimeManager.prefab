@@ -49,4 +49,4 @@ MonoBehaviour:
   morningLight: 0.5
   nightLight: 0
   lightTime: 0.06
-  _timeSpeed: 2
+  _timeSpeed: 5

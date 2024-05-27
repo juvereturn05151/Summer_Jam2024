@@ -33,12 +33,14 @@ public class Bullet : MonoBehaviour
         // Check if the bullet collided with an object other than an obstacle
         if (other.gameObject.GetComponent<Human>() is Human human)
         {
+            Debug.Log("Human");
             human.OnGettingHurt(damage);
             DestroyBullet();
         }
 
         if (other.gameObject.CompareTag(TagCollection.WallTag))
         {
+            Debug.Log("DestroyWithWall");
             DestroyBullet();
         }
     }
