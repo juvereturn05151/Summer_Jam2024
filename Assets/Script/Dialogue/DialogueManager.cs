@@ -104,6 +104,7 @@ public class DialogueManager : MonoBehaviour
         _objectiveText.text = objectiveDialogue;
         nextButton.gameObject.SetActive(false);
         _objectiveBG.SetActive(true);
+        Debug.Log("Dialogue End");
         _onDialogueEnd?.Invoke();
     }
 }

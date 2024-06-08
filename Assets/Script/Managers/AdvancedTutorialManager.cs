@@ -102,6 +102,7 @@ public class AdvancedTutorialManager : MonoBehaviour
 
     public void OnDialogueEnd() 
     {
+        Debug.Log("_isOperating");
         _isOperating = true;
         _backGround.SetActive(false);
         _nextButton.SetActive(false);
@@ -143,6 +144,8 @@ public class AdvancedTutorialManager : MonoBehaviour
             _tutorialDisplayBackGround.SetActive(CurrentTutorial.ShowTutorialGuideBackground);
         }
 
+        dialogueManager._onDialogueEnd.AddListener(CurrentTutorial.StartOperating);
+        dialogueManager._onDialogueEnd.AddListener(OnDialogueEnd);
         dialogueManager.StartDialogue(CurrentTutorial.DialogueLines, CurrentTutorial.ObjectiveDialogue, CurrentTutorial.WhatToDoDialogue);
     }
 
@@ -151,6 +154,7 @@ public class AdvancedTutorialManager : MonoBehaviour
         ResetDialogueListener();
         dialogueManager._onSecondLineAppear.AddListener(OnSecondDialogue);
         dialogueManager._onLastLineAppear.AddListener(OnLastDialogue);
+
     }
 
     private void ResetEndDialogue() 
