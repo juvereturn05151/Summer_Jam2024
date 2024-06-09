@@ -33,6 +33,10 @@ public class GameManager : MonoBehaviour
     #endregion
 
     [SerializeField]
+    private int _currentStage;
+    public int CurrentStage => _currentStage;
+
+    [SerializeField]
     private GameObject spawner2;
 
     [SerializeField]
@@ -76,23 +80,23 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (ScoreManager.score >= _phase4Score)
+        if (ScoreManager.Scores[GameManager.instance.CurrentStage] >= _phase4Score)
         {
             if (spawner5)
                 spawner5.gameObject.SetActive(true);
         }
         else
-        if(ScoreManager.score >= _phase3Score)
+        if(ScoreManager.Scores[GameManager.instance.CurrentStage] >= _phase3Score)
         {
             if (spawner4)
                 spawner4.gameObject.SetActive(true);
         }
-        else if (ScoreManager.score >= _phase2Score)
+        else if (ScoreManager.Scores[GameManager.instance.CurrentStage] >= _phase2Score)
         {
             if (spawner3)
                 spawner3.gameObject.SetActive(true);
         }
-        else if(ScoreManager.score >= _phase1Score)
+        else if(ScoreManager.Scores[GameManager.instance.CurrentStage] >= _phase1Score)
         {
             if (spawner2)
                 spawner2.gameObject.SetActive(true);
@@ -109,8 +113,6 @@ public class GameManager : MonoBehaviour
         {
             state = GameState.StartGame;
         }
-
-        ScoreManager.score = 0;
     }
 
     public void OnEndGame()

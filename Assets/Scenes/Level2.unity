@@ -5092,6 +5092,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isTutorial: 0
   BigPondDrank: 0
+  _currentStage: 1
   spawner2: {fileID: 1181859098}
   spawner3: {fileID: 1876508023}
   spawner4: {fileID: 1000610459}

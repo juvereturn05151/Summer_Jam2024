@@ -146,6 +146,10 @@ PrefabInstance:
       propertyPath: scorePoint
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 3552005282547976627, guid: 780bc14468e64a84baadfe7365934a87, type: 3}
+      propertyPath: _barrierTimer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7783745605821132605, guid: 780bc14468e64a84baadfe7365934a87, type: 3}
       propertyPath: m_LocalPosition.y
       value: 2.09

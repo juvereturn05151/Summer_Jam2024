@@ -4,6 +4,68 @@ using UnityEngine;
 
 public static class ScoreManager 
 {
-    public static float score = 0;
-    public static float highscore = 0;
+    private static bool isInit;
+    private static readonly int numberOfStage = 3;
+    private static int[] scores;
+    public static int[] Scores
+    {
+        get
+        {
+            if (!isInit)
+            {
+                InitScore();
+            }
+
+            return scores;
+        }
+    }
+    private static int[] highScores;
+    public static int[] HighScores 
+    {
+        get 
+        {
+            if (!isInit) 
+            {
+                InitScore();
+            }
+
+            return highScores;
+        }
+    } 
+
+    public static void InitScore() 
+    {
+        if (isInit)
+            return;
+
+        isInit = true;
+        scores =  new int[numberOfStage];
+        highScores = new int[numberOfStage];
+
+        for(int i = 0; i < scores.Length; i++) 
+        {
+            scores[i] = 0;
+        }
+
+        for (int i = 0; i < highScores.Length; i++)
+        {
+            highScores[i] = PlayerPrefs.GetInt("highscore" + i.ToString(), 0);
+        }
+    }
+
+    public static void SaveHighScore(int highScore, int scoreNumber) 
+    {
+        highScores[scoreNumber] = highScore;
+        PlayerPrefs.SetInt("highscore" + scoreNumber.ToString(), highScore);
+        PlayerPrefs.Save();
+    }
+
+    public static void AddScore(int value, int scoreNumber) 
+    {
+        Debug.Log("before" + scores[scoreNumber]);
+        scores[scoreNumber] += value;
+        Debug.Log("after" + scores[scoreNumber]);
+    }
+
+
 }

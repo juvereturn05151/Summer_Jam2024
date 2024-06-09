@@ -74,39 +74,38 @@ public class GameplayUIManager : MonoBehaviour
 
     private void Start()
     {
-        ScoreManager.highscore = PlayerPrefs.GetFloat("HighScore", 0);
-        highScoreText.text = $"High score: {ScoreManager.highscore}";
+        highScoreText.text = $"High score: {ScoreManager.HighScores[GameManager.Instance.CurrentStage]}";
     }
 
-    void Update()
+    private void Update()
     {
-        //if (Input.GetMouseButtonDown(0)) 
-        //{
-        //    if (gameOverUI.activeSelf)
-        //    {
-        //        Restart();
-        //    }
-        //}
-
-        scoreText.text = "Score: " + ScoreManager.score;
+        scoreText.text = "Score: " + ScoreManager.Scores[GameManager.Instance.CurrentStage];
 
         if (GameManager.Instance.State == GameManager.GameState.EndGame)
         {
             gamePlayUI.SetActive(false);
             waterSlider.gameObject.SetActive(false);
-            scoreTextGameOver.text = $"Score: {ScoreManager.score}";
-            highScoreTextGameOver.text = $"HighScore: {ScoreManager.highscore}";
+            scoreTextGameOver.text = $"Score: {ScoreManager.Scores[GameManager.Instance.CurrentStage]}";
+            highScoreTextGameOver.text = $"HighScore: {ScoreManager.HighScores[GameManager.Instance.CurrentStage]}";
         }
     }
 
-    public void IncreaseScore(float value)
+    public void IncreaseScore(int value)
     {
-        ScoreManager.score += value;
-        if (ScoreManager.score >= ScoreManager.highscore) 
+        if (GameManager.Instance.CurrentStage > ScoreManager.Scores.Length) 
         {
-            ScoreManager.highscore = ScoreManager.score;
-            PlayerPrefs.SetFloat("HighScore", ScoreManager.highscore);
+            return;
         }
+
+            ScoreManager.AddScore(value, GameManager.Instance.CurrentStage);
+        Debug.Log("score"+ScoreManager.Scores[GameManager.Instance.CurrentStage] + "value"+value);
+
+        if (ScoreManager.Scores[GameManager.Instance.CurrentStage] >= ScoreManager.HighScores[GameManager.Instance.CurrentStage]) 
+        {
+            ScoreManager.HighScores[0] = ScoreManager.Scores[GameManager.Instance.CurrentStage];
+            ScoreManager.SaveHighScore(ScoreManager.HighScores[GameManager.Instance.CurrentStage], GameManager.Instance.CurrentStage);
+        }
+
         scoreFeedback.PlayFeedbacks();
     }
 

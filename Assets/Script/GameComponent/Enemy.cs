@@ -40,7 +40,7 @@ public class Enemy : MonoBehaviour
     private bool isFreeze;
 
     [SerializeField] 
-    private float scorePoint;
+    private int scorePoint;
 
     [SerializeField] 
     private GameObject _healthUI;
@@ -65,6 +65,13 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private GameObject lightFX;
 
+    [SerializeField]
+    private Barrier _barrier;
+    public Barrier Barrier => _barrier;
+
+    [SerializeField]
+    private float _barrierTimer;
+
     private const float _meltDestroyTime = 0.5f;
     private const float _damageFxDestroyTime = 1f;
     private const float _damageFxTimer = 0.25f;
@@ -75,6 +82,8 @@ public class Enemy : MonoBehaviour
     private const string _sfx_monsterDead = "SFX_MonsterDead";
     private float _maxHealth;
     private float _timer;
+    private float _currentBarrierCooldownTime;
+    private float _currentHealthHorizontalScale;
 
     private Animator _animator;
 
@@ -86,7 +95,8 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         _maxHealth = _health;
-        innerHealthUI.transform.localScale = new Vector3(_health / _maxHealth, _healthUI.transform.localScale.y, _healthUI.transform.localScale.z);
+        _currentHealthHorizontalScale = _health / _maxHealth;
+        innerHealthUI.transform.localScale = new Vector3(_currentHealthHorizontalScale, 0.5f, _healthUI.transform.localScale.z);
         SoundManager.Instance.PlayOneShot(_sfx_monsterSpawn);
     }
 
@@ -100,6 +110,7 @@ public class Enemy : MonoBehaviour
         Seek();
         UpdateHealthUI();
         ObstacleAvoid();
+        HandleBarrier();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -109,6 +120,27 @@ public class Enemy : MonoBehaviour
             human.OnGettingHurt(_decreaseAmount); 
             var water = Instantiate(GameplayUIManager.Instance.WaterSplashFX, GameplayUIManager.Instance.waterSplashParent.transform.position, quaternion.identity, GameplayUIManager.Instance.waterSplashParent.transform);
             Destroy(water, 1f);
+        }
+    }
+
+    private void HandleBarrier() 
+    {
+        if (_barrier != null) 
+        {
+            if (!_barrier.isActiveAndEnabled)
+            {
+                _currentBarrierCooldownTime -= Time.deltaTime;
+
+                if (_currentBarrierCooldownTime <= 0)
+                {
+                    _currentBarrierCooldownTime = _barrierTimer;
+                    _barrier.SetBarrierActive(true);
+                }
+            }
+            else 
+            {
+                _barrier.SetBarrierActive(true);
+            }
         }
     }
 
@@ -126,6 +158,9 @@ public class Enemy : MonoBehaviour
     public void DecreaseHealth(float damage)
     {
         if (_health <= 0)
+            return;
+
+        if (Barrier !=null && Barrier.isActiveAndEnabled)
             return;
 
         _health -= damage;
@@ -177,7 +212,9 @@ public class Enemy : MonoBehaviour
     {
         if (_healthUI != null)
         {
-            _healthUI.transform.localScale = new Vector3(_health / _maxHealth, _healthUI.transform.localScale.y, _healthUI.transform.localScale.z);
+            float healthPercentage = _health / _maxHealth;
+            _healthUI.transform.localScale = new Vector3(healthPercentage, 0.5f, _healthUI.transform.localScale.z);
+            _healthUI.transform.localPosition = new Vector3((_currentHealthHorizontalScale * (1 - healthPercentage)) / 2, innerHealthUI.transform.localPosition.y, _healthUI.transform.localPosition.z);
         }
     }
 

@@ -5088,6 +5088,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isTutorial: 0
   BigPondDrank: 0
+  _currentStage: 2
   spawner2: {fileID: 1181859098}
   spawner3: {fileID: 1876508023}
   spawner4: {fileID: 1000610459}
@@ -5106,7 +5107,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5038164240262669759, guid: c8565501678b7b842baa8680bc7ff225, type: 3}
       propertyPath: spawnInterval
-      value: 90
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5038164240262669759, guid: c8565501678b7b842baa8680bc7ff225, type: 3}
       propertyPath: prefabToSpawn.Array.size
@@ -5115,7 +5116,7 @@ PrefabInstance:
     - target: {fileID: 5038164240262669759, guid: c8565501678b7b842baa8680bc7ff225, type: 3}
       propertyPath: prefabToSpawn.Array.data[0]
       value: 
-      objectReference: {fileID: 4162748651300157362, guid: 9bb515c94ffea694fa21de756addc269, type: 3}
+      objectReference: {fileID: 5591368068968304221, guid: 750e9474f71841442b64fcdbb8a17c20, type: 3}
     - target: {fileID: 6368901718563106322, guid: c8565501678b7b842baa8680bc7ff225, type: 3}
       propertyPath: m_Name
       value: Spawner4
@@ -5258,7 +5259,7 @@ PrefabInstance:
     - target: {fileID: 5038164240262669759, guid: c8565501678b7b842baa8680bc7ff225, type: 3}
       propertyPath: prefabToSpawn.Array.data[0]
       value: 
-      objectReference: {fileID: 5763626024849688944, guid: d6b3122af37cebe4e8ec1045bed0a0f6, type: 3}
+      objectReference: {fileID: 7629052338154522445, guid: 2fff884baa3477c49bd6628e4323d316, type: 3}
     - target: {fileID: 6368901718563106322, guid: c8565501678b7b842baa8680bc7ff225, type: 3}
       propertyPath: m_Name
       value: Spawner5
@@ -5393,7 +5394,7 @@ PrefabInstance:
     - target: {fileID: 5038164240262669759, guid: c8565501678b7b842baa8680bc7ff225, type: 3}
       propertyPath: prefabToSpawn.Array.data[0]
       value: 
-      objectReference: {fileID: 1703859074394605504, guid: 38948e335220fc24aacf0a4c764b5653, type: 3}
+      objectReference: {fileID: 5763626024849688944, guid: d6b3122af37cebe4e8ec1045bed0a0f6, type: 3}
     - target: {fileID: 5038164240262669759, guid: c8565501678b7b842baa8680bc7ff225, type: 3}
       propertyPath: prefabToSpawn.Array.data[1]
       value: 

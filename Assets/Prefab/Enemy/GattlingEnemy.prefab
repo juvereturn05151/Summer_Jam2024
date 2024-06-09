@@ -398,6 +398,8 @@ MonoBehaviour:
   smokeFX: {fileID: 7803121286815431195, guid: 92143f0d8337d4740a2c409d1f81b2c4, type: 3}
   damageFX: {fileID: 6710806040289404186, guid: 140b30224bf48aa4d80a676b453b46bd, type: 3}
   lightFX: {fileID: 4226614812645000377, guid: e1527692eabfc1049a7e1f746dbfc554, type: 3}
+  _barrier: {fileID: 0}
+  _barrierTimer: 0
 --- !u!58 &9136401385096076173
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1032,8 +1034,8 @@ Transform:
   m_GameObject: {fileID: 5517410593241134669}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalPosition: {x: 0, y: 0.405, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1593112958770213311}
