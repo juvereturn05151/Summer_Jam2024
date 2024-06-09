@@ -5,7 +5,7 @@ using UnityEngine;
 public static class ScoreManager 
 {
     private static bool isInit;
-    private static readonly int numberOfStage = 3;
+    public static readonly int numberOfStage = 5;
     private static int[] scores;
     public static int[] Scores
     {

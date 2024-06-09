@@ -163,10 +163,22 @@ public class Human : MonoBehaviour
 
         if (CurrentWater <= 0)
         {
-            SoundManager.Instance.PlayOneShot(_sfx_villageDeadString);
-            _animator.StartDeadAnimation();
+            
+
+            if (ScoreManager.Scores[GameManager.Instance.CurrentStage] > GameManager.Instance.Phase4Score)
+            {
+                GameplayUIManager.Instance.winningUI.SetActive(true);
+
+                GameManager.Instance.DestroyOnWinning();
+            }
+            else 
+            {
+                GameplayUIManager.Instance.gameOverUI.SetActive(true);
+                SoundManager.Instance.PlayOneShot(_sfx_villageDeadString);
+                _animator.StartDeadAnimation();
+            }
+
             GameManager.Instance.OnEndGame();
-            GameplayUIManager.Instance.gameOverUI.SetActive(true);
 
             if (GameManager.Instance.State == GameManager.GameState.EndGame)
             {

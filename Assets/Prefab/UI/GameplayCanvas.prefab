@@ -167,7 +167,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1122466884051912067
 RectTransform:
   m_ObjectHideFlags: 0
@@ -343,6 +343,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 9049331940297764958}
   highScoreText: {fileID: 7039982790465404241}
+  winningUI: {fileID: 0}
   gameOverUI: {fileID: 0}
   gamePlayUI: {fileID: 1560320802513085133}
   waterSlider: {fileID: 0}
@@ -925,7 +926,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5955962521339948499
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1847,6 +1848,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3640156798628775337, guid: 026c1952d73eddc499dcbebd0658d22c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5860333847862198683, guid: 026c1952d73eddc499dcbebd0658d22c, type: 3}
+      propertyPath: m_SortingLayer
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

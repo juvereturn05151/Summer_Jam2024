@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private float _phase4Score = 1800;
+    public float Phase4Score => _phase4Score;
 
     private void Awake()
     {
@@ -118,5 +119,27 @@ public class GameManager : MonoBehaviour
     public void OnEndGame()
     {
         state = GameState.EndGame;
+    }
+
+    public void DestroyOnWinning() 
+    {
+        if (spawner2)
+            spawner2.gameObject.SetActive(false);
+
+        if (spawner3)
+            spawner3.gameObject.SetActive(false);
+
+        if (spawner4)
+            spawner4.gameObject.SetActive(false);
+
+        if (spawner5)
+            spawner5.gameObject.SetActive(false);
+
+        Enemy[] enemies = FindObjectsByType<Enemy>(FindObjectsSortMode.None);
+
+        foreach (Enemy enemy in enemies) 
+        {
+            Destroy(enemy.gameObject);
+        }
     }
 }

@@ -49,7 +49,8 @@ public class GameplayUIManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI highScoreText;
-    
+
+    public GameObject winningUI;
     public GameObject gameOverUI;
     public GameObject gamePlayUI;
 
@@ -70,6 +71,10 @@ public class GameplayUIManager : MonoBehaviour
     [Header("GameOver Panel")]
     [SerializeField] private TextMeshProUGUI scoreTextGameOver;
     [SerializeField] private TextMeshProUGUI highScoreTextGameOver;
+
+    [Header("Winning Panel")]
+    [SerializeField] private TextMeshProUGUI scoreTextWinning;
+    [SerializeField] private TextMeshProUGUI highScoreTextWinning;
     // Update is called once per frame
 
     private void Start()
@@ -87,6 +92,8 @@ public class GameplayUIManager : MonoBehaviour
             waterSlider.gameObject.SetActive(false);
             scoreTextGameOver.text = $"Score: {ScoreManager.Scores[GameManager.Instance.CurrentStage]}";
             highScoreTextGameOver.text = $"HighScore: {ScoreManager.HighScores[GameManager.Instance.CurrentStage]}";
+            scoreTextWinning.text = $"Score: {ScoreManager.Scores[GameManager.Instance.CurrentStage]}";
+            highScoreTextWinning.text = $"HighScore: {ScoreManager.HighScores[GameManager.Instance.CurrentStage]}";
         }
     }
 
@@ -97,12 +104,11 @@ public class GameplayUIManager : MonoBehaviour
             return;
         }
 
-            ScoreManager.AddScore(value, GameManager.Instance.CurrentStage);
-        Debug.Log("score"+ScoreManager.Scores[GameManager.Instance.CurrentStage] + "value"+value);
+        ScoreManager.AddScore(value, GameManager.Instance.CurrentStage);
 
         if (ScoreManager.Scores[GameManager.Instance.CurrentStage] >= ScoreManager.HighScores[GameManager.Instance.CurrentStage]) 
         {
-            ScoreManager.HighScores[0] = ScoreManager.Scores[GameManager.Instance.CurrentStage];
+            ScoreManager.HighScores[GameManager.Instance.CurrentStage] = ScoreManager.Scores[GameManager.Instance.CurrentStage];
             ScoreManager.SaveHighScore(ScoreManager.HighScores[GameManager.Instance.CurrentStage], GameManager.Instance.CurrentStage);
         }
 
@@ -117,9 +123,20 @@ public class GameplayUIManager : MonoBehaviour
         FadingUI.Instance.OnStopFading.AddListener(LoadGameplay);
     }
 
-    private void LoadGameplay()
+    public void LoadGameplay()
     {
-        SceneManager.LoadScene("QiqiRealGameplay");
+        SceneManager.LoadScene("Level" + (GameManager.Instance.CurrentStage + 1));
+    }
+
+    public void LoadNextGameplay()
+    {
+        if (GameManager.Instance.CurrentStage <= ScoreManager.numberOfStage) 
+        {
+            SceneManager.LoadScene("ThankYouForPlaying");
+            return;
+        }
+
+        SceneManager.LoadScene("Level" + (GameManager.Instance.CurrentStage + 1 + 1));
     }
 
     public void Quit()
