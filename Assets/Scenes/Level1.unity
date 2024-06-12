@@ -5002,10 +5002,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Human
       objectReference: {fileID: 0}
-    - target: {fileID: 7044077412557546384, guid: f5cc614c8cbed784c97f69d7fde777d2, type: 3}
-      propertyPath: waterFillImage
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

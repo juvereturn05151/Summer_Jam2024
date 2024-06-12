@@ -9062,6 +9062,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FadingUI
       objectReference: {fileID: 0}
+    - target: {fileID: 4967561666900042100, guid: 1d939218748fa8f499d97ae6d173eead, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8371221690434577718, guid: 1d939218748fa8f499d97ae6d173eead, type: 3}
       propertyPath: m_Camera
       value: 
