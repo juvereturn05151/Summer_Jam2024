@@ -117,7 +117,7 @@ public class GameplayUIManager : MonoBehaviour
 
     public void Restart() 
     {
-        //gameOverUI.SetActive(false);
+        ScoreManager.Scores[GameManager.Instance.CurrentStage] = 0;
         SoundManager.Instance.PlayOneShot("SFX_Click");
         FadingUI.Instance.StartFadeIn();
         FadingUI.Instance.OnStopFading.AddListener(LoadGameplay);
