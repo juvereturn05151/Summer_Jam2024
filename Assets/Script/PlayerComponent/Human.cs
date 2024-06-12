@@ -97,6 +97,7 @@ public class Human : MonoBehaviour
     private void Start()
     {
         CurrentWater = startWater;
+        waterFillImage = GameplayUIManager.Instance.WaterFillImage;
         GameplayUIManager.Instance.waterSlider.maxValue = maxWater;
         GameplayUIManager.Instance.waterSlider.value = CurrentWater;
     }
@@ -163,27 +164,24 @@ public class Human : MonoBehaviour
 
         if (CurrentWater <= 0)
         {
-            
+            GameplayUIManager.Instance.OnGameOver(ScoreManager.Scores[GameManager.Instance.CurrentStage] > GameManager.Instance.Phase4Score);
 
             if (ScoreManager.Scores[GameManager.Instance.CurrentStage] > GameManager.Instance.Phase4Score)
             {
-                GameplayUIManager.Instance.winningUI.SetActive(true);
-
                 GameManager.Instance.DestroyOnWinning();
             }
             else 
             {
-                GameplayUIManager.Instance.gameOverUI.SetActive(true);
                 SoundManager.Instance.PlayOneShot(_sfx_villageDeadString);
                 _animator.StartDeadAnimation();
+
+                if (GameManager.Instance.State == GameManager.GameState.EndGame)
+                {
+                    var soul = Instantiate(deadParticle, transform.position, quaternion.identity);
+                }
             }
 
             GameManager.Instance.OnEndGame();
-
-            if (GameManager.Instance.State == GameManager.GameState.EndGame)
-            {
-                var soul = Instantiate(deadParticle, transform.position, quaternion.identity);
-            }
         }
     }
 

@@ -50,11 +50,16 @@ public class GameplayUIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI highScoreText;
 
-    public GameObject winningUI;
-    public GameObject gameOverUI;
+
     public GameObject gamePlayUI;
 
     public Slider waterSlider;
+
+    [SerializeField] private ChangeFillImage _waterFillImage;
+    public ChangeFillImage WaterFillImage => _waterFillImage;
+    [SerializeField] private GameObject _gameEndUI;
+    [SerializeField] private GameObject _winningUI;
+    [SerializeField] private GameObject _losingUI;
 
     [SerializeField] private MMF_Player scoreFeedback;
 
@@ -69,12 +74,8 @@ public class GameplayUIManager : MonoBehaviour
     public Transform waterSplashParent;
 
     [Header("GameOver Panel")]
-    [SerializeField] private TextMeshProUGUI scoreTextGameOver;
-    [SerializeField] private TextMeshProUGUI highScoreTextGameOver;
-
-    [Header("Winning Panel")]
-    [SerializeField] private TextMeshProUGUI scoreTextWinning;
-    [SerializeField] private TextMeshProUGUI highScoreTextWinning;
+    [SerializeField] private TextMeshProUGUI _scoreText;
+    [SerializeField] private TextMeshProUGUI _highScoreText;
     // Update is called once per frame
 
     private void Start()
@@ -90,10 +91,8 @@ public class GameplayUIManager : MonoBehaviour
         {
             gamePlayUI.SetActive(false);
             waterSlider.gameObject.SetActive(false);
-            scoreTextGameOver.text = $"Score: {ScoreManager.Scores[GameManager.Instance.CurrentStage]}";
-            highScoreTextGameOver.text = $"HighScore: {ScoreManager.HighScores[GameManager.Instance.CurrentStage]}";
-            scoreTextWinning.text = $"Score: {ScoreManager.Scores[GameManager.Instance.CurrentStage]}";
-            highScoreTextWinning.text = $"HighScore: {ScoreManager.HighScores[GameManager.Instance.CurrentStage]}";
+            _scoreText.text = $"Score: {ScoreManager.Scores[GameManager.Instance.CurrentStage]}";
+            _highScoreText.text = $"HighScore: {ScoreManager.HighScores[GameManager.Instance.CurrentStage]}";
         }
     }
 
@@ -144,6 +143,29 @@ public class GameplayUIManager : MonoBehaviour
         SoundManager.Instance.PlayOneShot("SFX_Click");
         FadingUI.Instance.StartFadeIn();
         FadingUI.Instance.OnStopFading.AddListener(LoadMainScene);
+    }
+
+    public void OnGameOver(bool isWinning) 
+    {
+        if (_gameEndUI != null) 
+        {
+            _gameEndUI.SetActive(true);
+        }
+
+        if (isWinning)
+        {
+            if (_winningUI != null) 
+            {
+                _winningUI.SetActive(true);
+            }
+        }
+        else
+        {
+            if (_losingUI != null) 
+            {
+                _losingUI.SetActive(true);
+            }
+        }
     }
 
     private void LoadMainScene()
