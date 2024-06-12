@@ -50,7 +50,6 @@ public class GameplayUIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI highScoreText;
 
-
     public GameObject gamePlayUI;
 
     public Slider waterSlider;
@@ -76,6 +75,7 @@ public class GameplayUIManager : MonoBehaviour
     [Header("GameOver Panel")]
     [SerializeField] private TextMeshProUGUI _scoreText;
     [SerializeField] private TextMeshProUGUI _highScoreText;
+    [SerializeField] private TextMeshProUGUI _passingScoreText;
     // Update is called once per frame
 
     private void Start()
@@ -93,6 +93,7 @@ public class GameplayUIManager : MonoBehaviour
             waterSlider.gameObject.SetActive(false);
             _scoreText.text = $"Score: {ScoreManager.Scores[GameManager.Instance.CurrentStage]}";
             _highScoreText.text = $"HighScore: {ScoreManager.HighScores[GameManager.Instance.CurrentStage]}";
+            _passingScoreText.text = $"You Need To Score At Least: {GameManager.Instance.Phase4Score}";
         }
     }
 
