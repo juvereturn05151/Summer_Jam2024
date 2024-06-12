@@ -169,16 +169,13 @@ public class Human : MonoBehaviour
             if (ScoreManager.Scores[GameManager.Instance.CurrentStage] > GameManager.Instance.Phase4Score)
             {
                 GameManager.Instance.DestroyOnWinning();
+                _animator.StartWinAnimation();
             }
             else 
             {
                 SoundManager.Instance.PlayOneShot(_sfx_villageDeadString);
                 _animator.StartDeadAnimation();
-
-                if (GameManager.Instance.State == GameManager.GameState.EndGame)
-                {
-                    var soul = Instantiate(deadParticle, transform.position, quaternion.identity);
-                }
+                var soul = Instantiate(deadParticle, transform.position, quaternion.identity);
             }
 
             GameManager.Instance.OnEndGame();

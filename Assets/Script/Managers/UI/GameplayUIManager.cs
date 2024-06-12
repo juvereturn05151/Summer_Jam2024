@@ -130,7 +130,7 @@ public class GameplayUIManager : MonoBehaviour
 
     public void LoadNextGameplay()
     {
-        if (GameManager.Instance.CurrentStage <= ScoreManager.numberOfStage) 
+        if (GameManager.Instance.CurrentStage >= ScoreManager.numberOfStage) 
         {
             SceneManager.LoadScene("ThankYouForPlaying");
             return;

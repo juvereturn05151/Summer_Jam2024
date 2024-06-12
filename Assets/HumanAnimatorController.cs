@@ -24,6 +24,11 @@ public class HumanAnimatorController : MonoBehaviour
         animatorController.SetBool("isDead", true);
     }
 
+    public void StartWinAnimation()
+    {
+        animatorController.SetBool("isWin", true);
+    }
+
     public void StartHurtAnimation()
     {
         animatorController.SetBool("isHurt", true);
