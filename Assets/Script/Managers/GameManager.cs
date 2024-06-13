@@ -1,6 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+/* filename GameManager.cs
+ * author   Tonnattan Chankasemporn
+ * email:   juvereturn@gmail.com
+ * 
+ * Brief Description: 
+ * This Class Contains All The Scene Names
+ * /*/
+
+using UnityEngine; /*Monobehaviour*/
 
 public class GameManager : MonoBehaviour
 {

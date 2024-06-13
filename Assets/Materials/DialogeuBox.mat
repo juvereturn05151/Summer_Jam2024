@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Barrier
+  m_Name: DialogeuBox
   m_Shader: {fileID: -6465566751694194690, guid: 529ca32a633ac7646884d1865003ce0b, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -67,7 +67,7 @@ Material:
     - _WaveSpeed: 4
     m_Colors:
     - _ClipRect: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 1, g: 0, b: 0, a: 1}
+    - _Color: {r: 0.3207547, g: 0.31318974, b: 0.31318974, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

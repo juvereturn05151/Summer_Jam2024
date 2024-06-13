@@ -17,14 +17,17 @@ public class Spawner : MonoBehaviour
         if (GameManager.Instance.State == GameManager.GameState.EndGame)
             return;
 
-        // Check if it's time to spawn
-        if (Time.time >= nextSpawnTime)
+        if (GameManager.Instance.State == GameManager.GameState.StartGame) 
         {
-            // Spawn the prefab
-            SpawnPrefab();
+            // Check if it's time to spawn
+            if (Time.time >= nextSpawnTime)
+            {
+                // Spawn the prefab
+                SpawnPrefab();
 
-            // Calculate the time for the next spawn
-            nextSpawnTime = Time.time + spawnInterval;
+                // Calculate the time for the next spawn
+                nextSpawnTime = Time.time + spawnInterval;
+            }
         }
     }
 
