@@ -242,6 +242,7 @@ public class Sunlight : MonoBehaviour
     private void StartSunlighting() 
     {
         ActivateSunlight = true;
+        Human.Instance.CallSpiritPower();
         Human.Instance.DecreaseWaterAmount(Time.deltaTime * _waterDecreaseSpeed);
     }
 
@@ -333,6 +334,7 @@ public class Sunlight : MonoBehaviour
         light.intensity = normalSunlightIntensity;
         ResetSunlightRadius();
         ActivateSunlight = false;
+        Human.Instance.UnCallSpiritPower();
     }
 
     private void HandleSunlightColor() 

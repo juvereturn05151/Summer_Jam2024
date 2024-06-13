@@ -1,13 +1,17 @@
+/* filename Human.cs
+ * author   Tonnattan Chankasemporn
+ * email:   juvereturn@gmail.com
+ * 
+ * Brief Description: 
+ * Human is the player's main character that has Water as their energy and health
+ * The reason why it is singleton because we expected to have only 1 human in the stage
+ * /*/
+
 using System.Collections;
 using MoreMountains.Feedbacks;
 using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
-
-/// <summary>
-/// Human is the player's main character that has Water as their energy and health
-/// The reason why it is singleton because we expected to have only 1 human in the stage
-/// </summary>
 
 public class Human : MonoBehaviour
 {
@@ -21,7 +25,7 @@ public class Human : MonoBehaviour
             // If the instance doesn't exist, try to find it in the scene
             if (instance == null)
             {
-                instance = FindObjectOfType<Human>();
+                instance = FindAnyObjectByType<Human>();
 
                 // If it still doesn't exist, create a new GameObject with the SingletonExample component
                 if (instance == null)
@@ -61,6 +65,9 @@ public class Human : MonoBehaviour
     [SerializeField]
     private ChangeFillImage waterFillImage;
     public ChangeFillImage WaterFillImage => waterFillImage;
+
+    [SerializeField]
+    private HumanAnimatorController _spiritCharacter;
 
     public bool IsHurt { get; private set;}
     public float CurrentWater { get; private set; }
@@ -102,7 +109,6 @@ public class Human : MonoBehaviour
         GameplayUIManager.Instance.waterSlider.value = CurrentWater;
     }
 
-    // Update is called once per frame
     private void Update()
     {
         if (GameManager.Instance.State != GameManager.GameState.StartGame) 
@@ -180,6 +186,17 @@ public class Human : MonoBehaviour
 
             GameManager.Instance.OnEndGame();
         }
+    }
+
+    public void CallSpiritPower() 
+    {
+        _spiritCharacter.gameObject.SetActive(true);
+        _spiritCharacter.StartWinAnimation();
+    }
+
+    public void UnCallSpiritPower()
+    {
+        _spiritCharacter.gameObject.SetActive(false);
     }
 
     private void HandleMove() 

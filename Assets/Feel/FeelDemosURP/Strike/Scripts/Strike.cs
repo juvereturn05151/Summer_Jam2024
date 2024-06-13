@@ -18,7 +18,7 @@ namespace MoreMountains.Feel
 		{
 			Rb.transform.position = InitialPosition;
 			Rb.transform.rotation = InitialRotation;
-			Rb.velocity = Vector3.zero;
+			Rb.linearVelocity = Vector3.zero;
 			Rb.angularVelocity = Vector3.zero;
 		}
 	}
@@ -266,7 +266,7 @@ namespace MoreMountains.Feel
 			// we reset the ball's position and forces
 			BowlingBallRb.MovePosition(_initialBallPosition);
 			BowlingBallRb.transform.localRotation = _initialBallRotation;
-			BowlingBallRb.velocity = Vector3.zero;
+			BowlingBallRb.linearVelocity = Vector3.zero;
 			BowlingBallRb.angularVelocity = Vector3.zero;
 
 			yield return MMCoroutine.WaitForFrames(1);

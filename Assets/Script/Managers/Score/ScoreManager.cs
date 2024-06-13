@@ -62,10 +62,6 @@ public static class ScoreManager
 
     public static void AddScore(int value, int scoreNumber) 
     {
-        Debug.Log("before" + scores[scoreNumber]);
         scores[scoreNumber] += value;
-        Debug.Log("after" + scores[scoreNumber]);
     }
-
-
 }

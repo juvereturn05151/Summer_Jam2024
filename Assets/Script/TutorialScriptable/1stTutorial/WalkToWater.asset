@@ -14,10 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 2
   DialogueLines:
-  - Hello, Doctor Elias. This is Nova calling.
-  - "I\u2019m the sunlight AI here to assist you."
-  - Your journey from the Sun must have been long. Let's get you some water, the
-    true source of solar energy.
+  - Hello, Ju-ve Justar. This is Nova.
+  - "I\u2019m your spirit power here to assist you."
+  - Let's get you some water, the true source of solar energy.
   ShowTutorialGuideOnStart: 0
   ShowTutorialGuideBackground: 1
   ShowOnSecondDialogue: 0

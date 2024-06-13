@@ -174,7 +174,7 @@ public class Enemy : MonoBehaviour
             _timer = 0;
         }
 
-        feedbacks.PlayFeedbacks();
+        //feedbacks.PlayFeedbacks();
         
         if (_health <= 0) 
         {

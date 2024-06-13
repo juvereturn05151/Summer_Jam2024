@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -25,10 +23,10 @@ public class MainMenuPanel : MonoBehaviour
 
     private void InitButtonAction()
     {
-        startButton.onClick.AddListener(OnClickStart);
+        /*startButton.onClick.AddListener(OnClickStart);
         tutorialButton.onClick.AddListener(OnClickTutorial);
         settingButton.onClick.AddListener(OnClickSetting);
-        quitButton.onClick.AddListener(OnClickQuit);
+        quitButton.onClick.AddListener(OnClickQuit);*/
     }
 
     #region Panel Action

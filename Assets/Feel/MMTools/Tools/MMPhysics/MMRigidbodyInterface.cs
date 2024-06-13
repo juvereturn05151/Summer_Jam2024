@@ -69,7 +69,7 @@ namespace MoreMountains.Tools
 				{
 					if (_mode == "3D") 
 					{
-						return(_rigidbody.velocity);
+						return(_rigidbody.linearVelocity);
 					}
 					else
 					{
@@ -83,7 +83,7 @@ namespace MoreMountains.Tools
 					_rigidbody2D.velocity = value;
 				}
 				if (_mode == "3D") {
-					_rigidbody.velocity = value;
+					_rigidbody.linearVelocity = value;
 				}
 			}
 		}
