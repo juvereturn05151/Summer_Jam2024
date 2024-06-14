@@ -63,6 +63,7 @@ public class GameplayUIManager : MonoBehaviour
     [SerializeField] private MMF_Player scoreFeedback;
 
     [SerializeField] private GameObject waterSplashFX;
+    [SerializeField] private GameEndPanelManager _gameEndPanel;
 
     public GameObject WaterSplashFX
     {
@@ -76,7 +77,8 @@ public class GameplayUIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _scoreText;
     [SerializeField] private TextMeshProUGUI _highScoreText;
     [SerializeField] private TextMeshProUGUI _passingScoreText;
-    // Update is called once per frame
+    [SerializeField] private PrepareStateManager _prepareStateManager;
+    public PrepareStateManager PrepareStateManager => _prepareStateManager;
 
     private void Start()
     {
@@ -148,6 +150,9 @@ public class GameplayUIManager : MonoBehaviour
 
     public void OnGameOver(bool isWinning) 
     {
+        _gameEndPanel.ActivateEndGameUI(isWinning);
+
+        /*
         if (_gameEndUI != null) 
         {
             _gameEndUI.SetActive(true);
@@ -166,7 +171,7 @@ public class GameplayUIManager : MonoBehaviour
             {
                 _losingUI.SetActive(true);
             }
-        }
+        }*/
     }
 
     private void LoadMainScene()

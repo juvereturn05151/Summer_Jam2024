@@ -3,7 +3,7 @@ using UnityEngine.Rendering.Universal;
 using System.Collections.Generic;
 using Unity.Mathematics;
 
-public class Sunlight : MonoBehaviour
+public class Sunlight : MonoBehaviour, ISetPlayerManager
 {
     [SerializeField]
     private float _waterDecreaseSpeed = 1.5f;
@@ -77,6 +77,7 @@ public class Sunlight : MonoBehaviour
     private float _currentCreatePondTime;
     private GameObject _lightFX_Temp;
     private bool _isLighting;
+    private PlayerManager _playerManager;
 
     private void Start()
     {
@@ -91,42 +92,68 @@ public class Sunlight : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.Instance.State != GameManager.GameState.StartGame)
-            return;
-
-        if (Input.GetMouseButtonDown(0))
+        if (GameManager.Instance.State == GameManager.GameState.StartGame || GameManager.Instance.State == GameManager.GameState.PrepareGame) 
         {
-            HandleHitEnemyOnce();
-        }
-
-        if (Input.GetMouseButtonUp(0))
-        {
-            SoundManager.Instance.Stop(_sfx_burn);
-        }
-
-        if (Input.GetMouseButton(0))
-        {
-            HandlePreparingSunlighting();
-
-            if (IsReadyToSunlighting())
+            if (Input.GetMouseButtonDown(0))
             {
-                if (Human.Instance.CurrentWater > 0)
+                HandleHitEnemyOnce();
+            }
+
+            if (Input.GetMouseButtonUp(0))
+            {
+                SoundManager.Instance.Stop(_sfx_burn);
+            }
+
+            if (Input.GetMouseButton(0))
+            {
+                HandlePreparingSunlighting();
+
+                if (IsReadyToSunlighting())
                 {
-                    StartSunlighting();
+                    StartSunlight();
                 }
             }
-        }
-        else
-        {
-            StopSunlightAttack();
+            else
+            {
+                StopSunlight();
+            }
+
+            if (GameManager.Instance.State == GameManager.GameState.PrepareGame) 
+            {
+                if (ActivateSunlight)
+                {
+                    HandleSunlightOnPreparePhase();
+                    GameplayUIManager.Instance.PrepareStateManager.OnPlayerSpawn();
+                }
+            }
+
+            if (GameManager.Instance.State == GameManager.GameState.StartGame) 
+            {
+                if (Input.GetMouseButton(0))
+                {
+                    if (IsReadyToSunlighting())
+                    {
+                        if (Human.Instance.CurrentWater > 0)
+                        {
+                            StartSunlightingAttack();
+                        }
+                    }
+                }
+                else
+                {
+                    StopSunlightAttack();
+                }
+
+                if (ActivateSunlight)
+                {
+                    HandleOnSunlighting();
+                }
+            }
+
+            HandleSunlightColor();
         }
 
-        if (ActivateSunlight)
-        {
-            HandleOnSunlighting();
-        }
 
-        HandleSunlightColor();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -170,6 +197,11 @@ public class Sunlight : MonoBehaviour
                 _sightedPonds.Remove(pond);
             }
         }
+    }
+
+    public void SetPlayerManager(PlayerManager playerManager) 
+    {
+        _playerManager = playerManager;
     }
 
     private void HandleHitEnemyOnce() 
@@ -239,9 +271,13 @@ public class Sunlight : MonoBehaviour
         return _currentAlpha >= _maximumAlpha || light.intensity >= sunlightFlashIntensity;
     }
 
-    private void StartSunlighting() 
+    private void StartSunlight()
     {
         ActivateSunlight = true;
+    }
+
+    private void StartSunlightingAttack() 
+    {
         Human.Instance.CallSpiritPower();
         Human.Instance.DecreaseWaterAmount(Time.deltaTime * _waterDecreaseSpeed);
     }
@@ -252,6 +288,27 @@ public class Sunlight : MonoBehaviour
         HandleSightedEnemies();
         HandleSightedPond();
         HandleCreatingBigPond();
+    }
+
+    private void HandleSunlightOnPreparePhase() 
+    {
+        if (GameManager.Instance.State == GameManager.GameState.PrepareGame) 
+        {
+            _timer += Time.deltaTime;
+
+            if (_timer >= 1f)
+            {
+                _timer = 0;
+                //Spawn Player Here
+                if (_playerManager.Human.gameObject.activeInHierarchy) 
+                {
+                    return;
+                }
+
+                _playerManager.Human.gameObject.SetActive(true);
+                _playerManager.Human.transform.position = transform.position;
+            }
+        }
     }
 
     private void HandleVfxOnSunlighting() 
@@ -326,15 +383,24 @@ public class Sunlight : MonoBehaviour
         }
     }
 
-    private void StopSunlightAttack() 
+    private void StopSunlight() 
     {
         _currentAlpha = _startingAlpha;
         SetAlpha(_startingAlpha);
 
         light.intensity = normalSunlightIntensity;
         ResetSunlightRadius();
+    }
+
+    private void StopSunlightAttack() 
+    {
+
         ActivateSunlight = false;
-        Human.Instance.UnCallSpiritPower();
+
+        if (GameManager.Instance.State == GameManager.GameState.StartGame) 
+        {
+            Human.Instance.UnCallSpiritPower();
+        }
     }
 
     private void HandleSunlightColor() 

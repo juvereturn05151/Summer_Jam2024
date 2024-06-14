@@ -13,7 +13,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class Human : MonoBehaviour
+public class Human : MonoBehaviour, ISetPlayerManager
 {
     private static Human instance;
     private static string _scriptName = "Human";
@@ -84,6 +84,7 @@ public class Human : MonoBehaviour
     private const string _sfx_villageHitString = "SFX_VillagerHit";
     private HumanAnimatorController _animator;
     private GameObject _blood;
+    private PlayerManager _playerManager;
 
     // Optional Awake method to ensure the instance is created before any other script's Start method
     private void Awake()
@@ -120,6 +121,11 @@ public class Human : MonoBehaviour
         StartCoroutine(LerpWater());
         CheckPlayerHurtAnim();
         DecreaseWaterAmount(Time.deltaTime);
+    }
+
+    public void SetPlayerManager(PlayerManager playerManager) 
+    {
+        _playerManager = playerManager;
     }
 
     public void OnGettingHurt(float damage) 
@@ -182,6 +188,7 @@ public class Human : MonoBehaviour
                 SoundManager.Instance.PlayOneShot(_sfx_villageDeadString);
                 _animator.StartDeadAnimation();
                 var soul = Instantiate(deadParticle, transform.position, quaternion.identity);
+                GameManager.Instance.SetGameTimeScale(0.0f);
             }
 
             GameManager.Instance.OnEndGame();

@@ -3,7 +3,7 @@
  * email:   juvereturn@gmail.com
  * 
  * Brief Description: 
- * This Class Contains All The Scene Names
+ * Manages GameState Involving Preparation
  * /*/
 
 using UnityEngine; /*Monobehaviour*/
@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
 
     public enum GameState
     {
+        PrepareGame,
         StartGame,
         EndGame,
         Stop
@@ -67,6 +68,8 @@ public class GameManager : MonoBehaviour
     private float _phase4Score = 1800;
     public float Phase4Score => _phase4Score;
 
+    public float GameTimeScale { get; private set; } = 1;
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -81,7 +84,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        OnStartGame();
+        OnPrepareGame();
     }
 
     // Update is called once per frame
@@ -111,14 +114,20 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void OnStartGame()
+    public void SetGameTimeScale(float timeScale) 
+    {
+        GameTimeScale = timeScale;
+    }
+
+    public void OnPrepareGame()
     {
         SoundManager.Instance.Stop("BGM_Title");
         SoundManager.Instance.Play("BGM_Gameplay");
 
         if (!IsTutorial) 
         {
-            state = GameState.StartGame;
+            state = GameState.PrepareGame;
+            GameplayUIManager.Instance.PrepareStateManager.OnStartPrepare();
         }
     }
 
