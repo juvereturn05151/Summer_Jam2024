@@ -5087,93 +5087,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _human: {fileID: 1540456438}
   _sunlight: {fileID: 1577209711}
---- !u!1 &761594508
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 761594509}
-  - component: {fileID: 761594510}
-  m_Layer: 0
-  m_Name: Square
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &761594509
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 761594508}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.62877, y: 0.62877, z: 0.62877}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1577209714}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &761594510
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 761594508}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 3
-  m_Sprite: {fileID: -3644054915747790185, guid: 67ac8b2256824f74aa5426553b0996e9, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
 --- !u!1 &894329855
 GameObject:
   m_ObjectHideFlags: 0
@@ -6709,65 +6622,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2940887928499749680, guid: 6325fd24993e06e49a202d4321f9bfe3, type: 3}
-      propertyPath: m_LightType
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2940887928499749680, guid: 6325fd24993e06e49a202d4321f9bfe3, type: 3}
-      propertyPath: m_LocalBounds.m_Center.y
-      value: -0.00000011920929
-      objectReference: {fileID: 0}
-    - target: {fileID: 2940887928499749680, guid: 6325fd24993e06e49a202d4321f9bfe3, type: 3}
-      propertyPath: m_LocalBounds.m_Extent.x
-      value: 0.9985302
-      objectReference: {fileID: 0}
-    - target: {fileID: 2940887928499749680, guid: 6325fd24993e06e49a202d4321f9bfe3, type: 3}
-      propertyPath: m_LocalBounds.m_Extent.y
-      value: 0.99853027
-      objectReference: {fileID: 0}
-    - target: {fileID: 3687364642673932757, guid: 6325fd24993e06e49a202d4321f9bfe3, type: 3}
-      propertyPath: fireMeltFX
-      value: 
-      objectReference: {fileID: 7198792262499221365, guid: 0b902de12d185304482c960bcea0b239, type: 3}
-    - target: {fileID: 3687364642673932757, guid: 6325fd24993e06e49a202d4321f9bfe3, type: 3}
-      propertyPath: meltSnowFX
-      value: 
-      objectReference: {fileID: 7803121286815431195, guid: 7b4fc252a8df6b141bc43160f83d8760, type: 3}
-    - target: {fileID: 3687364642673932757, guid: 6325fd24993e06e49a202d4321f9bfe3, type: 3}
-      propertyPath: _cameraShaker
-      value: 
-      objectReference: {fileID: 220215728}
-    - target: {fileID: 3687364642673932757, guid: 6325fd24993e06e49a202d4321f9bfe3, type: 3}
-      propertyPath: lightParticle
-      value: 
-      objectReference: {fileID: 8600904210304158374, guid: a74f5d4fb70d94948a7a8cbee0693f89, type: 3}
-    - target: {fileID: 3687364642673932757, guid: 6325fd24993e06e49a202d4321f9bfe3, type: 3}
-      propertyPath: _sunlightImage
-      value: 
-      objectReference: {fileID: 761594510}
-    - target: {fileID: 3687364642673932757, guid: 6325fd24993e06e49a202d4321f9bfe3, type: 3}
-      propertyPath: sunlightFeedback
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4075066699219346150, guid: 6325fd24993e06e49a202d4321f9bfe3, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: -3644054915747790185, guid: 67ac8b2256824f74aa5426553b0996e9, type: 3}
-    - target: {fileID: 4075066699219346150, guid: 6325fd24993e06e49a202d4321f9bfe3, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5281588524044609426, guid: 6325fd24993e06e49a202d4321f9bfe3, type: 3}
       propertyPath: m_Name
       value: Sunlight
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4075066699219346150, guid: 6325fd24993e06e49a202d4321f9bfe3, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 1653185030284301143, guid: 6325fd24993e06e49a202d4321f9bfe3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 761594509}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6325fd24993e06e49a202d4321f9bfe3, type: 3}
 --- !u!1001 &7699947647352580185
