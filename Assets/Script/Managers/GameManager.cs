@@ -28,23 +28,11 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance => _instance;
     private static GameManager _instance;
 
-
-
     public GameState State { get; private set; }
 
     [SerializeField]
     private GameMode _mode;
     public GameMode Mode => _mode;
-
-    #region Tutorial Only
-
-    [SerializeField]
-    private bool _isTutorial;
-    public bool IsTutorial => _isTutorial;
-
-    public int BigPondDrank = 0;
-
-    #endregion
 
     [SerializeField]
     private int _currentStage;
@@ -78,12 +66,10 @@ public class GameManager : MonoBehaviour
     public delegate void WhenGameEnd(bool isWin, GameMode mode);
     public static WhenGameEnd OnGameEnd;
 
+    public int BigPondDrank { get; private set; } = 0;
     public float GameTimeScale { get; private set; } = 1;
 
     private GameplayUIManager _gameplayUIManager;
-
-
-
 
     private void Awake()
     {
@@ -100,29 +86,28 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         InitOnStart();
-        OnPrepareGame();
     }
 
     // Update is called once per frame
     private void Update()
     {
-        if (ScoreManager.Scores[GameManager._instance.CurrentStage] >= _phase4Score)
+        if (ScoreManager.Scores[CurrentStage] >= _phase4Score)
         {
             if (spawner5)
                 spawner5.gameObject.SetActive(true);
         }
         else
-        if(ScoreManager.Scores[GameManager._instance.CurrentStage] >= _phase3Score)
+        if(ScoreManager.Scores[CurrentStage] >= _phase3Score)
         {
             if (spawner4)
                 spawner4.gameObject.SetActive(true);
         }
-        else if (ScoreManager.Scores[GameManager._instance.CurrentStage] >= _phase2Score)
+        else if (ScoreManager.Scores[CurrentStage] >= _phase2Score)
         {
             if (spawner3)
                 spawner3.gameObject.SetActive(true);
         }
-        else if(ScoreManager.Scores[GameManager._instance.CurrentStage] >= _phase1Score)
+        else if(ScoreManager.Scores[CurrentStage] >= _phase1Score)
         {
             if (spawner2)
                 spawner2.gameObject.SetActive(true);
@@ -136,38 +121,9 @@ public class GameManager : MonoBehaviour
         GameTimeScale = timeScale;
     }
 
-    public void OnPrepareGame()
+    public void IncreaseBigPondDrank() 
     {
-        SoundManager.Instance.Stop("BGM_Title");
-        SoundManager.Instance.Play("BGM_Gameplay");
-
-        if (!IsTutorial) 
-        {
-            State = GameState.PreparingState;
-            GameplayUIManager.Instance.PrepareStateManager.OnStartPrepare();
-        }
-    }
-
-    private void DestroyEnd() 
-    {
-        if (spawner2)
-            spawner2.gameObject.SetActive(false);
-
-        if (spawner3)
-            spawner3.gameObject.SetActive(false);
-
-        if (spawner4)
-            spawner4.gameObject.SetActive(false);
-
-        if (spawner5)
-            spawner5.gameObject.SetActive(false);
-
-        Enemy[] enemies = FindObjectsByType<Enemy>(FindObjectsSortMode.None);
-
-        foreach (Enemy enemy in enemies) 
-        {
-            Destroy(enemy.gameObject);
-        }
+        BigPondDrank++;
     }
 
     public void CheckScore() 
@@ -186,6 +142,10 @@ public class GameManager : MonoBehaviour
         State = newState;
     }
 
+    /* Brief
+    If it's not the tutorial mode, we always start from the preparing state
+    */
+
     private void InitOnStart() 
     {
         OnGameEnd += OnGameOver;
@@ -195,13 +155,43 @@ public class GameManager : MonoBehaviour
         if (_gameplayUIManager != null) 
         {
             _gameplayUIManager.Init(_mode);
+
+            if (Mode == GameMode.StoryMode || Mode == GameMode.SurvivalMode)
+            {
+                State = GameState.PreparingState;
+                _gameplayUIManager.PrepareStateManager.OnStartPrepare();
+            }
         }
+
+        SoundManager.Instance.InitOnGameBegin();
     }
 
     private void OnGameOver(bool isWin, GameMode mode) 
     {
         State = GameState.EndState;
-        DestroyEnd();
+        DestroyAtEnd();
         SetGameTimeScale(0.0f);
+    }
+
+    private void DestroyAtEnd()
+    {
+        if (spawner2)
+            spawner2.gameObject.SetActive(false);
+
+        if (spawner3)
+            spawner3.gameObject.SetActive(false);
+
+        if (spawner4)
+            spawner4.gameObject.SetActive(false);
+
+        if (spawner5)
+            spawner5.gameObject.SetActive(false);
+
+        Enemy[] enemies = FindObjectsByType<Enemy>(FindObjectsSortMode.None);
+
+        foreach (Enemy enemy in enemies)
+        {
+            Destroy(enemy.gameObject);
+        }
     }
 }

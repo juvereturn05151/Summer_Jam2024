@@ -84,12 +84,18 @@ public class Enemy : MonoBehaviour
     private float _timer;
     private float _currentBarrierCooldownTime;
     private float _currentHealthHorizontalScale;
+    private bool _isDissolving = false;
+    private float _dissolveAmount;
+    private float _dissolveSpeed = 2.0f;
 
     private Animator _animator;
+    private SpriteRenderer _sprite;
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
+        _sprite = GetComponent<SpriteRenderer>();
+        _sprite.material = new Material(_sprite.material);
     }
 
     private void Start()
@@ -111,6 +117,8 @@ public class Enemy : MonoBehaviour
         UpdateHealthUI();
         ObstacleAvoid();
         HandleBarrier();
+        HandleDissolving();
+        _sprite.material.SetFloat("_DissolveAmount", Mathf.Clamp01(_health/ _maxHealth));
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -120,6 +128,15 @@ public class Enemy : MonoBehaviour
             human.OnGettingHurt(_decreaseAmount); 
             var water = Instantiate(GameplayUIManager.Instance.WaterSplashFX, GameplayUIManager.Instance.waterSplashParent.transform.position, quaternion.identity, GameplayUIManager.Instance.waterSplashParent.transform);
             Destroy(water, 1f);
+        }
+    }
+
+    private void HandleDissolving() 
+    {
+        if (_isDissolving) 
+        {
+            _dissolveAmount = Mathf.Clamp01(_dissolveAmount + Time.deltaTime * _dissolveSpeed);
+            _sprite.material.SetFloat("_DissolveAmount", _dissolveAmount);
         }
     }
 
@@ -180,7 +197,7 @@ public class Enemy : MonoBehaviour
         {
             var burnMeltFx = Instantiate(smokeFX, transform.position + Vector3.up, quaternion.identity);
             GameplayUIManager.Instance.IncreaseScore(scorePoint);
-            
+            _isDissolving = true;
             Destroy(burnMeltFx, _meltDestroyTime);
             _animator.SetBool(_sfx_isDead, true);
         }

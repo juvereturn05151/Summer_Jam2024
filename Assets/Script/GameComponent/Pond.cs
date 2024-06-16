@@ -41,9 +41,9 @@ public class Pond : MonoBehaviour
 
             if (pondFillOnDay >= 20)
             {
-                if (GameManager.Instance.IsTutorial && AdvancedTutorialManager.Instance.CurrentTutorial.Type == TutorialType.CreateABigPond) 
+                if (GameManager.Instance.Mode == GameMode.TutorialMode && AdvancedTutorialManager.Instance.CurrentTutorial.Type == TutorialType.CreateABigPond) 
                 {
-                    GameManager.Instance.BigPondDrank++;
+                    GameManager.Instance.IncreaseBigPondDrank();
                 }
             }
 

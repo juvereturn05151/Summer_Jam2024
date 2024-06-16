@@ -151,7 +151,7 @@ public class Human : MonoBehaviour, ISetPlayerManager
 
     public void DecreaseWaterAmount(float increaseAmount)
     {
-        if (GameManager.Instance.IsTutorial && !AdvancedTutorialManager.Instance.CurrentTutorial.IsWaterDecreasable())
+        if (GameManager.Instance.Mode == GameMode.TutorialMode && !AdvancedTutorialManager.Instance.CurrentTutorial.IsWaterDecreasable())
             return;
 
         CurrentWater -= increaseAmount;
@@ -167,7 +167,7 @@ public class Human : MonoBehaviour, ISetPlayerManager
         CurrentWater = (CurrentWater - increaseAmount <= 0) ? 0 : CurrentWater - increaseAmount;
         GameplayUIManager.Instance.WaterSlider.value = CurrentWater;
 
-        if (GameManager.Instance.IsTutorial) 
+        if (GameManager.Instance.Mode == GameMode.TutorialMode) 
         {
             return;
         }

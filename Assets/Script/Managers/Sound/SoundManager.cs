@@ -258,16 +258,7 @@ public class SoundManager : MonoBehaviour
             Debug.LogWarning("Sound: " + name + " not found...");
             return;
         }
-        StartCoroutine(dropVolumeToZero(s.Source));
-    }
-
-    IEnumerator dropVolumeToZero(AudioSource source)
-    {
-        while (source.volume > 0)
-        {
-            source.volume -= Time.deltaTime;
-            yield return null;
-        }
+        StartCoroutine(DropVolumeToZero(s.Source));
     }
 
     public void ChageVolume(string name, float volume)
@@ -278,10 +269,25 @@ public class SoundManager : MonoBehaviour
             Debug.LogWarning("Sound: " + name + " not found...");
             return;
         }
-        StartCoroutine(dropVolume(s.Source, volume));
+        StartCoroutine(DropVolume(s.Source, volume));
     }
 
-    IEnumerator dropVolume(AudioSource source, float volume)
+    public void InitOnGameBegin() 
+    {
+        Stop("BGM_Title");
+        Play("BGM_Gameplay");
+    }
+
+    private IEnumerator DropVolumeToZero(AudioSource source)
+    {
+        while (source.volume > 0)
+        {
+            source.volume -= Time.deltaTime;
+            yield return null;
+        }
+    }
+
+    private IEnumerator DropVolume(AudioSource source, float volume)
     {
         while (source.volume > volume)
         {
