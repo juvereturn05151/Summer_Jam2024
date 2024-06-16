@@ -1,4 +1,4 @@
-/* filename MenuButtonBase.cs
+/* filename GoToStoryModeOnClick.cs
  * author   Tonnattan Chankasemporn
  * email:   juvereturn@gmail.com
  * 
@@ -16,7 +16,7 @@ public class GoToStoryModeOnClick : OnButtonClick
     public void GoToStoryMode() 
     {
         base.OnClick();
-        FadingUI.Instance.OnStopFading.AddListener(LoadTutorialScene);
+        FadingUI.OnStopFading += LoadTutorialScene;
     }
 
     private void LoadTutorialScene()

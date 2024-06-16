@@ -23,13 +23,20 @@ public class GameEndPanelManager : MonoBehaviour
     [SerializeField]
     private GameObject _losePanel;
 
+    [SerializeField]
+    private GameObject[] _storyModePanels;
+
+    [SerializeField]
+    private GameObject[] _survivalModePanels;
+
     private bool _isWin;
 
-    public void ActivateEndGameUI(bool isWin) 
+    public void ActivateEndGameUI(bool isWin, GameMode mode) 
     {
         this.gameObject.SetActive(true);
         _winAnimation.SetGameEndPanel(this);
         _loseAnimation.SetGameEndPanel(this);
+        ActivateModeSpecificUI(mode);
 
         _isWin = isWin;
 
@@ -56,6 +63,24 @@ public class GameEndPanelManager : MonoBehaviour
         else
         {
             _losePanel.gameObject.SetActive(true);
+        }
+    }
+
+    private void ActivateModeSpecificUI(GameMode mode) 
+    {
+        if (mode == GameMode.StoryMode)
+        {
+            foreach (GameObject gameObj in _storyModePanels)
+            {
+                gameObj.SetActive(true);
+            }
+        }
+        else if (mode == GameMode.SurvivalMode) 
+        {
+            foreach (GameObject gameObj in _survivalModePanels)
+            {
+                gameObj.SetActive(true);
+            }
         }
     }
 }

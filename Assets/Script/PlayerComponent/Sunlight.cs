@@ -92,7 +92,7 @@ public class Sunlight : MonoBehaviour, ISetPlayerManager
 
     private void Update()
     {
-        if (GameManager.Instance.State == GameManager.GameState.StartGame || GameManager.Instance.State == GameManager.GameState.PrepareGame) 
+        if (GameManager.Instance.State == GameState.PlayingState || GameManager.Instance.State == GameState.PreparingState) 
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -118,7 +118,7 @@ public class Sunlight : MonoBehaviour, ISetPlayerManager
                 StopSunlight();
             }
 
-            if (GameManager.Instance.State == GameManager.GameState.PrepareGame) 
+            if (GameManager.Instance.State == GameState.PreparingState) 
             {
                 if (ActivateSunlight)
                 {
@@ -127,7 +127,7 @@ public class Sunlight : MonoBehaviour, ISetPlayerManager
                 }
             }
 
-            if (GameManager.Instance.State == GameManager.GameState.StartGame) 
+            if (GameManager.Instance.State == GameState.PlayingState) 
             {
                 if (Input.GetMouseButton(0))
                 {
@@ -292,7 +292,7 @@ public class Sunlight : MonoBehaviour, ISetPlayerManager
 
     private void HandleSunlightOnPreparePhase() 
     {
-        if (GameManager.Instance.State == GameManager.GameState.PrepareGame) 
+        if (GameManager.Instance.State == GameState.PreparingState) 
         {
             _timer += Time.deltaTime;
 
@@ -394,10 +394,9 @@ public class Sunlight : MonoBehaviour, ISetPlayerManager
 
     private void StopSunlightAttack() 
     {
-
         ActivateSunlight = false;
 
-        if (GameManager.Instance.State == GameManager.GameState.StartGame) 
+        if (GameManager.Instance.State == GameState.PlayingState) 
         {
             Human.Instance.UnCallSpiritPower();
         }

@@ -83,7 +83,7 @@ public class TutorialUIManager : MonoBehaviour
     public void Play()
     {
         FadingUI.Instance.StartFadeIn();
-        FadingUI.Instance.OnStopFading.AddListener(LoadScene);
+        FadingUI.OnStopFading += LoadScene;
     }
 
     private void LoadScene() 

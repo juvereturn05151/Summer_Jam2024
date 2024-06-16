@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8357022549430970409}
   - component: {fileID: 1440477751235517290}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: Art
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,6 +49,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -127,6 +130,7 @@ BoxCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5472125496726947528}
   m_Enabled: 1
+  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -150,7 +154,8 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,7 +166,6 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
   m_Size: {x: 2.5, y: 1}
   m_EdgeRadius: 0
 --- !u!50 &7513228382025021311
@@ -204,9 +208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 1440477751235517290}
-  iceMeltTimeBySun: 3
   pondTimeEvaporate: 1
-  objectStat: 1
   pondFillOnDay: 10
   melt: {fileID: 7803121286815431195, guid: 7b4fc252a8df6b141bc43160f83d8760, type: 3}
   waterSplash: {fileID: 4226614812645000377, guid: e1527692eabfc1049a7e1f746dbfc554, type: 3}

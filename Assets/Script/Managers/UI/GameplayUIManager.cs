@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using MoreMountains.Feedbacks;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,7 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class GameplayUIManager : MonoBehaviour
 {
-    private static GameplayUIManager instance;
+    private static GameplayUIManager _instance;
+    private static string _name = "GameplayUIManager";
 
     // Public property to access the singleton instance
     public static GameplayUIManager Instance
@@ -16,49 +15,44 @@ public class GameplayUIManager : MonoBehaviour
         get
         {
             // If the instance doesn't exist, try to find it in the scene
-            if (instance == null)
+            if (_instance == null)
             {
-                instance = FindObjectOfType<GameplayUIManager>();
+                _instance = FindFirstObjectByType<GameplayUIManager>();
 
                 // If it still doesn't exist, create a new GameObject with the SingletonExample component
-                if (instance == null)
+                if (_instance == null)
                 {
-                    GameObject singletonObject = new GameObject("GameplayUIManager");
-                    instance = singletonObject.AddComponent<GameplayUIManager>();
+                    GameObject singletonObject = new GameObject(_name);
+                    _instance = singletonObject.AddComponent<GameplayUIManager>();
                 }
-
-                // Ensure the instance persists between scene changes
-                DontDestroyOnLoad(instance.gameObject);
             }
-            return instance;
+
+            return _instance;
         }
     }
 
     private void Awake()
     {
-        // If an instance already exists and it's not this one, destroy this instance
-        if (instance != null && instance != this)
+        if (_instance != null && _instance != this)
         {
             Destroy(gameObject);
             return;
         }
 
-        // If this is the first instance, set it as the singleton instance
-        instance = this;
+        _instance = this;
     }
 
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI highScoreText;
-
-    public GameObject gamePlayUI;
-
-    public Slider waterSlider;
-
+    [SerializeField] private GameObject gamePlayUI;
+    [SerializeField] private Slider waterSlider;
+    public Slider WaterSlider => waterSlider;
     [SerializeField] private ChangeFillImage _waterFillImage;
     public ChangeFillImage WaterFillImage => _waterFillImage;
     [SerializeField] private GameObject _gameEndUI;
     [SerializeField] private GameObject _winningUI;
     [SerializeField] private GameObject _losingUI;
+    [SerializeField] private Slider _levelProgressSlider;
 
     [SerializeField] private MMF_Player scoreFeedback;
 
@@ -79,23 +73,32 @@ public class GameplayUIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _passingScoreText;
     [SerializeField] private PrepareStateManager _prepareStateManager;
     public PrepareStateManager PrepareStateManager => _prepareStateManager;
+    [SerializeField] private GameObject _storyModeUI;
+    [SerializeField] private GameObject _survivalModeUI;
+    [SerializeField] private Slider _progressionSlider;
 
-    private void Start()
+    public void Init(GameMode mode)
     {
-        highScoreText.text = $"High score: {ScoreManager.HighScores[GameManager.Instance.CurrentStage]}";
+        if (mode == GameMode.StoryMode)
+        {
+            _storyModeUI.SetActive(true);
+        }
+        else 
+        {
+            _survivalModeUI.SetActive(true);
+            highScoreText.text = $"High score: {ScoreManager.HighScores[GameManager.Instance.CurrentStage]}";
+        }
     }
 
-    private void Update()
+    public void UpdateUI(GameMode mode) 
     {
-        scoreText.text = "Score: " + ScoreManager.Scores[GameManager.Instance.CurrentStage];
-
-        if (GameManager.Instance.State == GameManager.GameState.EndGame)
+        if (mode == GameMode.StoryMode)
         {
-            gamePlayUI.SetActive(false);
-            waterSlider.gameObject.SetActive(false);
-            _scoreText.text = $"Score: {ScoreManager.Scores[GameManager.Instance.CurrentStage]}";
-            _highScoreText.text = $"HighScore: {ScoreManager.HighScores[GameManager.Instance.CurrentStage]}";
-            _passingScoreText.text = $"You Need To Score At Least: {GameManager.Instance.Phase4Score}";
+            _levelProgressSlider.value = (ScoreManager.Scores[GameManager.Instance.CurrentStage] / GameManager.Instance.Phase4Score); 
+        }
+        else if (mode == GameMode.SurvivalMode)
+        {
+            scoreText.text = "Score: " + ScoreManager.Scores[GameManager.Instance.CurrentStage];
         }
     }
 
@@ -114,6 +117,8 @@ public class GameplayUIManager : MonoBehaviour
             ScoreManager.SaveHighScore(ScoreManager.HighScores[GameManager.Instance.CurrentStage], GameManager.Instance.CurrentStage);
         }
 
+        GameManager.Instance.CheckScore();
+
         scoreFeedback.PlayFeedbacks();
     }
 
@@ -122,7 +127,7 @@ public class GameplayUIManager : MonoBehaviour
         ScoreManager.Scores[GameManager.Instance.CurrentStage] = 0;
         SoundManager.Instance.PlayOneShot("SFX_Click");
         FadingUI.Instance.StartFadeIn();
-        FadingUI.Instance.OnStopFading.AddListener(LoadGameplay);
+        FadingUI.OnStopFading += LoadGameplay;
     }
 
     public void LoadGameplay()
@@ -145,33 +150,25 @@ public class GameplayUIManager : MonoBehaviour
     {
         SoundManager.Instance.PlayOneShot("SFX_Click");
         FadingUI.Instance.StartFadeIn();
-        FadingUI.Instance.OnStopFading.AddListener(LoadMainScene);
+        FadingUI.OnStopFading += LoadMainScene;
     }
 
-    public void OnGameOver(bool isWinning) 
+    public void OnGameOver(bool isWinning, GameMode mode) 
     {
-        _gameEndPanel.ActivateEndGameUI(isWinning);
+        _gameEndPanel.ActivateEndGameUI(isWinning,mode);
+        gamePlayUI.SetActive(false);
+        waterSlider.gameObject.SetActive(false);
 
-        /*
-        if (_gameEndUI != null) 
+        if (mode == GameMode.StoryMode) 
         {
-            _gameEndUI.SetActive(true);
+            _progressionSlider.value = (ScoreManager.Scores[GameManager.Instance.CurrentStage] / GameManager.Instance.Phase4Score);
         }
-
-        if (isWinning)
+        else if (mode == GameMode.SurvivalMode)
         {
-            if (_winningUI != null) 
-            {
-                _winningUI.SetActive(true);
-            }
+            _scoreText.text = $"Score: {ScoreManager.Scores[GameManager.Instance.CurrentStage]}";
+            _highScoreText.text = $"HighScore: {ScoreManager.HighScores[GameManager.Instance.CurrentStage]}";
+            _passingScoreText.text = $"You Need To Score At Least: {GameManager.Instance.Phase4Score}";
         }
-        else
-        {
-            if (_losingUI != null) 
-            {
-                _losingUI.SetActive(true);
-            }
-        }*/
     }
 
     private void LoadMainScene()

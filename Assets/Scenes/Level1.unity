@@ -5131,6 +5131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef72068ea32b6e04789543e54834aed4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mode: 1
   _isTutorial: 0
   BigPondDrank: 0
   _currentStage: 0

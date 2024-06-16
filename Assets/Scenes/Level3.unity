@@ -1338,6 +1338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef72068ea32b6e04789543e54834aed4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mode: 1
   _isTutorial: 0
   BigPondDrank: 0
   _currentStage: 2
@@ -6461,11 +6462,11 @@ PrefabInstance:
       objectReference: {fileID: 1960235639}
     - target: {fileID: 7742323122316027353, guid: 8895ed99ec35faa40a3ea91075cad1e0, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7742323122316027353, guid: 8895ed99ec35faa40a3ea91075cad1e0, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7742323122316027353, guid: 8895ed99ec35faa40a3ea91075cad1e0, type: 3}
       propertyPath: m_LocalPosition.y

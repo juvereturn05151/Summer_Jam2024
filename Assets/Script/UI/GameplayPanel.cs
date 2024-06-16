@@ -39,7 +39,6 @@ public class GameplayPanel : MonoBehaviour
         // Call menu panel
         // Call pause game
         Debug.Log($"OnClickMenu");
-        UIManager.MenuPanel.Show();
     }
     #endregion
 }

@@ -16,7 +16,7 @@ public class BulletSpawner : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.Instance.State != GameManager.GameState.StartGame)
+        if (GameManager.Instance.State != GameState.PlayingState)
             return;
 
         // Update the fire timer
@@ -44,7 +44,5 @@ public class BulletSpawner : MonoBehaviour
 
         // Instantiate a new bullet at the fire point's position and rotation
         GameObject bullet = Instantiate(bulletPrefab, this.transform.position, this.transform.rotation);
-
-        
     }
 }

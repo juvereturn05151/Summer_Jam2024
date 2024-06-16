@@ -57,7 +57,7 @@ public class AdvancedTutorialManager : MonoBehaviour
     {
         _skipButton.onClick.AddListener(LoadGameScene);
 
-        GameManager.Instance.State = GameManager.GameState.Stop;
+        GameManager.Instance.SetGameState(GameState.Stop);
 
         if (_tutorialList != null && _tutorialList.Count > 0) 
         {
@@ -102,19 +102,18 @@ public class AdvancedTutorialManager : MonoBehaviour
 
     public void OnDialogueEnd() 
     {
-        Debug.Log("_isOperating");
         _isOperating = true;
         _backGround.SetActive(false);
         _nextButton.SetActive(false);
         _tutorialDisplayBackGround.SetActive(true);
         _advancedTutorialUIController.OnDialogueEnd(_currentTutorialIndex);
-        GameManager.Instance.State = GameManager.GameState.StartGame;
+        GameManager.Instance.SetGameState(GameState.PlayingState);
     }
 
     private void OnTutorialEnd() 
     {
         _isOperating = false;
-        GameManager.Instance.State = GameManager.GameState.Stop;
+        GameManager.Instance.SetGameState(GameState.Stop);
         _backGround.SetActive(true);
         _nextButton.SetActive(true);
         _tutorialDisplayBackGround.SetActive(false);
@@ -174,7 +173,7 @@ public class AdvancedTutorialManager : MonoBehaviour
     private void LoadGameScene() 
     {
         FadingUI.Instance.StartFadeIn();
-        FadingUI.Instance.OnStopFading.AddListener(LoadScene);
+        FadingUI.OnStopFading += LoadScene;
     }
 
     private void LoadScene()

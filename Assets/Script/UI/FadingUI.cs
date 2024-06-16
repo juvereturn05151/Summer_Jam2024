@@ -1,7 +1,17 @@
-using UnityEngine.SceneManagement;
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.Events;
+/* filename FadingUI.cs
+ * author   Tonnattan Chankasemporn
+ * email:   juvereturn@gmail.com
+ * 
+ * Brief Description: 
+ * Manages Fade Black On Loading Scene
+ * Indestrutible On Load
+ * 
+ * /*/
+
+using UnityEngine; /*MonoBehaviour*/
+using UnityEngine.SceneManagement; /*LoadScene*/
+using UnityEngine.UI; /*Image*/
+using UnityEngine.Events; /*UnityEvent*/
 
 public enum FadingPhase
 {
@@ -34,7 +44,8 @@ public class FadingUI : MonoBehaviour
     [SerializeField]
     private float fadingSpeed;
 
-    public UnityEvent OnStopFading;
+    public delegate void WhenStopFading();
+    public static event WhenStopFading OnStopFading;
 
     private bool fading;
     private FadingPhase currentFadingPhase;
@@ -54,13 +65,42 @@ public class FadingUI : MonoBehaviour
 
     private void Update()
     {
-        if (fading) 
+        HandleFading();
+    }
+
+    /*Brief:
+     * Start From White To Black
+     */
+
+    public void StartFadeIn() 
+    {
+        fadeImage.gameObject.SetActive(true);
+        fading = true;
+        currentFadingPhase = FadingPhase.FadeIn;
+        fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, 0);
+    }
+
+    /*Brief:
+     * Start From Black To White
+     */
+
+    public void StartFadeOut()
+    {
+        fadeImage.gameObject.SetActive(true);
+        fading = true;
+        currentFadingPhase = FadingPhase.FadeOut;
+        fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, 1);
+    }
+
+    private void HandleFading() 
+    {
+        if (fading)
         {
             if (currentFadingPhase == FadingPhase.FadeIn)
             {
                 fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, fadeImage.color.a + Time.deltaTime * fadingSpeed);
-                
-                if (fadeImage.color.a >= 1) 
+
+                if (fadeImage.color.a >= 1)
                 {
                     StopFading();
                 }
@@ -77,27 +117,16 @@ public class FadingUI : MonoBehaviour
         }
     }
 
-    public void StartFadeIn() 
-    {
-        fadeImage.gameObject.SetActive(true);
-        fading = true;
-        currentFadingPhase = FadingPhase.FadeIn;
-        fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, 0);
-    }
-
-    public void StartFadeOut()
-    {
-        fadeImage.gameObject.SetActive(true);
-        fading = true;
-        currentFadingPhase = FadingPhase.FadeOut;
-        fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, 1);
-    }
-
     private void StopFading() 
     {
         fading = false;
-        OnStopFading?.Invoke();
-        OnStopFading.RemoveAllListeners();
+
+        if (OnStopFading != null) 
+        {
+            OnStopFading();
+        }
+        
+        OnStopFading = null;
     }
 
     private void OnActiveSceneChanged() 

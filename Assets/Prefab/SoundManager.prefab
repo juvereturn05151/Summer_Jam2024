@@ -62,11 +62,11 @@ MonoBehaviour:
     SpatialBlend: 1
     Source: {fileID: 0}
   - Name: SFX_MonsterDead
-    clip: {fileID: 8300000, guid: 92eace025af3c7a4982d375ef8976866, type: 3}
+    clip: {fileID: 8300000, guid: 2a8516ff6666e4948b3ce0a108d2c9a7, type: 3}
     IsPlayOnAwake: 0
     IsLoop: 0
-    Vol: 0.4
-    Pitch: 1
+    Vol: 0.028
+    Pitch: 1.839
     SpatialBlend: 0.1
     Source: {fileID: 0}
   - Name: SFX_VillagerMove
@@ -118,7 +118,7 @@ MonoBehaviour:
     SpatialBlend: 1
     Source: {fileID: 0}
   - Name: SFX_EnemyHurt
-    clip: {fileID: 8300000, guid: cf7858e8c3d4b0149a8f7a5456dcf54a, type: 3}
+    clip: {fileID: 8300000, guid: 6d219d1f294da2d44b4c12db419f64ce, type: 3}
     IsPlayOnAwake: 0
     IsLoop: 0
     Vol: 0.5
@@ -150,7 +150,7 @@ MonoBehaviour:
     SpatialBlend: 1
     Source: {fileID: 0}
   - Name: BGM_Gameplay
-    clip: {fileID: 8300000, guid: 2a6abadf588a3430cbbe3431d4205e89, type: 3}
+    clip: {fileID: 8300000, guid: 3190a1fe74898fe43b8c03339cdc6f3f, type: 3}
     IsPlayOnAwake: 0
     IsLoop: 1
     Vol: 0.15

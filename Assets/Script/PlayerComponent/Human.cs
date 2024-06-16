@@ -4,7 +4,7 @@
  * 
  * Brief Description: 
  * Human is the player's main character that has Water as their energy and health
- * The reason why it is singleton because we expected to have only 1 human in the stage
+ * The reason why it is singleton because we expected to have only 1 human in the stage (I know this is not a good design)
  * /*/
 
 using System.Collections;
@@ -86,17 +86,14 @@ public class Human : MonoBehaviour, ISetPlayerManager
     private GameObject _blood;
     private PlayerManager _playerManager;
 
-    // Optional Awake method to ensure the instance is created before any other script's Start method
     private void Awake()
     {
-        // If an instance already exists and it's not this one, destroy this instance
         if (instance != null && instance != this)
         {
             Destroy(gameObject);
             return;
         }
 
-        // If this is the first instance, set it as the singleton instance
         instance = this;
 
         _animator = GetComponent<HumanAnimatorController>();
@@ -106,13 +103,14 @@ public class Human : MonoBehaviour, ISetPlayerManager
     {
         CurrentWater = startWater;
         waterFillImage = GameplayUIManager.Instance.WaterFillImage;
-        GameplayUIManager.Instance.waterSlider.maxValue = maxWater;
-        GameplayUIManager.Instance.waterSlider.value = CurrentWater;
+        GameplayUIManager.Instance.WaterSlider.maxValue = maxWater;
+        GameplayUIManager.Instance.WaterSlider.value = CurrentWater;
+        GameManager.OnGameEnd += OnGameEnd;
     }
 
     private void Update()
     {
-        if (GameManager.Instance.State != GameManager.GameState.StartGame) 
+        if (GameManager.Instance.State != GameState.PlayingState) 
         {
             return;
         }
@@ -167,7 +165,7 @@ public class Human : MonoBehaviour, ISetPlayerManager
         }
 
         CurrentWater = (CurrentWater - increaseAmount <= 0) ? 0 : CurrentWater - increaseAmount;
-        GameplayUIManager.Instance.waterSlider.value = CurrentWater;
+        GameplayUIManager.Instance.WaterSlider.value = CurrentWater;
 
         if (GameManager.Instance.IsTutorial) 
         {
@@ -176,23 +174,29 @@ public class Human : MonoBehaviour, ISetPlayerManager
 
         if (CurrentWater <= 0)
         {
-            GameplayUIManager.Instance.OnGameOver(ScoreManager.Scores[GameManager.Instance.CurrentStage] > GameManager.Instance.Phase4Score);
-
-            if (ScoreManager.Scores[GameManager.Instance.CurrentStage] > GameManager.Instance.Phase4Score)
-            {
-                GameManager.Instance.DestroyOnWinning();
-                _animator.StartWinAnimation();
-            }
-            else 
-            {
-                SoundManager.Instance.PlayOneShot(_sfx_villageDeadString);
-                _animator.StartDeadAnimation();
-                var soul = Instantiate(deadParticle, transform.position, quaternion.identity);
-                GameManager.Instance.SetGameTimeScale(0.0f);
-            }
-
-            GameManager.Instance.OnEndGame();
+            GameManager.OnGameEnd(false, GameManager.Instance.Mode);
         }
+    }
+
+    private void OnGameEnd(bool isWinning, GameMode mode) 
+    {
+        GameplayUIManager.Instance.OnGameOver(isWinning, mode);
+
+        if (isWinning)
+        {
+            OnWinning(isWinning);
+        }
+        else 
+        {
+            SoundManager.Instance.PlayOneShot(_sfx_villageDeadString);
+            _animator.StartDeadAnimation();
+            var soul = Instantiate(deadParticle, transform.position, quaternion.identity);
+        }
+    }
+
+    public void OnWinning(bool isWin) 
+    {
+        _animator.StartWinAnimation();
     }
 
     public void CallSpiritPower() 
@@ -228,7 +232,7 @@ public class Human : MonoBehaviour, ISetPlayerManager
     
     private IEnumerator LerpWater()
     {
-        GameplayUIManager.Instance.waterSlider.value = Mathf.Lerp(GameplayUIManager.Instance.waterSlider.value, CurrentWater, Time.deltaTime * _lerpSpeed);
+        GameplayUIManager.Instance.WaterSlider.value = Mathf.Lerp(GameplayUIManager.Instance.WaterSlider.value, CurrentWater, Time.deltaTime * _lerpSpeed);
         yield return null;
     }
 

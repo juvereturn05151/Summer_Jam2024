@@ -33,6 +33,6 @@ public class PrepareStateManager : MonoBehaviour
     public void After321Go() 
     {
         _go321.gameObject.SetActive(false);
-        GameManager.Instance.State = GameManager.GameState.StartGame;
+        GameManager.Instance.SetGameState(GameState.PlayingState);
     }
 }

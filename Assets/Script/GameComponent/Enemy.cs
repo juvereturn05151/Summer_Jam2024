@@ -102,7 +102,7 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        if(GameManager.Instance.State != GameManager.GameState.StartGame)
+        if(GameManager.Instance.State != GameState.PlayingState)
         {
             return;
         }

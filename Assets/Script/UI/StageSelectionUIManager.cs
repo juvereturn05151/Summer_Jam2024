@@ -11,7 +11,7 @@ public class StageSelectionUIManager : MonoBehaviour
     {
         FadingUI.Instance.StartFadeIn();
         _sceneIndex = sceneIndex;
-        FadingUI.Instance.OnStopFading.AddListener(LoadScene);
+        FadingUI.OnStopFading += LoadScene;
     }
 
     private void LoadScene()
