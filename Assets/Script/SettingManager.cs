@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 public class SettingManager : MonoBehaviour
 {
+    [SerializeField] Button openSettingButton;
+    [SerializeField] Button closeSettingButton;
+    [SerializeField] GameObject settingPanel;
+
     [Header("===== Resolution =====")]
     [SerializeField] Button nextResolutionButton;
     [SerializeField] Button previousResolutionButton;
@@ -47,6 +51,9 @@ public class SettingManager : MonoBehaviour
 
     private void Awake()
     {
+        openSettingButton.onClick.AddListener(OpenSetting);
+        closeSettingButton.onClick.AddListener(CloseSetting);
+
         nextResolutionButton.onClick.AddListener(NextResolution);
         previousResolutionButton.onClick.AddListener(PrevResolution);
 
@@ -68,6 +75,20 @@ public class SettingManager : MonoBehaviour
         SetSFXVolume();
     }
 
+    #region Open Close Setting
+
+    void OpenSetting()
+    {
+        settingPanel.SetActive(true);
+    }
+
+    void CloseSetting()
+    {
+        settingPanel.SetActive(false);
+    }
+
+    #endregion
+
     void SetupScreen()
     {
         refresRate = Screen.currentResolution.refreshRateRatio;
@@ -82,8 +103,6 @@ public class SettingManager : MonoBehaviour
     }
 
     #region Resolution
-
-
 
     void GetResolution()
     {
@@ -108,6 +127,7 @@ public class SettingManager : MonoBehaviour
         }
 
         SetResolution(curResolutionIndex);
+        SoundManager.Instance.PlayOneShot("SFX_Click");
     }
 
     void PrevResolution()
@@ -121,6 +141,7 @@ public class SettingManager : MonoBehaviour
             curResolutionIndex--;
         }
         SetResolution(curResolutionIndex);
+        SoundManager.Instance.PlayOneShot("SFX_Click");
     }
 
     void SetResolution(int index)
@@ -144,6 +165,7 @@ public class SettingManager : MonoBehaviour
     {
         isFullscreen = !isFullscreen;
         SetFullscreen();
+        SoundManager.Instance.PlayOneShot("SFX_Click");
     }
 
     void SetFullscreen()
@@ -178,6 +200,7 @@ public class SettingManager : MonoBehaviour
             curBGMStep = maxStep;
         }
         SetBGMVolume();
+        SoundManager.Instance.PlayOneShot("SFX_Click");
     }
 
     void bgmDownVolume()
@@ -188,6 +211,7 @@ public class SettingManager : MonoBehaviour
             curBGMStep = minStep;
         }
         SetBGMVolume();
+        SoundManager.Instance.PlayOneShot("SFX_Click");
     }
 
     void sfxUpVolume()
@@ -198,6 +222,7 @@ public class SettingManager : MonoBehaviour
             curSFXStep = maxStep;
         }
         SetSFXVolume();
+        SoundManager.Instance.PlayOneShot("SFX_Click");
     }
 
     void sfxDownVolume()
@@ -208,6 +233,7 @@ public class SettingManager : MonoBehaviour
             curSFXStep = minStep;
         }
         SetSFXVolume();
+        SoundManager.Instance.PlayOneShot("SFX_Click");
     }
 
     void SetBGMVolume()
