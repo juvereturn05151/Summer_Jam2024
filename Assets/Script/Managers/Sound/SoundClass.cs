@@ -7,6 +7,7 @@ public class SoundClass
 
     public string Name;
     public AudioClip clip;
+    public AudioMixerGroup mixerGroup;
     public bool IsPlayOnAwake;
     public bool IsLoop;
     [Range(0f, 1f)]

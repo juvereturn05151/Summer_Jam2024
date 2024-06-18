@@ -36,6 +36,7 @@ public class SoundManager : MonoBehaviour
             if (s.clip != null)
             {
                 s.Source = gameObject.AddComponent<AudioSource>();
+                s.Source.outputAudioMixerGroup = s.mixerGroup;
                 s.Source.clip = s.clip;
                 s.Source.volume = s.Vol;
                 s.Source.pitch = s.Pitch;
@@ -120,7 +121,7 @@ public class SoundManager : MonoBehaviour
             return;
         }
 
-        if (!s.Source.isPlaying) 
+        if (!s.Source.isPlaying)
         {
             s.Source.Play();
         }
@@ -272,7 +273,7 @@ public class SoundManager : MonoBehaviour
         StartCoroutine(DropVolume(s.Source, volume));
     }
 
-    public void InitOnGameBegin() 
+    public void InitOnGameBegin()
     {
         Stop("BGM_Title");
         Play("BGM_Gameplay");

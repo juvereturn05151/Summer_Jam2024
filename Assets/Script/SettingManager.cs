@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class SettingManager : MonoBehaviour
@@ -23,6 +24,27 @@ public class SettingManager : MonoBehaviour
 
     bool isFullscreen = true;
 
+    [Header("===== Audio Setting =====")]
+    [SerializeField] AudioMixer mixer;
+    [SerializeField] int minStep = -8;
+    [SerializeField] int maxStep = 2;
+    [SerializeField] int volumePerStep = 10;
+
+    [Header("- BGM")]
+    [SerializeField] Button bgmUpButton;
+    [SerializeField] Button bgmDownButton;
+    [SerializeField] Image bgmFill;
+
+    [Header("- SFX ")]
+    [SerializeField] Button sfxUpButton;
+    [SerializeField] Button sfxDownButton;
+    [SerializeField] Image sfxFill;
+
+
+    int curBGMStep = 0;
+    int curSFXStep = 0;
+
+
     private void Awake()
     {
         nextResolutionButton.onClick.AddListener(NextResolution);
@@ -31,11 +53,19 @@ public class SettingManager : MonoBehaviour
         nextFullscreenButton.onClick.AddListener(NextFullscreenButton);
         previousFullscreenButton.onClick.AddListener(NextFullscreenButton);
 
+        bgmUpButton.onClick.AddListener(bgmUpVolume);
+        bgmDownButton.onClick.AddListener(bgmDownVolume);
+
+        sfxUpButton.onClick.AddListener(sfxUpVolume);
+        sfxDownButton.onClick.AddListener(sfxDownVolume);
+
     }
 
     private void Start()
     {
         SetupScreen();
+        SetBGMVolume();
+        SetSFXVolume();
     }
 
     void SetupScreen()
@@ -108,7 +138,6 @@ public class SettingManager : MonoBehaviour
 
     #endregion
 
-
     #region Fullscreen
 
     void NextFullscreenButton()
@@ -138,4 +167,81 @@ public class SettingManager : MonoBehaviour
     }
 
     #endregion
+
+    #region Audio Setting
+
+    void bgmUpVolume()
+    {
+        curBGMStep++;
+        if (curBGMStep > maxStep)
+        {
+            curBGMStep = maxStep;
+        }
+        SetBGMVolume();
+    }
+
+    void bgmDownVolume()
+    {
+        curBGMStep--;
+        if (curBGMStep < minStep)
+        {
+            curBGMStep = minStep;
+        }
+        SetBGMVolume();
+    }
+
+    void sfxUpVolume()
+    {
+        curSFXStep++;
+        if (curSFXStep > maxStep)
+        {
+            curSFXStep = maxStep;
+        }
+        SetSFXVolume();
+    }
+
+    void sfxDownVolume()
+    {
+        curSFXStep--;
+        if (curSFXStep < minStep)
+        {
+            curSFXStep = minStep;
+        }
+        SetSFXVolume();
+    }
+
+    void SetBGMVolume()
+    {
+        int volume = curBGMStep * volumePerStep;
+        mixer.SetFloat("MusicVolume", volume);
+        UpdateBGMFill();
+    }
+
+    void SetSFXVolume()
+    {
+        int volume = curSFXStep * volumePerStep;
+        mixer.SetFloat("SfxVolume", volume);
+        UpdateSFXFill();
+    }
+
+    void UpdateSFXFill()
+    {
+        float volumeRange = Mathf.Abs(minStep) + Mathf.Abs(maxStep);
+        float curVolume = curSFXStep + Mathf.Abs(minStep);
+
+        float percent = curVolume / volumeRange;
+        sfxFill.fillAmount = percent;
+    }
+
+    void UpdateBGMFill()
+    {
+        float volumeRange = Mathf.Abs(minStep) + Mathf.Abs(maxStep);
+        float curVolume = curBGMStep + Mathf.Abs(minStep);
+
+        float percent = curVolume / volumeRange;
+        bgmFill.fillAmount = percent;
+    }
+
+    #endregion
+
 }
