@@ -1385,6 +1385,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3101992441465310042, guid: f22d24e58850a304db1a6ae91d4aae2e, type: 3}
   m_PrefabInstance: {fileID: 398059878}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &398793758 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7630443690712553414, guid: 5bbe5e4af3871df44a1aa2e91ec86811, type: 3}
+  m_PrefabInstance: {fileID: 1740462713}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &408287115 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3768668196835480952, guid: 8c9f3f7c71fcf6944ac8e04b87826990, type: 3}
@@ -2621,6 +2632,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 731113250}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1007223624 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8875341127238379128, guid: 5bbe5e4af3871df44a1aa2e91ec86811, type: 3}
+  m_PrefabInstance: {fileID: 1740462713}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1298985205
 GameObject:
   m_ObjectHideFlags: 0
@@ -2681,6 +2703,9 @@ MonoBehaviour:
   nextResolutionButton: {fileID: 1372198240}
   previousResolutionButton: {fileID: 464903158}
   curResolutionText: {fileID: 1473905121}
+  nextFullscreenButton: {fileID: 398793758}
+  previousFullscreenButton: {fileID: 1007223624}
+  curFullscreenText: {fileID: 1830032860}
 --- !u!114 &1372198240 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7630443690712553414, guid: 5bbe5e4af3871df44a1aa2e91ec86811, type: 3}
@@ -3682,6 +3707,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 70156465060296962, guid: 5bbe5e4af3871df44a1aa2e91ec86811, type: 3}
   m_PrefabInstance: {fileID: 1740462713}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1830032860 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1136117639195520708, guid: 5bbe5e4af3871df44a1aa2e91ec86811, type: 3}
+  m_PrefabInstance: {fileID: 1740462713}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1913675070
 GameObject:
   m_ObjectHideFlags: 0

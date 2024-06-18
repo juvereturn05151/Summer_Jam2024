@@ -16,20 +16,29 @@ public class SettingManager : MonoBehaviour
     RefreshRate refresRate;
     int curResolutionIndex = 0;
 
+    [Header("===== Fullscreen =====")]
+    [SerializeField] Button nextFullscreenButton;
+    [SerializeField] Button previousFullscreenButton;
+    [SerializeField] TextMeshProUGUI curFullscreenText;
+
+    bool isFullscreen = true;
+
     private void Awake()
     {
         nextResolutionButton.onClick.AddListener(NextResolution);
         previousResolutionButton.onClick.AddListener(PrevResolution);
+
+        nextFullscreenButton.onClick.AddListener(NextFullscreenButton);
+        previousFullscreenButton.onClick.AddListener(NextFullscreenButton);
+
     }
 
     private void Start()
     {
-        SetupResolution();
+        SetupScreen();
     }
 
-    #region Resolution
-
-    void SetupResolution()
+    void SetupScreen()
     {
         refresRate = Screen.currentResolution.refreshRateRatio;
         resolutions = Screen.resolutions;
@@ -41,6 +50,10 @@ public class SettingManager : MonoBehaviour
         SetResolution(curResolutionIndex);
 
     }
+
+    #region Resolution
+
+
 
     void GetResolution()
     {
@@ -83,7 +96,7 @@ public class SettingManager : MonoBehaviour
     void SetResolution(int index)
     {
         Resolution resolution = filterResolution[index];
-        Screen.SetResolution(resolution.width, resolution.height, true);
+        Screen.SetResolution(resolution.width, resolution.height, isFullscreen);
         UpdateResolutionText();
     }
 
@@ -95,4 +108,34 @@ public class SettingManager : MonoBehaviour
 
     #endregion
 
+
+    #region Fullscreen
+
+    void NextFullscreenButton()
+    {
+        isFullscreen = !isFullscreen;
+        SetFullscreen();
+    }
+
+    void SetFullscreen()
+    {
+        SetResolution(curResolutionIndex);
+        UpdateFullscreenText();
+    }
+
+    void UpdateFullscreenText()
+    {
+        string text = string.Empty;
+        if (isFullscreen)
+        {
+            text = $"Fullscreen";
+        }
+        else
+        {
+            text = $"Window";
+        }
+        curFullscreenText.text = text;
+    }
+
+    #endregion
 }
