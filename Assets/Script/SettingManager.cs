@@ -305,6 +305,8 @@ public class SettingManager : MonoBehaviour
         }
 
         UpdateVsyncText();
+        SoundManager.Instance.PlayOneShot("SFX_Click");
+
     }
 
     void UpdateVsyncText()
@@ -320,4 +322,5 @@ public class SettingManager : MonoBehaviour
     }
 
     #endregion
+
 }
