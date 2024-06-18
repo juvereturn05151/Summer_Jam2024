@@ -48,6 +48,17 @@ public class SettingManager : MonoBehaviour
     int curBGMStep = 0;
     int curSFXStep = 0;
 
+    [Header("===== Language =====")]
+    [SerializeField] Button nextLanguageButton;
+    [SerializeField] Button previousLanguageButton;
+    [SerializeField] TextMeshProUGUI curLanguageText;
+
+    [Header("===== Vsync =====")]
+    [SerializeField] Button nextVsyncButton;
+    [SerializeField] Button previousVsyncButton;
+    [SerializeField] TextMeshProUGUI curVsyncText;
+
+    bool isOpenVsync;
 
     private void Awake()
     {
@@ -66,6 +77,9 @@ public class SettingManager : MonoBehaviour
         sfxUpButton.onClick.AddListener(sfxUpVolume);
         sfxDownButton.onClick.AddListener(sfxDownVolume);
 
+        nextVsyncButton.onClick.AddListener(nextVsync);
+        previousVsyncButton.onClick.AddListener(nextVsync);
+
     }
 
     private void Start()
@@ -73,6 +87,7 @@ public class SettingManager : MonoBehaviour
         SetupScreen();
         SetBGMVolume();
         SetSFXVolume();
+        UpdateVsyncText();
     }
 
     #region Open Close Setting
@@ -95,9 +110,7 @@ public class SettingManager : MonoBehaviour
         resolutions = Screen.resolutions;
 
         GetResolution();
-
         curResolutionIndex = filterResolution.Count - 1;
-
         SetResolution(curResolutionIndex);
 
     }
@@ -149,6 +162,7 @@ public class SettingManager : MonoBehaviour
         Resolution resolution = filterResolution[index];
         Screen.SetResolution(resolution.width, resolution.height, isFullscreen);
         UpdateResolutionText();
+        UpdateFullscreenText();
     }
 
     void UpdateResolutionText()
@@ -166,11 +180,12 @@ public class SettingManager : MonoBehaviour
         isFullscreen = !isFullscreen;
         SetFullscreen();
         SoundManager.Instance.PlayOneShot("SFX_Click");
+        UpdateResolutionText();
     }
 
     void SetFullscreen()
     {
-        SetResolution(curResolutionIndex);
+        Screen.fullScreen = !isFullscreen;
         UpdateFullscreenText();
     }
 
@@ -270,4 +285,39 @@ public class SettingManager : MonoBehaviour
 
     #endregion
 
+    #region Language
+
+    #endregion
+
+    #region Vsync
+
+    void nextVsync()
+    {
+        isOpenVsync = !isOpenVsync;
+
+        if (isOpenVsync)
+        {
+            QualitySettings.vSyncCount = 1;
+        }
+        else
+        {
+            QualitySettings.vSyncCount = 0;
+        }
+
+        UpdateVsyncText();
+    }
+
+    void UpdateVsyncText()
+    {
+        if (isOpenVsync)
+        {
+            curVsyncText.text = "On";
+        }
+        else
+        {
+            curVsyncText.text = "Off";
+        }
+    }
+
+    #endregion
 }
