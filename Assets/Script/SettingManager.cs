@@ -185,7 +185,7 @@ public class SettingManager : MonoBehaviour
 
     void SetFullscreen()
     {
-        Screen.fullScreen = !isFullscreen;
+        SetResolution(curResolutionIndex);
         UpdateFullscreenText();
     }
 
