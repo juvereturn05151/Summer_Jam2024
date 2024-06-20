@@ -102,11 +102,15 @@ public class SettingManager : MonoBehaviour
     void OpenSetting()
     {
         settingPanel.SetActive(true);
+        SoundManager.Instance.PlayOneShot("SFX_Click");
+
     }
 
     void CloseSetting()
     {
         settingPanel.SetActive(false);
+        SoundManager.Instance.PlayOneShot("SFX_Click");
+
     }
 
     #endregion
@@ -301,11 +305,15 @@ public class SettingManager : MonoBehaviour
     void OpenCredit()
     {
         creditPage.SetActive(true);
+        SoundManager.Instance.PlayOneShot("SFX_Click");
+
     }
 
     void CloseCredit()
     {
         creditPage?.SetActive(false);
+        SoundManager.Instance.PlayOneShot("SFX_Click");
+
     }
 
     #endregion
