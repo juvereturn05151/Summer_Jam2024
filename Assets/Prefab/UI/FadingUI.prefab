@@ -191,7 +191,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeImage: {fileID: 2586755054157994241}
-  OnStopFading:
-    m_PersistentCalls:
-      m_Calls: []
   fadingSpeed: 1.5

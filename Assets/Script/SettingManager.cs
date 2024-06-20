@@ -47,6 +47,10 @@ public class SettingManager : MonoBehaviour
 
     int curBGMStep = 0;
     int curSFXStep = 0;
+    [Header("===== Credit =====")]
+    [SerializeField] GameObject creditPage;
+    [SerializeField] Button openCreditPage;
+    [SerializeField] Button closeCreditPage;
 
     [Header("===== Language =====")]
     [SerializeField] Button nextLanguageButton;
@@ -79,6 +83,9 @@ public class SettingManager : MonoBehaviour
 
         nextVsyncButton.onClick.AddListener(nextVsync);
         previousVsyncButton.onClick.AddListener(nextVsync);
+
+        openCreditPage.onClick.AddListener(OpenCredit);
+        closeCreditPage.onClick.AddListener(CloseCredit);
 
     }
 
@@ -286,6 +293,20 @@ public class SettingManager : MonoBehaviour
     #endregion
 
     #region Language
+
+    #endregion
+
+    #region Credit
+
+    void OpenCredit()
+    {
+        creditPage.SetActive(true);
+    }
+
+    void CloseCredit()
+    {
+        creditPage?.SetActive(false);
+    }
 
     #endregion
 
