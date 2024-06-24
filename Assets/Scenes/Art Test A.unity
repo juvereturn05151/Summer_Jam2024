@@ -21827,6 +21827,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visual: {fileID: 43050282}
+  moveSpeed: 0.5
   moveInput: {x: 0, y: 0}
 --- !u!54 &484451790
 Rigidbody:
@@ -21852,9 +21853,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_Constraints: 116
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!136 &484451791
 CapsuleCollider:
   m_ObjectHideFlags: 0
