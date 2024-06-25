@@ -71,7 +71,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _ColorMask: 15
-    - _DissolveAmount: 1.40682355e-14
+    - _DissolveAmount: 0.40898532
     - _EnableExternalAlpha: 0
     - _Stencil: 0
     - _StencilComp: 8

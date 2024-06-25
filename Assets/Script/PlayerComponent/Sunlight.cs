@@ -3,7 +3,7 @@ using UnityEngine.Rendering.Universal;
 using System.Collections.Generic;
 using Unity.Mathematics;
 
-public class Sunlight : MonoBehaviour, ISetPlayerManager
+public class Sunlight : AttackBase, ISetPlayerManager
 {
     [SerializeField]
     private float _waterDecreaseSpeed = 1.5f;
@@ -17,7 +17,7 @@ public class Sunlight : MonoBehaviour, ISetPlayerManager
 
     [Header("Sunlight (Light)")]
     [SerializeField] 
-    private Light2D light;
+    private Light2D _light;
 
     [SerializeField] 
     private float sunlightRadius = 0.5f;
@@ -53,8 +53,7 @@ public class Sunlight : MonoBehaviour, ISetPlayerManager
     [SerializeField] 
     private GameObject fireMeltFX;
 
-    [Space]
-    public bool ActivateSunlight;
+    protected override bool IsHolding { get; set; }
 
     private const float _alphaIncreaseSpeed = 2.0f;
     private const float _pointLightIncrementRadiusJitter = 0.75f;
@@ -68,6 +67,7 @@ public class Sunlight : MonoBehaviour, ISetPlayerManager
     private const string _sfx_expand = "SFX_Expand";
     private readonly Color _normal_color = new Color(1.0f, 0.64f, 0.0f, 1);
     private readonly Color _attacking_color = new Color(1.0f, 0.20f, 0.0f, 1);
+    private bool _activateSunlightAttack;
     private float _maximumAlpha = 1.0f;
     private float _currentAlpha;
     private float _timer;
@@ -77,83 +77,38 @@ public class Sunlight : MonoBehaviour, ISetPlayerManager
     private float _currentCreatePondTime;
     private GameObject _lightFX_Temp;
     private bool _isLighting;
-    private PlayerManager _playerManager;
+    private Human _human;
+
 
     private void Start()
     {
         SetAlpha(_startingAlpha);
 
-        light = GetComponentInChildren<Light2D>();
-        light.intensity = normalSunlightIntensity;
+        if (_light == null) 
+        {
+            _light = GetComponentInChildren<Light2D>();
+        }
 
-        _col = GetComponent<CircleCollider2D>();
-        _col.radius = sunlightRadius;
+        if (_light != null)
+        {
+            _light.intensity = normalSunlightIntensity;
+        }
+
+        if (_col == null)
+        {
+            _col = GetComponent<CircleCollider2D>();
+        }
+
+        if (_col != null)
+        {
+            _col.radius = sunlightRadius;
+        }
+
     }
 
     private void Update()
     {
-        if (GameManager.Instance.State == GameState.PlayingState || GameManager.Instance.State == GameState.PreparingState) 
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                HandleHitEnemyOnce();
-            }
-
-            if (Input.GetMouseButtonUp(0))
-            {
-                SoundManager.Instance.Stop(_sfx_burn);
-            }
-
-            if (Input.GetMouseButton(0))
-            {
-                HandlePreparingSunlighting();
-
-                if (IsReadyToSunlighting())
-                {
-                    StartSunlight();
-                }
-            }
-            else
-            {
-                StopSunlight();
-            }
-
-            if (GameManager.Instance.State == GameState.PreparingState) 
-            {
-                if (ActivateSunlight)
-                {
-                    HandleSunlightOnPreparePhase();
-                    GameplayUIManager.Instance.PrepareStateManager.OnPlayerSpawn();
-                }
-            }
-
-            if (GameManager.Instance.State == GameState.PlayingState) 
-            {
-                if (Input.GetMouseButton(0))
-                {
-                    if (IsReadyToSunlighting())
-                    {
-                        if (Human.Instance.CurrentWater > 0)
-                        {
-                            StartSunlightingAttack();
-                        }
-                    }
-                }
-                else
-                {
-                    StopSunlightAttack();
-                }
-
-                if (ActivateSunlight)
-                {
-                    HandleOnSunlighting();
-                }
-            }
-
-            HandleSunlightColor();
-        }
-
-
+        UpdateAttack(GameManager.Instance.State);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -164,7 +119,7 @@ public class Sunlight : MonoBehaviour, ISetPlayerManager
             {
                 _sightedEnemies.Add(enemy);
 
-                if (ActivateSunlight && _sightedEnemies.Count > 1)
+                if (_activateSunlightAttack && _sightedEnemies.Count > 1)
                 {
                     SoundManager.Instance.PlayOneShot(_sfx_expand);
                 }
@@ -199,12 +154,84 @@ public class Sunlight : MonoBehaviour, ISetPlayerManager
         }
     }
 
-    public void SetPlayerManager(PlayerManager playerManager) 
+    protected override void UpdateAttack(GameState gameState) 
     {
-        _playerManager = playerManager;
+        if (gameState == GameState.PlayingState || gameState == GameState.PreparingState)
+        {
+            if (IsHolding)
+            {
+                HandleChargingSunlightAttack();
+
+                if (IsChargeSunlightEnough())
+                {
+                    StartSunlightAttack();
+                }
+
+                if (gameState == GameState.PreparingState)
+                {
+                    if (_activateSunlightAttack)
+                    {
+                        SpawnHuman();
+                        GameplayUIManager.Instance.PrepareStateManager.OnPlayerSpawn();
+                    }
+                }
+                else if (gameState == GameState.PlayingState)
+                {
+                    if (IsChargeSunlightEnough())
+                    {
+                        if (_human.CurrentWater > 0)
+                        {
+                            DecreaseWater();
+                        }
+                    }
+
+                    if (_activateSunlightAttack)
+                    {
+                        HandleOnSunlightAttacking();
+                    }
+                }
+            }
+
+            HandleSunlightColor();
+        }
     }
 
-    private void HandleHitEnemyOnce() 
+    public override void OnTapAttack(GameState gameState) 
+    {
+        if (gameState == GameState.PlayingState || gameState == GameState.PreparingState) 
+        {
+            StunEnemies();
+        }
+    }
+
+    public override void OnReleaseAttack(GameState gameState)
+    {
+        if (gameState == GameState.PlayingState || gameState == GameState.PreparingState)
+        {
+            IsHolding = false;
+            SoundManager.Instance.Stop(_sfx_burn);
+
+            if (gameState == GameState.PlayingState)
+            {
+                StopSunlight();
+            }
+        }
+    }
+
+    public override void OnHoldAttack(GameState gameState)
+    {
+        if (gameState == GameState.PlayingState || gameState == GameState.PreparingState)
+        {
+            IsHolding = true;
+        }
+    }
+
+    public override void SetPlayerManager(PlayerController playerManager) 
+    {
+        _human = playerManager.Human;
+    }
+
+    private void StunEnemies() 
     {
         SoundManager.Instance.Play(_sfx_burn);
 
@@ -219,7 +246,7 @@ public class Sunlight : MonoBehaviour, ISetPlayerManager
         }
     }
 
-    private void HandlePreparingSunlighting() 
+    private void HandleChargingSunlightAttack() 
     {
         IncreasingAlpha();
         IncreasingLightIntensity();
@@ -234,9 +261,9 @@ public class Sunlight : MonoBehaviour, ISetPlayerManager
 
     private void IncreasingLightIntensity() 
     {
-        if (light.intensity < sunlightFlashIntensity)
+        if (_light.intensity < sunlightFlashIntensity)
         {
-            light.intensity += Time.deltaTime;
+            _light.intensity += Time.deltaTime;
         }
     }
 
@@ -254,35 +281,37 @@ public class Sunlight : MonoBehaviour, ISetPlayerManager
 
     private void ExpandRadiusWithEnemyCount() 
     {
-        light.pointLightOuterRadius = _sightedEnemies.Count;
-        light.pointLightInnerRadius = _sightedEnemies.Count * _pointLightIncrementRadiusJitter;
+        _light.pointLightOuterRadius = _sightedEnemies.Count;
+        _light.pointLightInnerRadius = _sightedEnemies.Count * _pointLightIncrementRadiusJitter;
         circleCollider2D.radius = _sightedEnemies.Count;
     }
 
     private void ResetSunlightRadius() 
     {
-        light.pointLightOuterRadius = _originalPointOuterRadiusSize;
-        light.pointLightInnerRadius = _originalPointInnerRadiusSize;
+        _light.pointLightOuterRadius = _originalPointOuterRadiusSize;
+        _light.pointLightInnerRadius = _originalPointInnerRadiusSize;
         circleCollider2D.radius = _originalCircleColliderSize;
     }
 
-    private bool IsReadyToSunlighting() 
+    private bool IsChargeSunlightEnough() 
     {
-        return _currentAlpha >= _maximumAlpha || light.intensity >= sunlightFlashIntensity;
+        return _currentAlpha >= _maximumAlpha || _light.intensity >= sunlightFlashIntensity;
     }
 
-    private void StartSunlight()
+    private void StartSunlightAttack()
     {
-        ActivateSunlight = true;
+        _activateSunlightAttack = true;
     }
 
-    private void StartSunlightingAttack() 
+    private void DecreaseWater() 
     {
-        Human.Instance.CallSpiritPower();
-        Human.Instance.DecreaseWaterAmount(Time.deltaTime * _waterDecreaseSpeed);
+        if (_human != null) 
+        {
+            _human.DecreaseWaterAmount(Time.deltaTime * _waterDecreaseSpeed);
+        }
     }
 
-    private void HandleOnSunlighting() 
+    private void HandleOnSunlightAttacking() 
     {
         HandleVfxOnSunlighting();
         HandleSightedEnemies();
@@ -290,7 +319,7 @@ public class Sunlight : MonoBehaviour, ISetPlayerManager
         HandleCreatingBigPond();
     }
 
-    private void HandleSunlightOnPreparePhase() 
+    private void SpawnHuman() 
     {
         if (GameManager.Instance.State == GameState.PreparingState) 
         {
@@ -300,13 +329,17 @@ public class Sunlight : MonoBehaviour, ISetPlayerManager
             {
                 _timer = 0;
                 //Spawn Player Here
-                if (_playerManager.Human.gameObject.activeInHierarchy) 
-                {
-                    return;
-                }
 
-                _playerManager.Human.gameObject.SetActive(true);
-                _playerManager.Human.transform.position = transform.position;
+                if (_human != null) 
+                {
+                    if (_human.gameObject.activeInHierarchy)
+                    {
+                        return;
+                    }
+
+                    _human.gameObject.SetActive(true);
+                    _human.transform.position = transform.position;
+                }
             }
         }
     }
@@ -387,30 +420,24 @@ public class Sunlight : MonoBehaviour, ISetPlayerManager
     {
         _currentAlpha = _startingAlpha;
         SetAlpha(_startingAlpha);
-
-        light.intensity = normalSunlightIntensity;
+        _light.intensity = normalSunlightIntensity;
         ResetSunlightRadius();
     }
 
     private void StopSunlightAttack() 
     {
-        ActivateSunlight = false;
-
-        if (GameManager.Instance.State == GameState.PlayingState) 
-        {
-            Human.Instance.UnCallSpiritPower();
-        }
+        _activateSunlightAttack = false;
     }
 
     private void HandleSunlightColor() 
     {
         if (_sightedEnemies.Count == 0)
         {
-            light.color = _normal_color;
+            _light.color = _normal_color;
         }
         else
         {
-            light.color = _attacking_color;
+            _light.color = _attacking_color;
         }
     }
 

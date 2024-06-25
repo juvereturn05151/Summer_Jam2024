@@ -63,11 +63,12 @@ public class Human : MonoBehaviour, ISetPlayerManager
     private GameObject deadParticle;
 
     [SerializeField]
-    private ChangeFillImage waterFillImage;
-    public ChangeFillImage WaterFillImage => waterFillImage;
+    private HumanAnimatorController _spiritCharacter;
 
     [SerializeField]
-    private HumanAnimatorController _spiritCharacter;
+    private Rigidbody2D _rigidbody2D;
+
+    public ChangeFillImage WaterFillImage { get; private set; }
 
     public bool IsHurt { get; private set;}
     public float CurrentWater { get; private set; }
@@ -82,9 +83,10 @@ public class Human : MonoBehaviour, ISetPlayerManager
     private const string _sfx_villageDeadString = "SFX_VillagerDead";
     private const string _sfx_villageHurtString = "SFX_VillagerHurt";
     private const string _sfx_villageHitString = "SFX_VillagerHit";
+    private Vector3 _moveDirection;
     private HumanAnimatorController _animator;
     private GameObject _blood;
-    private PlayerManager _playerManager;
+    private PlayerController _playerManager;
 
     private void Awake()
     {
@@ -102,7 +104,7 @@ public class Human : MonoBehaviour, ISetPlayerManager
     private void Start()
     {
         CurrentWater = startWater;
-        waterFillImage = GameplayUIManager.Instance.WaterFillImage;
+        WaterFillImage = GameplayUIManager.Instance.WaterFillImage;
         GameplayUIManager.Instance.WaterSlider.maxValue = maxWater;
         GameplayUIManager.Instance.WaterSlider.value = CurrentWater;
         GameManager.OnGameEnd += OnGameEnd;
@@ -115,13 +117,42 @@ public class Human : MonoBehaviour, ISetPlayerManager
             return;
         }
 
-        HandleMove();
         StartCoroutine(LerpWater());
         CheckPlayerHurtAnim();
-        DecreaseWaterAmount(Time.deltaTime);
+        DecreaseWaterAmount(Time.deltaTime * GameManager.Instance.GameTimeScale);
     }
 
-    public void SetPlayerManager(PlayerManager playerManager) 
+    private void FixedUpdate()
+    {
+        if (GameManager.Instance.State != GameState.PlayingState)
+        {
+            return;
+        }
+
+        HandleMove();
+    }
+
+    /*Breif:
+     * Receive Value From PlayerController
+     */
+    public void ReceiveMoveValue(Vector2 movement)
+    {
+        bool _isWalking = movement.magnitude != 0f;
+        _moveDirection = new Vector3(movement.x, movement.y, 0f).normalized;
+
+        if (_isWalking)
+        {
+            SoundManager.Instance.PlayWhileOtherSoundIsNotPlaying(_sfx_villageMoveString);
+            _animator.StartWalkingAnimation();
+        }
+        else
+        {
+            SoundManager.Instance.Stop(_sfx_villageMoveString);
+            _animator.StopWalkingAnimation();
+        }
+    }
+
+    public void SetPlayerManager(PlayerController playerManager) 
     {
         _playerManager = playerManager;
     }
@@ -151,9 +182,11 @@ public class Human : MonoBehaviour, ISetPlayerManager
 
     public void DecreaseWaterAmount(float increaseAmount)
     {
-        if (GameManager.Instance.Mode == GameMode.TutorialMode && !AdvancedTutorialManager.Instance.CurrentTutorial.IsWaterDecreasable())
+        if (GameManager.Instance.Mode == GameMode.TutorialMode && !AdvancedTutorialManager.Instance.CurrentTutorial.IsWaterDecreasable()) 
+        {
             return;
-
+        }
+            
         CurrentWater -= increaseAmount;
 
         if (IsHurt)
@@ -199,37 +232,13 @@ public class Human : MonoBehaviour, ISetPlayerManager
         _animator.StartWinAnimation();
     }
 
-    public void CallSpiritPower() 
-    {
-        _spiritCharacter.gameObject.SetActive(true);
-        _spiritCharacter.StartWinAnimation();
-    }
-
-    public void UnCallSpiritPower()
-    {
-        _spiritCharacter.gameObject.SetActive(false);
-    }
-
     private void HandleMove() 
     {
-        float horizontalInput = Input.GetAxis(_horizontalInputString);
-        float verticalInput = Input.GetAxis(_verticalInputString);
-        Vector3 moveDirection = new Vector3(horizontalInput, verticalInput, 0f).normalized;
-
-        if (horizontalInput != 0f || verticalInput != 0f)
-        {
-            SoundManager.Instance.PlayWhileOtherSoundIsNotPlaying(_sfx_villageMoveString);
-            _animator.StartWalkingAnimation();
-        }
-        else
-        {
-            SoundManager.Instance.Stop(_sfx_villageMoveString);
-            _animator.StopWalkingAnimation();
-        }
-
-        transform.position += moveDirection * _moveSpeed * Time.deltaTime;
+        transform.position += _moveDirection * _moveSpeed * GameManager.Instance.GameTimeScale * Time.deltaTime;
     }
-    
+
+
+
     private IEnumerator LerpWater()
     {
         GameplayUIManager.Instance.WaterSlider.value = Mathf.Lerp(GameplayUIManager.Instance.WaterSlider.value, CurrentWater, Time.deltaTime * _lerpSpeed);

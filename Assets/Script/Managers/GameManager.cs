@@ -7,6 +7,7 @@
  * /*/
 
 using UnityEngine; /*Monobehaviour*/
+using AYellowpaper.SerializedCollections;
 
 public enum GameState
 {
@@ -37,6 +38,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private int _currentStage;
     public int CurrentStage => _currentStage;
+
+    [SerializeField]
+    private SerializedDictionary<Spawner, float> _spawnerAndScore; 
 
     [SerializeField]
     private GameObject spawner2;
@@ -88,31 +92,9 @@ public class GameManager : MonoBehaviour
         InitOnStart();
     }
 
-    // Update is called once per frame
     private void Update()
     {
-        if (ScoreManager.Scores[CurrentStage] >= _phase4Score)
-        {
-            if (spawner5)
-                spawner5.gameObject.SetActive(true);
-        }
-        else
-        if(ScoreManager.Scores[CurrentStage] >= _phase3Score)
-        {
-            if (spawner4)
-                spawner4.gameObject.SetActive(true);
-        }
-        else if (ScoreManager.Scores[CurrentStage] >= _phase2Score)
-        {
-            if (spawner3)
-                spawner3.gameObject.SetActive(true);
-        }
-        else if(ScoreManager.Scores[CurrentStage] >= _phase1Score)
-        {
-            if (spawner2)
-                spawner2.gameObject.SetActive(true);
-        }
-
+        UpdateSpawners();
         _gameplayUIManager.UpdateUI(_mode);
     }
 
@@ -130,7 +112,7 @@ public class GameManager : MonoBehaviour
     {
         if (_mode == GameMode.StoryMode) 
         {
-            if (ScoreManager.Scores[CurrentStage] > Phase4Score) 
+            if (ScoreManager.Scores[CurrentStage] >= Phase4Score) 
             {
                 OnGameEnd(true, _mode);
             }
@@ -142,10 +124,25 @@ public class GameManager : MonoBehaviour
         State = newState;
     }
 
+    private void UpdateSpawners() 
+    {
+        foreach (Spawner spawner in _spawnerAndScore.Keys) 
+        {
+            if (spawner.gameObject.activeSelf) 
+            {
+                continue;
+            }
+
+            if (ScoreManager.Scores[CurrentStage] >= _spawnerAndScore[spawner]) 
+            {
+                spawner.gameObject.SetActive(true);
+            }
+        }
+    }
+
     /* Brief
     If it's not the tutorial mode, we always start from the preparing state
     */
-
     private void InitOnStart() 
     {
         OnGameEnd += OnGameOver;

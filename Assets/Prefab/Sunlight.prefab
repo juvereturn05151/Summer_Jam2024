@@ -151,7 +151,7 @@ MonoBehaviour:
   _waterDecreaseSpeed: 1
   _sunlightImage: {fileID: 247771272198421685}
   _startingAlpha: 0.25
-  light: {fileID: 2940887928499749680}
+  _light: {fileID: 2940887928499749680}
   sunlightRadius: 0.5
   normalSunlightIntensity: 0.5
   sunlightFlashIntensity: 1

@@ -2090,7 +2090,6 @@ GameObject:
   - component: {fileID: 242156887299036844}
   - component: {fileID: 7713227816175463476}
   - component: {fileID: 7044077412557546384}
-  - component: {fileID: 6140603534495596400}
   - component: {fileID: 5489588960916444530}
   - component: {fileID: 4787006980189151522}
   m_Layer: 0
@@ -2269,21 +2268,8 @@ MonoBehaviour:
   - {fileID: 3960749430749291628, guid: b414b98dd89017d4790fa6215d4dd176, type: 3}
   - {fileID: 4257772204703358925, guid: bc6d4972da638b24087a2cdb9a77b844, type: 3}
   deadParticle: {fileID: 3386794119381278758, guid: ab580194dd71a5541bd0342271fd1aeb, type: 3}
-  waterFillImage: {fileID: 0}
   _spiritCharacter: {fileID: 7812752316059286616}
---- !u!114 &6140603534495596400
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6975150998743173204}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bd5b00f3fc67874aa3e58b45983afd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _moveSpeed: 4
+  _rigidbody2D: {fileID: 7713227816175463476}
 --- !u!114 &5489588960916444530
 MonoBehaviour:
   m_ObjectHideFlags: 0

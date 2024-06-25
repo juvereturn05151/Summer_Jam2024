@@ -167,7 +167,6 @@ public class GameplayUIManager : MonoBehaviour
         {
             _scoreText.text = $"Score: {ScoreManager.Scores[GameManager.Instance.CurrentStage]}";
             _highScoreText.text = $"HighScore: {ScoreManager.HighScores[GameManager.Instance.CurrentStage]}";
-            _passingScoreText.text = $"You Need To Score At Least: {GameManager.Instance.Phase4Score}";
         }
     }
 

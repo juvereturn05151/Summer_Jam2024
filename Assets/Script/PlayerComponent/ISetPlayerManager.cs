@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface ISetPlayerManager
 {
-    void SetPlayerManager(PlayerManager playerManager);
+    void SetPlayerManager(PlayerController playerManager);
 }
