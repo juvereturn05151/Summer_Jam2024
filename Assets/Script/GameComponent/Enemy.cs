@@ -24,20 +24,11 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private bool _unstunnable;
 
-    [SerializeField] 
-    private bool isStunning;
-    public bool IsStunning => isStunning;
-
     [SerializeField]
     private float raycastDistance = 1f;
 
-    [Space]
     [SerializeField]
     private GameObject dropItemPrefab;
-
-    [Space]
-    [SerializeField]
-    private bool isFreeze;
 
     [SerializeField] 
     private int scorePoint;
@@ -72,6 +63,8 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float _barrierTimer;
 
+    public bool IsStunning { get; private set; }
+
     private const float _meltDestroyTime = 0.5f;
     private const float _damageFxDestroyTime = 1f;
     private const float _damageFxTimer = 0.25f;
@@ -87,7 +80,6 @@ public class Enemy : MonoBehaviour
     private bool _isDissolving = false;
     private float _dissolveAmount;
     private float _dissolveSpeed = 2.0f;
-
     private Animator _animator;
     private SpriteRenderer _sprite;
 
@@ -165,11 +157,11 @@ public class Enemy : MonoBehaviour
     {
         if (_unstunnable) 
         {
-            isStunning = false;
+            IsStunning = false;
             return;
         }
 
-        isStunning = stunning;
+        IsStunning = stunning;
     }
 
     public void DecreaseHealth(float damage)
@@ -219,7 +211,7 @@ public class Enemy : MonoBehaviour
 
     private void Seek() 
     {
-        if (!isStunning)
+        if (!IsStunning)
         {
             _aiAgent.ChangeState(new StateSeek(_aiAgent, Human.Instance.gameObject));
         }
@@ -231,7 +223,7 @@ public class Enemy : MonoBehaviour
         {
             float healthPercentage = _health / _maxHealth;
             _healthUI.transform.localScale = new Vector3(healthPercentage, 0.5f, _healthUI.transform.localScale.z);
-            _healthUI.transform.localPosition = new Vector3((_currentHealthHorizontalScale * (1 - healthPercentage)) / 2, innerHealthUI.transform.localPosition.y, _healthUI.transform.localPosition.z);
+            _healthUI.transform.localPosition = new Vector3((-_currentHealthHorizontalScale * (1 - healthPercentage)) / 2, innerHealthUI.transform.localPosition.y, _healthUI.transform.localPosition.z);
         }
     }
 

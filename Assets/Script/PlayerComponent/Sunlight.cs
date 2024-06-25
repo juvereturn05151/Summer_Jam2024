@@ -73,7 +73,7 @@ public class Sunlight : AttackBase, ISetPlayerManager
     private float _timer;
     private CircleCollider2D _col;
     private List<Enemy> _sightedEnemies = new List<Enemy>();
-    private List<Pond> _sightedPonds = new List<Pond>();
+    private List<Oasis> _sightedPonds = new List<Oasis>();
     private float _currentCreatePondTime;
     private GameObject _lightFX_Temp;
     private bool _isLighting;
@@ -126,7 +126,7 @@ public class Sunlight : AttackBase, ISetPlayerManager
             }
         }
 
-        if (collision.gameObject.GetComponent<Pond>() is Pond pond)
+        if (collision.gameObject.GetComponent<Oasis>() is Oasis pond)
         {
             if (!_sightedPonds.Contains(pond))
             {
@@ -145,7 +145,7 @@ public class Sunlight : AttackBase, ISetPlayerManager
             }
         }
 
-        if (collision.gameObject.GetComponent<Pond>() is Pond pond)
+        if (collision.gameObject.GetComponent<Oasis>() is Oasis pond)
         {
             if (_sightedPonds.Contains(pond))
             {
@@ -214,6 +214,7 @@ public class Sunlight : AttackBase, ISetPlayerManager
             if (gameState == GameState.PlayingState)
             {
                 StopSunlight();
+                StopSunlightAttack();
             }
         }
     }
@@ -402,7 +403,7 @@ public class Sunlight : AttackBase, ISetPlayerManager
             Destroy(fireFX, _fireFxDestroyTime);
 
             var holeClone = Instantiate(hole, transform.position, transform.rotation);
-            Pond pond = holeClone.GetComponent<Pond>();
+            Oasis pond = holeClone.GetComponent<Oasis>();
 
             if (!_sightedPonds.Contains(pond))
             {

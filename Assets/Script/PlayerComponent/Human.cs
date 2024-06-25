@@ -68,6 +68,9 @@ public class Human : MonoBehaviour, ISetPlayerManager
     [SerializeField]
     private Rigidbody2D _rigidbody2D;
 
+    [SerializeField]
+    private PlayerWater _playerWater;
+
     public ChangeFillImage WaterFillImage { get; private set; }
 
     public bool IsHurt { get; private set;}
@@ -86,7 +89,7 @@ public class Human : MonoBehaviour, ISetPlayerManager
     private Vector3 _moveDirection;
     private HumanAnimatorController _animator;
     private GameObject _blood;
-    private PlayerController _playerManager;
+    private PlayerController _playerController;
 
     private void Awake()
     {
@@ -117,9 +120,7 @@ public class Human : MonoBehaviour, ISetPlayerManager
             return;
         }
 
-        StartCoroutine(LerpWater());
         CheckPlayerHurtAnim();
-        DecreaseWaterAmount(Time.deltaTime * GameManager.Instance.GameTimeScale);
     }
 
     private void FixedUpdate()
@@ -154,7 +155,7 @@ public class Human : MonoBehaviour, ISetPlayerManager
 
     public void SetPlayerManager(PlayerController playerManager) 
     {
-        _playerManager = playerManager;
+        _playerController = playerManager;
     }
 
     public void OnGettingHurt(float damage) 
@@ -171,23 +172,15 @@ public class Human : MonoBehaviour, ISetPlayerManager
     public void IncreaseWaterAmount(float increaseAmount)
     {
         playerFeedback.PlayFeedbacks();
-        CurrentWater += increaseAmount;
-        SoundManager.Instance.PlayOneShot(_sfx_villageDrinkString);
-
-        if (CurrentWater >= maxWater) 
-        {
-            CurrentWater = maxWater;
-        }
+        _playerWater.IncreaseWaterAmount(increaseAmount);
     }
 
-    public void DecreaseWaterAmount(float increaseAmount)
+    public void DecreaseWaterAmount(float decreaseAmount)
     {
         if (GameManager.Instance.Mode == GameMode.TutorialMode && !AdvancedTutorialManager.Instance.CurrentTutorial.IsWaterDecreasable()) 
         {
             return;
-        }
-            
-        CurrentWater -= increaseAmount;
+        } 
 
         if (IsHurt)
         {
@@ -197,18 +190,7 @@ public class Human : MonoBehaviour, ISetPlayerManager
             IsHurt = false;
         }
 
-        CurrentWater = (CurrentWater - increaseAmount <= 0) ? 0 : CurrentWater - increaseAmount;
-        GameplayUIManager.Instance.WaterSlider.value = CurrentWater;
-
-        if (GameManager.Instance.Mode == GameMode.TutorialMode) 
-        {
-            return;
-        }
-
-        if (CurrentWater <= 0)
-        {
-            GameManager.OnGameEnd(false, GameManager.Instance.Mode);
-        }
+        _playerWater.DecreaseWaterAmount(decreaseAmount);
     }
 
     private void OnGameEnd(bool isWinning, GameMode mode) 
@@ -235,14 +217,6 @@ public class Human : MonoBehaviour, ISetPlayerManager
     private void HandleMove() 
     {
         transform.position += _moveDirection * _moveSpeed * GameManager.Instance.GameTimeScale * Time.deltaTime;
-    }
-
-
-
-    private IEnumerator LerpWater()
-    {
-        GameplayUIManager.Instance.WaterSlider.value = Mathf.Lerp(GameplayUIManager.Instance.WaterSlider.value, CurrentWater, Time.deltaTime * _lerpSpeed);
-        yield return null;
     }
 
     private void CheckPlayerHurtAnim()

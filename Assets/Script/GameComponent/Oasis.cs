@@ -1,7 +1,7 @@
 using Unity.Mathematics;
 using UnityEngine;
 
-public class Pond : MonoBehaviour
+public class Oasis : MonoBehaviour
 {
     [SerializeField]
     private SpriteRenderer _spriteRenderer;
