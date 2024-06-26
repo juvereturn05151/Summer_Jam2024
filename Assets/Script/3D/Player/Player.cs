@@ -10,8 +10,9 @@ public class Player : MonoBehaviour
     Animator anim;
     SpriteRenderer spriteRenderer;
     [HideInInspector] public Vector2 moveInput;
-
-
+    [HideInInspector] public Vector2 mousePos;
+    [SerializeField] LayerMask groundMask;
+    [SerializeField] GameObject cone;
 
     private void Awake()
     {
@@ -23,11 +24,12 @@ public class Player : MonoBehaviour
     private void Update()
     {
         HandleMovement();
+        MoveCone();
     }
 
     private void LateUpdate()
     {
-        LockAtCam();
+        //LockAtCam();
     }
 
     void HandleMovement()
@@ -48,12 +50,21 @@ public class Player : MonoBehaviour
         else anim.SetBool("isWalk", false);
 
         if (moveInput.x > 0) spriteRenderer.flipX = true;
-        else spriteRenderer.flipX = false;
+        else if (moveInput.x < 0) spriteRenderer.flipX = false;
     }
 
     void LockAtCam()
     {
         visual.LookAt(visual.position + Camera.main.transform.rotation * Vector3.forward, Camera.main.transform.rotation * Vector3.up);
+    }
+
+    void MoveCone()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(mousePos);
+        if (Physics.Raycast(ray, out RaycastHit hit, 1000, groundMask))
+        {
+            cone.transform.position = hit.point;
+        }
     }
 
 }

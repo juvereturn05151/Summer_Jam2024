@@ -15,7 +15,7 @@ public class InputSystem : MonoBehaviour
             playerInput = new PlayerInputSystem();
 
             playerInput.PlayerInput.Move.performed += i => player.moveInput = i.ReadValue<Vector2>();
-
+            playerInput.PlayerInput.MousePos.performed += i => player.mousePos = i.ReadValue<Vector2>();
         }
 
         playerInput.Enable();
