@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
     [SerializeField] float moveSpeed;
 
     Rigidbody rb;
+    Animator anim;
+    SpriteRenderer spriteRenderer;
     [HideInInspector] public Vector2 moveInput;
 
 
@@ -14,6 +16,8 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        anim = visual.GetComponent<Animator>();
+        spriteRenderer = visual.GetComponent<SpriteRenderer>();
     }
 
     private void Update()
@@ -35,7 +39,16 @@ public class Player : MonoBehaviour
         moveDir = moveDir * moveSpeed;
 
         rb.linearVelocity = moveDir;
+        MoveAnimationHandle();
+    }
 
+    void MoveAnimationHandle()
+    {
+        if (moveInput != Vector2.zero) anim.SetBool("isWalk", true);
+        else anim.SetBool("isWalk", false);
+
+        if (moveInput.x > 0) spriteRenderer.flipX = true;
+        else spriteRenderer.flipX = false;
     }
 
     void LockAtCam()
